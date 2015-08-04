@@ -8,3 +8,4 @@ meteor-platform
 mquandalle:jade
 iron:router
 twbs:bootstrap
+momentjs:moment
