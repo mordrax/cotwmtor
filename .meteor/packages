@@ -8,3 +8,7 @@ meteor-platform
 mquandalle:jade
 iron:router
 twbs:bootstrap
+meteorhacks:npm
+cosmos:browserify
+react
+npm-container
