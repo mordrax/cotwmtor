@@ -1,0 +1,2 @@
+Router.route('new', 'newGame');
+
