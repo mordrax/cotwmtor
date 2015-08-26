@@ -40,7 +40,7 @@ observe-sequence@1.0.6
 ordered-dict@1.0.3
 random@1.0.3
 react@0.1.7
-react-meteor-data@0.1.4
+react-meteor-data@0.1.5
 react-runtime@0.13.3_4
 react-runtime-dev@0.13.3_3
 react-runtime-prod@0.13.3_2
