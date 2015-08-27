@@ -1,8 +1,0 @@
-#subtitle {
-    opacity: 0
-}
-
-#subtitle.fadein {
-    opacity: 1;
-    transition: opacity 2000ms ease;
-}

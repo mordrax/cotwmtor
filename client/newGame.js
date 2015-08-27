@@ -1,2 +1,0 @@
-Router.route('new', 'newGame');
-
