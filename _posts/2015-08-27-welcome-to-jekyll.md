@@ -6,6 +6,7 @@ categories: intro
 published: true
 comments: true
 ---
+
 Castle of the Winds is a old game. By old I mean the 80s. It used to run on Windows 3.1 on a 1.44&quot; floppy disk! And the full version came in a separate floppy disk.
 You can find more information on the game on [wikipedia][wiki-cotw].
 
@@ -21,9 +22,10 @@ This is not a 'How to' tutorial that spoon feeds you the basics. There are alot 
 
 What I hope to write about is the technology choices I'll make, game design choices (yes even for a remake), architecture and patterns, tools and workflows that I'll use to make this particular game.
 
-For avid readers interested in doing something similar, this devlog is hosted on the same open source [github project][cotwmtor]. So you're welcome to clone it and run it for yourself.
+For avid readers interested in doing something similar, this devlog is hosted on the same open source [github project][cotwmtor]. So you're welcome to clone it and run it for yourself. Or try out the [work-in-progress version][cotwgame]. 
 
 [wiki-cotw]: https://en.wikipedia.org/wiki/Castle_of_the_Winds
 [meteorjs]: https://meteor.com/
 [old-remake]: https://github.com/mordra/CoTWjs
 [cotwmtor]: https://github.com/mordra/cotwmtor
+[cotwgame]: https://cotwmtor.meteor.com/
