@@ -11,22 +11,27 @@ MainPage = React.createClass({
     },
     render() {
         return (
-            <div id="title" style={{backgroundColor:'black'}} className="fullscreen flexbox-container">
-                <div style={{margin:'auto'}}>
-                    <img src="/images/landing_cotw1.jpg" className="img-responsive center-block"/>
+            <div id="title" style={{backgroundColor:'black'}} className="ui middle aligned center aligned grid fullscreen">
+                <div className="ui one column">
+                    <div className="ui column">
+                        <img src="/images/landing_cotw1.jpg"/>
+                    </div>
 
-                    <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true}>
-                        <img src="/images/landing_cotw2.jpg" className="img-responsive center-block"/>
-                    </ReactCSSTransitionGroup>
+                    <div className="ui column">
+                        <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true}>
+                            <img src="/images/landing_cotw2.jpg"/>
+                        </ReactCSSTransitionGroup>
+                    </div>
 
-                    <div className="text-center">
-                        <div className="btn-group">
-                            <a href="new" className="btn btn-success">New Game</a>
-                            <a href="load" className="btn btn-default">Load Game</a>
-                            <a href="overview" className="btn btn-default">Overview</a>
+                    <div className="ui column">
+                        <div className="ui buttons">
+                            <a href="new" className="ui button primary">New Game</a>
+                            <a href="load" className="ui button">Load Game</a>
+                            <a href="overview" className="ui button">Overview</a>
                         </div>
                     </div>
                 </div>
+
             </div>
         );
     }

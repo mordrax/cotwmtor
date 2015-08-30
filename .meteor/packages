@@ -7,9 +7,10 @@
 meteor-platform
 kadira:flow-router
 kadira:react-layout
-twbs:bootstrap
 meteorhacks:npm
 cosmos:browserify
 react
 
 npm-container
+semantic:ui
+flemay:less-autoprefixer

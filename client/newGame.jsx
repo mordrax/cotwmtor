@@ -7,29 +7,38 @@ FlowRouter.route('/new', {
 var NewGame = React.createClass({
     render() {
         return (
-            <div className="container">
-                <h1 style={{backgroundColor:'blue'}}>Character Creation</h1>
-
-                <div className="form-horizontal">
-                    <div className="form-group">
-                        <label htmlFor="name1" className="control-label col-sm-2"> Character name: </label>
-
-                        <div className="col-sm-10">
-                            <input id="name1" className="form-control" placeholder="Name..."/>
+            <div className="ui middle aligned center aligned grid fullscreen">
+                <div className="ui one column">
+                    <div className="ui stacked segment">
+                        <div className="ui horizontal segments">
+                            <div className="ui labeled input segment">
+                                <div className="ui label">Character Name:</div>
+                                <input type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"/>
+                            </div>
                         </div>
+                        <div className="ui horizontal segments">
+                            <div className="ui segment">Available</div>
+                            <div className="ui segment">Strength</div>
+                            <div className="ui segment">Intelligence</div>
+                            <div className="ui segment">constitution</div>
+                            <div className="ui segment">Dexterity</div>
+                        </div>
+                        <div className="ui horizontal segments">
+                            <div className="ui segment">Character Gender</div>
+                            <div className="ui segment">Custom Character Icon</div>
+                        </div>
+                        <div className="ui horizontal segments">
+                            <div className="ui segment">Easy</div>
+                            <div className="ui segment">Intermediate</div>
+                            <div className="ui segment">Difficult</div>
+                            <div className="ui segment">Experts Only</div>
+                        </div>
+
+                            <div className="ui button primary">Ok</div>
+                            <div className="ui button">Cancel</div>
+                            <div className="ui button">View Icon</div>
+                            <div className="ui button">Help</div>
                     </div>
-                </div>
-
-                // attributes
-
-
-                // icon
-
-                // difficulty
-
-                <div>
-                    <div className="btn btn-success">Start Game</div>
-                    <div className="btn btn-default pull-right">Back</div>
                 </div>
             </div>
         )
