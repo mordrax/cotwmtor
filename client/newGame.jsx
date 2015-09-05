@@ -4,7 +4,15 @@ FlowRouter.route('/new', {
     }
 });
 
-var NewGame = React.createClass({
+NewGame = React.createClass({
+    getInitialState() {
+        return {
+            player: {
+                name: "Testing",
+                difficulty: cotw.DifficultyLevel.Easy
+            }
+        }
+    },
     render() {
         return (
             <div className="ui middle aligned center aligned grid fullscreen">
@@ -16,29 +24,18 @@ var NewGame = React.createClass({
                                 <input type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"/>
                             </div>
                         </div>
-                        <div className="ui horizontal segments">
-                            <div className="ui segment">Available</div>
-                            <div className="ui segment">Strength</div>
-                            <div className="ui segment">Intelligence</div>
-                            <div className="ui segment">constitution</div>
-                            <div className="ui segment">Dexterity</div>
-                        </div>
+                        <Attributes />
                         <div className="ui horizontal segments">
                             <div className="ui segment">Character Gender</div>
                             <div className="ui segment">Custom Character Icon</div>
                         </div>
-                        <div className="ui horizontal segments">
-                            <div className="ui segment">Easy</div>
-                            <div className="ui segment">Intermediate</div>
-                            <div className="ui segment">Difficult</div>
-                            <div className="ui segment">Experts Only</div>
-                        </div>
-
-                            <div className="ui button primary">Ok</div>
-                            <div className="ui button">Cancel</div>
-                            <div className="ui button">View Icon</div>
-                            <div className="ui button">Help</div>
+                        <GameDifficulty />
+                        <div className="ui button primary">Ok</div>
+                        <div className="ui button">Cancel</div>
+                        <div className="ui button">View Icon</div>
+                        <div className="ui button">Help</div>
                     </div>
+                    <pre>{JSON.stringify(this.state.player)}</pre>
                 </div>
             </div>
         )

@@ -31,7 +31,6 @@ MainPage = React.createClass({
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
