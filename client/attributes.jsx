@@ -15,39 +15,33 @@ Attributes = React.createClass({
 
 GameDifficulty = React.createClass({
     getInitialState() {
-        return {difficulty: cotw.DifficultyLevel.Easy}
+        return {
+            difficultyLevels: [
+                {icon: "huge green circle icon", level: cotw.DifficultyLevel.Easy},
+                {icon: "huge blue square icon", level: cotw.DifficultyLevel.Intermediate},
+                {icon: "huge black square icon", level: cotw.DifficultyLevel.Difficult},
+                {icon: "huge yellow warning sign icon", level: cotw.DifficultyLevel.ExpertsOnly}
+            ]
+        }
     },
     setDifficulty(level) {
-        console.log('setting difficulty level: ' + level);
+        this.props.setDifficulty(level);
     },
     render() {
         return (
             <div className="four ui buttons">
-                <DifficultyLevel icon="huge green circle icon" level={cotw.DifficultyLevel.Easy}/>
-                <DifficultyLevel icon="huge blue square icon" level={cotw.DifficultyLevel.Intermediate}/>
-                <DifficultyLevel icon="huge black square icon" level={cotw.DifficultyLevel.Difficult}/>
-                <DifficultyLevel icon="huge yellow warning sign icon" level={cotw.DifficultyLevel.ExpertsOnly}/>
-            </div>
-        )
-    }
-});
+                {this.state.difficultyLevels.map(function (level, i) {
+                    var classes = "ui icon button";
+                    if (this.props.difficulty === level.level)
+                        classes += " active";
 
-DifficultyLevel = React.createClass({
-    getInitialState() {
-        return {active:false}
-    },
-    handleClick() {
-        console.log("Diff level: " + this.props.level + " clicked!");
-        this.state.active = true;
-    },
-    render() {
-        var classes = "ui icon button";
-        classes += this.state.active?"active":"";
-
-        return (
-            <div className={classes} onClick={this.handleClick}>
-                <div><i className={this.props.icon}></i></div>
-                <label>{cotw.DifficultyLevel[this.props.level]}</label>
+                    return (
+                        <div className={classes} onClick={this.setDifficulty.bind(this, level.level)}>
+                            <div><i className={level.icon}></i></div>
+                            <label>{cotw.DifficultyLevel[level.level]}</label>
+                        </div>
+                    );
+                }, this)}
             </div>
         )
     }
