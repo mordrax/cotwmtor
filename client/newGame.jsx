@@ -9,11 +9,15 @@ NewGame = React.createClass({
     getInitialState() {
         return {
             name: "Testing",
-            difficulty: cotw.DifficultyLevel.Easy
+            difficulty: cotw.DifficultyLevel.Easy,
+            attributes:{}
         }
     },
     setDifficulty(level) {
         this.setState({difficulty: level});
+    },
+    setAttributes(attributes) {
+        this.setState({attributes: attributes});
     },
     render() {
         return (
@@ -26,12 +30,12 @@ NewGame = React.createClass({
                                 <input type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?" valueLink={this.linkState('name')}/>
                             </div>
                         </div>
-                        <Attributes />
+                        <Attributes onSetAttributes={this.setAttributes} />
                         <div className="ui horizontal segments">
                             <div className="ui segment">Character Gender</div>
                             <div className="ui segment">Custom Character Icon</div>
                         </div>
-                        <GameDifficulty setDifficulty={this.setDifficulty} />
+                        <GameDifficulty onSetDifficulty={this.setDifficulty}/>
                         <div className="ui button primary">Ok</div>
                         <div className="ui button">Cancel</div>
                         <div className="ui button">View Icon</div>
