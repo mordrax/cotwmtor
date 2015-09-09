@@ -2,7 +2,6 @@
 layout: post
 title:  "Castle of the Winds Remake (A Devlog)"
 date:   2015-08-29 11:20:29
-categories: intro
 published: true
 comments: true
 ---
