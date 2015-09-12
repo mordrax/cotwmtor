@@ -10,7 +10,7 @@ NewGame = React.createClass({
         return {
             name: "Testing",
             difficulty: cotw.DifficultyLevel.Easy,
-            attributes:{}
+            attributes: {}
         }
     },
     setDifficulty(level) {
@@ -21,28 +21,41 @@ NewGame = React.createClass({
     },
     render() {
         return (
-            <div className="ui middle aligned center aligned grid fullscreen">
-                <div className="ui one column">
-                    <div className="ui stacked segment">
-                        <div className="ui horizontal segments">
-                            <div className="ui labeled input segment">
-                                <div className="ui label">Character Name:</div>
-                                <input type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?" valueLink={this.linkState('name')}/>
-                            </div>
+            <div className="ui one column grid container">
+                <div className="row">
+                    <div className="column">
+                        <div className="ui fluid labeled input">
+                            <div className="ui label">Character Name:</div>
+                            <input type="text" name="name"
+                                   placeholder="What word did your mother utter as you came kicking and screaming into this world?"
+                                   valueLink={this.linkState('name')}/>
                         </div>
-                        <Attributes onSetAttributes={this.setAttributes} />
-                        <div className="ui horizontal segments">
-                            <div className="ui segment">Character Gender</div>
-                            <div className="ui segment">Custom Character Icon</div>
-                        </div>
-                        <GameDifficulty onSetDifficulty={this.setDifficulty}/>
-                        <div className="ui button primary">Ok</div>
-                        <div className="ui button">Cancel</div>
-                        <div className="ui button">View Icon</div>
-                        <div className="ui button">Help</div>
                     </div>
-                    <pre>{JSON.stringify(this.state)}</pre>
+
                 </div>
+
+                <div className="row"><Attributes onSetAttributes={this.setAttributes}/></div>
+
+                <div className="two column row">
+                    <div className="equal width column">
+                        <div className="ui large buttons">
+                            <div className="ui labeled icon button"><i className="large male icon"></i>Male</div>
+                            <div className="or"></div>
+                            <div className="ui labeled icon button"><i className="large female icon"></i>Female</div>
+                        </div>
+                    </div>
+                    <div className="equal width column">Custom Character Icon</div>
+                </div>
+                <div className="row"><GameDifficulty onSetDifficulty={this.setDifficulty}/></div>
+
+                <div className="row ui buttons">
+                    <div className="ui button primary">Ok</div>
+                    <div className="ui button">Cancel</div>
+                    <div className="ui button">View Icon</div>
+                    <div className="ui button">Help</div>
+                </div>
+
+                <pre>{JSON.stringify(this.state)}</pre>
             </div>
         )
     }

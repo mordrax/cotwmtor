@@ -11,6 +11,8 @@ meteorhacks:npm
 cosmos:browserify
 react
 
-npm-container
 semantic:ui
 flemay:less-autoprefixer
+
+
+npm-container

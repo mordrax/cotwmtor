@@ -58,9 +58,9 @@ Attributes = React.createClass({
         console.log(attr + " " + value);
     },
     buttons(attr) {
-        return (<div className="ui buttons">
-            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, -5)}><i className="ui icon minus"></i></button>
-            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, 5)}><i className="ui icon plus"></i></button>
+        return (<div className="ui fluid buttons">
+            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, -5)}><i className="ui large icon minus"></i></button>
+            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, 5)}><i className="ui large icon plus"></i></button>
         </div>);
     },
     renderAttribute(attr, key) {
@@ -75,10 +75,10 @@ Attributes = React.createClass({
 
         return (
             <div className="ui segment left aligned" key={key}>
-                <h4 className="ui header">{attr.name}:</h4>
+                <h2 className="ui header">{attr.name}:</h2>
+                <span>{description}</span>
                 <div className="ui indicating progress" data-percent={attr.value}>
                     <div className="bar" style={{width:attr.value+'%', minWidth:0}}></div>
-                    <div className="label">{description}</div>
                 </div>
                 {buttonsHtml}
             </div>
@@ -86,7 +86,7 @@ Attributes = React.createClass({
     },
     render() {
         return (
-            <div className="ui segments">
+            <div className="ui segments column">
                 {
                     _.map(this.state.attributes, function (attr, i) {
                         return this.renderAttribute(attr, i)
