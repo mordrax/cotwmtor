@@ -59,8 +59,12 @@ Attributes = React.createClass({
     },
     buttons(attr) {
         return (<div className="ui fluid buttons">
-            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, -5)}><i className="ui large icon minus"></i></button>
-            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, 5)}><i className="ui large icon plus"></i></button>
+            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, -5)}>
+                <i className="ui large icon minus"></i>
+            </button>
+            <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, 5)}>
+                <i className="ui large icon plus"></i>
+            </button>
         </div>);
     },
     renderAttribute(attr, key) {

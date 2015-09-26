@@ -10,19 +10,37 @@ NewGame = React.createClass({
         return {
             name: "Testing",
             difficulty: cotw.DifficultyLevel.Easy,
-            attributes: {}
+            attributes: {},
+            gender: ""
         }
     },
     setDifficulty(level) {
         this.setState({difficulty: level});
     },
+    setGender(gender) {
+        this.setState({gender: gender})
+    },
     setAttributes(attributes) {
-        this.setState({attributes: attributes});
+        this.setState({
+            str: attributes.Strength.value,
+            dex: attributes.Dexterity.value,
+            int: attributes.Intelligence.value,
+            con: attributes.Constititution.value
+        });
+    },
+    startGame() {
+        console.log('starting game!!! hi: ' + this.state.name);
+        Meteor.call('newGame', this.state, function (err, res) {
+            if (err) {
+                console.error(err);
+            } else {
+                FlowRouter.go('/game/'+res);
+            }
+        });
     },
     render() {
         return (
             <div className="ui one column grid container">
-                <div className="row">
                     <div className="column">
                         <div className="ui fluid labeled input">
                             <div className="ui label">Character Name:</div>
@@ -32,27 +50,21 @@ NewGame = React.createClass({
                         </div>
                     </div>
 
-                </div>
-
                 <div className="row"><Attributes onSetAttributes={this.setAttributes}/></div>
 
                 <div className="two column row">
-                    <div className="equal width column">
-                        <div className="ui large buttons">
-                            <div className="ui labeled icon button"><i className="large male icon"></i>Male</div>
-                            <div className="or"></div>
-                            <div className="ui labeled icon button"><i className="large female icon"></i>Female</div>
-                        </div>
-                    </div>
+                    <Gender setGender={this.setGender} gender={this.state.gender}/>
                     <div className="equal width column">Custom Character Icon</div>
                 </div>
-                <div className="row"><GameDifficulty onSetDifficulty={this.setDifficulty}/></div>
+                <div className="row">
+                    <GameDifficulty onSetDifficulty={this.setDifficulty} difficulty={this.state.difficulty}/>
+                </div>
 
                 <div className="row ui buttons">
-                    <div className="ui button primary">Ok</div>
-                    <div className="ui button">Cancel</div>
+                    <div className="ui button primary" onClick={this.startGame}>Ok</div>
+                    <a href="/" className="ui button">Cancel</a>
                     <div className="ui button">View Icon</div>
-                    <div className="ui button">Help</div>
+                    <a href="https://en.wikipedia.org/wiki/Castle_of_the_Winds" className="ui button">Help</a>
                 </div>
 
                 <pre>{JSON.stringify(this.state)}</pre>

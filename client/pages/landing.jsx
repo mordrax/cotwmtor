@@ -1,10 +1,10 @@
 FlowRouter.route('/', {
     action() {
-        ReactLayout.render(MainLayout, {content: <MainPage/>});
+        ReactLayout.render(MainLayout, {content: <Landing/>});
     }
 });
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-MainPage = React.createClass({
+Landing = React.createClass({
     componentDidMount() {
         //console.log('setting timeout for fadein');
         //setTimeout(function () {$('#subtitle').addClass('fadein');}, 1000);
