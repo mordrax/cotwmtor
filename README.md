@@ -19,28 +19,28 @@ There is a devlog detailing the making of this remake here: http://mordra.github
   - List of spells hotkeys
   - List of actions
   - Main map
-  - 
+
 ###1.1.4 Inventory
   - Items
   - Equip view
   - Equiping items
   - Dropping items
-  - 
+
 ###1.1.5 Shop
   - Items
   - Shop items
   - Buy/sell
-  - 
+
 ###1.1.6 Character Info
   - Base stats
   - Secondary stats
   - Insight on equipment
-  - 
+
 ###1.1.7 Spellbook
   - List of spells
   - Spells have description, picture, stats?
   - Quick access hotkey
-  - 
+
   
 ##1.2 Content
 
