@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "On inequality, The Glenlivet and Meteor 1.2.1, Webpack, React"
-date:   2015-09-09 11:20:29
+date:   2015-12-07 1:20:00
 published: true
 comments: true
 ---
