@@ -1,0 +1,18 @@
+{
+  "react": "^0.14.3",
+  "react-dom": "^0.14.3",
+  "react-addons-css-transition-group":"^0.14.3",
+  "react-addons-linked-state-mixin":"^0.14.3",
+
+  "babel": "^5.8.23",
+  "babel-loader": "^6.2.0",
+  "css-loader":"^0.23.0",
+  "style-loader":"^0.13.0",
+  "url-loader":"^0.5.7",
+  "file-loader":"^0.8.5",
+
+  "react-router": "^1.0.0",
+  "history": "^1.13.1",
+
+  "semantic-ui-css":"^2.1.6"
+}
