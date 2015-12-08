@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames/bind';
 
 var Gender = React.createClass({
   propTypes: {
@@ -11,13 +12,13 @@ var Gender = React.createClass({
         <div className="ui large buttons">
           <div className={classNames("ui labeled icon button", {active:this.props.gender === 'male'})}
                onClick={this.props.setGender.bind(null, 'male')}>
-            <i className="large male icon"></i>
+            <i className="large male icon" />
             Male
           </div>
           <div className="or"></div>
           <div className={classNames("ui labeled icon button", {active:this.props.gender==='female'})}
                onClick={this.props.setGender.bind(null, 'female')}>
-            <i className="large female icon"></i>
+            <i className="large female icon" />
             Female
           </div>
         </div>
@@ -26,4 +27,4 @@ var Gender = React.createClass({
   }
 });
 
-module.exports = {Gender}
+export default Gender;

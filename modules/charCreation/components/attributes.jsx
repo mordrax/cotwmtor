@@ -1,5 +1,5 @@
 import React from 'react';
-import {cotw} from '../../enums/enums.jsx';
+import cotw from '../../enums/enums.jsx';
 
 var Attributes = React.createClass({
   propTypes: {
@@ -12,7 +12,7 @@ var Attributes = React.createClass({
         Available: {value: 100, name: 'Available'},
         Strength: {value: 50, name: 'Strength'},
         Intelligence: {value: 50, name: 'Intelligence'},
-        Constititution: {value: 50, name: 'Constititution'},
+        Constitution: {value: 50, name: 'Constitution'},
         Dexterity: {value: 50, name: 'Dexterity'}
       },
       descriptions: {
@@ -30,7 +30,7 @@ var Attributes = React.createClass({
           {value: 50, text: "Smart enough to be at the peak of the standard distribution curve."},
           {value: 0, text: "Dumb"}
         ],
-        Constititution: [
+        Constitution: [
           {value: 50, text: "Able to outrun a hungry hippo!"},
           {
             value: 0,
@@ -63,9 +63,11 @@ var Attributes = React.createClass({
   },
   buttons(attr) {
     return (<div className="ui buttons">
-      <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, -5)}><i
-        className="ui icon minus"></i></button>
-      <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, 5)}><i className="ui icon plus"></i>
+      <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, -5)}>
+        <i className="ui icon minus" />
+      </button>
+      <button className="ui icon button" onClick={this.changeAttr.bind(this, attr, 5)}>
+        <i className="ui icon plus" />
       </button>
     </div>);
   },
@@ -101,6 +103,6 @@ var Attributes = React.createClass({
       </div>
     )
   }
-});
+})
 
-module.exports = {Attributes}
+export default Attributes;

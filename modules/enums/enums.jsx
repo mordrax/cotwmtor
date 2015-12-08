@@ -9,6 +9,6 @@ cotw.DifficultyLevel = {
     1:"Intermediate",
     2:"Difficult",
     3:"Experts Only"
-}
+};
 
-module.exports = {cotw:cotw}
+export default cotw

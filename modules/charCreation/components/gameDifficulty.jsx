@@ -1,5 +1,5 @@
 import React from 'react';
-import {cotw} from '../../enums/enums.jsx';
+import cotw from '../../enums/enums.jsx';
 
 var GameDifficulty = React.createClass({
   propTypes: {
@@ -36,4 +36,4 @@ var GameDifficulty = React.createClass({
   }
 });
 
-module.exports = {GameDifficulty}
+export default GameDifficulty

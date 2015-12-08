@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRoute } from 'react-router';
 import {Title} from '../../modules/title/title.jsx';
-import {CharCreation} from '../../modules/charCreation/charCreation.jsx';
+import CharCreation from '../../modules/charCreation/charCreation.jsx';
 import createBrowserHistory from '../../node_modules/history/lib/createBrowserHistory';
 
 var App = React.createClass({
