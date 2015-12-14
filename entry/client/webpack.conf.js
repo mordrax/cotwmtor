@@ -3,7 +3,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.(jsx|es6)?$/,
         loader: 'babel',
         query: {stage: 0},
         exclude: /node_modules/

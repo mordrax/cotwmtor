@@ -4,7 +4,13 @@ import cotw from '../../enums/enums.jsx';
 var GameDifficulty = React.createClass({
   propTypes: {
     // triggered with the difficulty level as first parameter
-    onSetDifficulty: React.PropTypes.func.isRequired
+    onSetDifficulty: React.PropTypes.func.isRequired,
+    defaultDifficulty: React.PropTypes.number.isRequired
+  },
+  getInitialState() {
+    return {
+      difficulty: this.props.defaultDifficulty
+    }
   },
   getDefaultProps() {
     return {
@@ -21,7 +27,7 @@ var GameDifficulty = React.createClass({
       <div className="four ui buttons">
         {this.props.difficultyLevels.map(function (level, i) {
           var classes = "ui icon button";
-          if (this.props.difficulty === level.level)
+          if (this.state.difficulty === level.level)
             classes += " active";
 
           return (
