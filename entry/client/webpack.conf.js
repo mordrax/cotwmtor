@@ -1,9 +1,14 @@
+var webpack = require('webpack');
+
 module.exports = {
   entry: './entry',
+  resolve: {
+    extensions: ['', '.js', '.es6', '.jsx']
+  },
   module: {
     loaders: [
       {
-        test: /\.(jsx|es6)?$/,
+        test: /\.(js|jsx|es6)?$/,
         loader: 'babel',
         query: {stage: 0},
         exclude: /node_modules/
