@@ -24,7 +24,6 @@ const GenderView = ({
       </div>
     );
 
-
 const Gender = connect(
   (state) => {
     return {

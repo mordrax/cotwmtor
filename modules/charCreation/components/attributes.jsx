@@ -1,18 +1,12 @@
 import React from 'react';
 import cotw from '../../enums/enums.jsx';
 
-var Attribute = React.createClass({
-  propTypes: {
-    // called with a object specifying attributes
-    onSetAttribute: React.PropTypes.func.isRequired,
-    descriptions: React.PropTypes.array.isRequired,
-    name: React.PropTypes.string.isRequired
-  },
-  getInitialState() {
-    return {
-      value: 50
-    }
-  },
+export class Attribute extends React.Component {
+  constructor(props, context) {
+    super(context);
+    context.store.dispatch({type: "INIT_ATTRIBUTE", attribute:props.name});
+    console.dir(context.store.getState());
+  }
   changeAttr(value) {
     var availablePoints = this.state.attributes.Available.value;
 
@@ -28,7 +22,7 @@ var Attribute = React.createClass({
     this.props.onSetAttribute(this.state.attributes);
 
     console.log(attr + " " + value);
-  },
+  }
   renderButtons() {
     return (<div className="ui buttons">
       <button className="ui icon button" onClick={this.changeAttr.bind(this, -5)}>
@@ -38,7 +32,7 @@ var Attribute = React.createClass({
         <i className="ui icon plus"/>
       </button>
     </div>);
-  },
+  }
   renderDescription() {
     var self = this;
     return (<p>
@@ -48,7 +42,7 @@ var Attribute = React.createClass({
         }).text
       }
     </p>)
-  },
+  }
   render() {
     return (
       <div className="ui segments">
@@ -61,8 +55,17 @@ var Attribute = React.createClass({
           {this.props.name !== "Available" ? this.renderButtons() : ''}
         </div>
       </div>
-    )
+    );
   }
-});
+}
 
-export default Attribute;
+Attribute.propTypes = {
+  // called with a object specifying attributes
+  onSetAttribute: React.PropTypes.func.isRequired,
+      descriptions: React.PropTypes.array.isRequired,
+      name: React.PropTypes.string.isRequired
+};
+
+Attribute.contextTypes = {
+  store: React.PropTypes.object
+};

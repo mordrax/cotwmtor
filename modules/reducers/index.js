@@ -1,21 +1,9 @@
 import { combineReducers } from 'redux';
-
-const reducerOfUselessness = (state = {}, action) => {
-  console.dir('take no action!: ' + state);
-  return state;
-};
-
-const gender = (state = 'male', action) => {
-  switch (action.type) {
-    case 'SET_GENDER':
-      return action.gender;
-    default:
-      return 'female';
-  }
-};
+import gender from './gender';
+import difficulty from './difficulty';
 
 const cotwApp = combineReducers({
-  reducerOfUselessness,
+  difficulty,
   gender
 });
 

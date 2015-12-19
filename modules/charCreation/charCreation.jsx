@@ -27,8 +27,7 @@ const CharCreation = ({
             <Gender gender={player.gender} />
           </div>
         </div>
-        {// <GameDifficulty difficulty={player.difficulty} />
-        }
+        <GameDifficulty difficulty={player.difficulty} />
         <div className="ui button primary" onclick={onCompleted}>Ok</div>
         <div className="ui button" onclick={onCancelled}>Cancel</div>
         <div className="ui button">View Icon</div>

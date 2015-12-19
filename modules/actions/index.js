@@ -4,3 +4,11 @@ export const setGender = (gender) => {
     gender
   };
 };
+
+export const setDifficulty = (level) => {
+  return {
+    type: "SET_DIFFICULTY",
+    level
+  }
+};
+
