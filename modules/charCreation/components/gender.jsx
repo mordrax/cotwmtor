@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
@@ -26,6 +26,7 @@ const GenderView = ({
 
 const Gender = connect(
   (state) => {
+    debugger;
     return {
       gender: state.gender
     }

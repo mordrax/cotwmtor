@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import Attribute from './components/attributes.jsx';
-import GameDifficulty from './components/gameDifficulty.jsx';
-import Gender from './components/gender.jsx';
+import Attributes from './components/attributes';
+import GameDifficulty from './components/gameDifficulty';
+import Gender from './components/gender';
 import { connect } from 'react-redux';
-import cotw from '../enums/enums.jsx';
+import cotw from '../enums/enums';
 
 const CharCreation = ({
   player,
@@ -19,8 +19,7 @@ const CharCreation = ({
             <input type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?" />
           </div>
         </div>
-        {//<Attributes attributes={player.attributes} />
-        }
+        <Attributes attributes={player.attributes}/>
         <div className="ui vertical segments">
           <div className="ui vertical segment">Character Gender</div>
           <div className="ui vertical segment">
@@ -42,13 +41,6 @@ const mapStateToProps = (_) => {
     player: {
       name: 'Testing',
       difficulty: cotw.DifficultyLevel.Easy,
-      attributes: {
-        Available: {value: 100, name: 'Available'},
-        Strength: {value: 50, name: 'Strength'},
-        Intelligence: {value: 50, name: 'Intelligence'},
-        Constitution: {value: 50, name: 'Constitution'},
-        Dexterity: {value: 50, name: 'Dexterity'}
-      },
       gender: 'male'
     }
   }

@@ -12,3 +12,10 @@ export const setDifficulty = (level) => {
   }
 };
 
+export const setAttribute = (attr, amt) => {
+  return {
+    type: "SET_ATTRIBUTE",
+    attr,
+    amt
+  }
+}
