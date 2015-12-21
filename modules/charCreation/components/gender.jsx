@@ -26,7 +26,6 @@ const GenderView = ({
 
 const Gender = connect(
   (state) => {
-    debugger;
     return {
       gender: state.gender
     }

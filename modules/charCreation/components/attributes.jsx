@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import cotw from '../../enums/enums.jsx';
 import {connect} from 'react-redux';
+import * as actions from '../../actions';
 
 const getAttributeDescription = (attr, attributes) => {
   //_.find(self.props.descriptions, function (desc) {
@@ -10,24 +11,24 @@ const getAttributeDescription = (attr, attributes) => {
 };
 
 class AttributesView extends Component {
-  renderButtons() {
+  renderButtons(onChangeAttribute, attr) {
     return (<div className="ui buttons">
-      <button className="ui icon button" onClick={this.changeAttr.bind(this, -5)}>
+      <button className="ui icon button" onClick={() => onChangeAttribute(attr, -5)}>
         <i className="ui icon minus"/>
       </button>
-      <button className="ui icon button" onClick={this.changeAttr.bind(this, 5)}>
+      <button className="ui icon button" onClick={() => onChangeAttribute(attr, 5)}>
         <i className="ui icon plus"/>
       </button>
     </div>);
   }
 
   render() {
-    let { attributes } = this.props;
+    let { attributes, onChangeAttribute } = this.props;
+    let self = this;
     return (
       <div>
         {
           _.map(attributes, function (attribute) {
-            debugger;
             return (
               <div className="ui segments">
                 <div className="ui segment left aligned">
@@ -36,7 +37,7 @@ class AttributesView extends Component {
                     <div className="bar" style={{width:attribute.value+'%', minWidth:0}}></div>
                     <div className="label">{getAttributeDescription(attribute, attributes)}</div>
                   </div>
-                  {attribute.name !== "Available" ? this.renderButtons() : ''}
+                  {attribute.name !== "Available" ? self.renderButtons(onChangeAttribute, attribute.name) : ''}
                 </div>
               </div>
             )
@@ -61,21 +62,9 @@ const Attributes = connect(
   (dispatch) => {
     return {
       onChangeAttribute: (attr, val) => {
-        dispatch(changeAttribute(attr, val));
-        //var availablePoints = this.state.attributes.Available.value;
-        //
-        //// if adding, check there's enough available
-        //// if subtracting, cap available at 100
-        //if (availablePoints - value < 0 || availablePoints - value > 100) return;
-        //if (attr.value + value < 0 || attr.value + value > 100) return;
-        //
-        //attr.value += value;
-        //this.state.attributes.Available.value -= value;
-        //this.setState(attr);
-        //
-        //this.props.onSetAttribute(this.state.attributes);
-        //
-        console.err('TODO: fix attributes!' + attr + " " + val);
+        dispatch(actions.setAttribute(attr, val));
+
+        console.error('TODO: fix attributes!' + attr + " " + val);
       }
     }
   }
