@@ -27,7 +27,7 @@ const GenderView = ({
 const Gender = connect(
   (state) => {
     return {
-      gender: state.gender
+      gender: state.player.gender
     }
   },
   (dispatch) => {

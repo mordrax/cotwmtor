@@ -25,7 +25,7 @@ const GameDifficultyView = ({
             className={classNames('ui icon button', {active:difficulty === level.level}) }
             onClick={() => setDifficulty(level.level)}
             key={i}>
-            <div><i className={level.icon}></i></div>
+            <div><i className={level.icon} /></div>
             <label>{cotw.DifficultyLevel[level.level]}</label>
           </div>
         );
@@ -35,7 +35,11 @@ const GameDifficultyView = ({
 };
 
 const GameDifficulty = connect (
-  (state) => { return {difficulty: state.difficulty} },
+  (state) => {
+    return {
+      difficulty: state.player.difficulty
+    }
+  },
   (dispatch) => {
     return {
       setDifficulty: (level) => {

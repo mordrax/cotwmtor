@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
-import gender from './gender';
-import difficulty from './difficulty';
-import attributes from './attributes';
+import charCreation from './charCreation';
 
 const cotwApp = combineReducers({
-  difficulty,
-  gender,
-  attributes
+  player: charCreation
 });
 
 export default cotwApp;

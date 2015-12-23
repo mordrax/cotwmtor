@@ -4,11 +4,13 @@ import GameDifficulty from './components/gameDifficulty';
 import Gender from './components/gender';
 import { connect } from 'react-redux';
 import cotw from '../enums/enums';
+import * as actions from '../actions';
 
 const CharCreation = ({
   player,
   onCompleted,
-  onCancelled
+  onCancelled,
+  onChangeName
   }) => (
   <div className="ui middle aligned center aligned grid">
     <div className="ui one column">
@@ -16,7 +18,11 @@ const CharCreation = ({
         <div className="ui vertical segment">
           <div className="ui labeled fluid input">
             <div className="ui label">Character Name:</div>
-            <input type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?" />
+            <input
+              type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"
+              onChange={(e) => onChangeName(e.target.value)}
+              value={player.name}
+            />
           </div>
         </div>
         <Attributes attributes={player.attributes}/>
@@ -27,8 +33,8 @@ const CharCreation = ({
           </div>
         </div>
         <GameDifficulty difficulty={player.difficulty} />
-        <div className="ui button primary" onclick={onCompleted}>Ok</div>
-        <div className="ui button" onclick={onCancelled}>Cancel</div>
+        <div className="ui button primary" onClick={onCompleted}>Ok</div>
+        <div className="ui button" onClick={onCancelled}>Cancel</div>
         <div className="ui button">View Icon</div>
         <div className="ui button">Help</div>
       </div>
@@ -36,19 +42,23 @@ const CharCreation = ({
   </div>
 );
 
-const mapStateToProps = (_) => {
+const mapStateToProps = (state) => {
   return {
-    player: {
-      name: 'Testing',
-      difficulty: cotw.DifficultyLevel.Easy,
-      gender: 'male'
-    }
+    player: state.player
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onCompleted: () => {console.error('TODO: create the player!')}
+    onCompleted: () => {
+      console.error('TODO: create the player!')
+    },
+    onCancelled: () => {
+      console.error('cancelled!');
+    },
+    onChangeName: (input) => {
+      dispatch(actions.changeName(input));
+    }
   }
 };
 

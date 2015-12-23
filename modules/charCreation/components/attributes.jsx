@@ -3,13 +3,6 @@ import cotw from '../../enums/enums.jsx';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
-const getAttributeDescription = (attr, attributes) => {
-  //_.find(self.props.descriptions, function (desc) {
-  //  return self.state.value <= desc.value;
-  //}).text
-  return ''
-};
-
 class AttributesView extends Component {
   renderButtons(onChangeAttribute, attr) {
     return (<div className="ui buttons">
@@ -28,14 +21,14 @@ class AttributesView extends Component {
     return (
       <div>
         {
-          _.map(attributes, function (attribute) {
+          _.map(attributes, function (attribute, i) {
             return (
-              <div className="ui segments">
+              <div className="ui segments" key={i}>
                 <div className="ui segment left aligned">
                   <h4 className="ui header">{attribute.name}:</h4>
                   <div className="ui indicating progress" data-percent={attribute.value}>
                     <div className="bar" style={{width:attribute.value+'%', minWidth:0}}></div>
-                    <div className="label">{getAttributeDescription(attribute, attributes)}</div>
+                    <div className="label">{cotw.getAttributeDescription(attribute.name, attribute.value)}</div>
                   </div>
                   {attribute.name !== "Available" ? self.renderButtons(onChangeAttribute, attribute.name) : ''}
                 </div>
@@ -56,15 +49,13 @@ AttributesView.PropTypes = {
 const Attributes = connect(
   (state) => {
     return {
-      attributes: state.attributes
+      attributes: state.player.attributes
     }
   },
   (dispatch) => {
     return {
       onChangeAttribute: (attr, val) => {
         dispatch(actions.setAttribute(attr, val));
-
-        console.error('TODO: fix attributes!' + attr + " " + val);
       }
     }
   }

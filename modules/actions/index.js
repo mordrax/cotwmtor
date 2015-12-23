@@ -19,3 +19,10 @@ export const setAttribute = (attr, value) => {
     value
   }
 }
+
+export const changeName = (name) => {
+  return {
+    type: "CHANGE_NAME",
+    name
+  }
+}
