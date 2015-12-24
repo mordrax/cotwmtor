@@ -21,11 +21,28 @@ let App = React.createClass({
   }
 });
 
-Meteor.startup( () => {
+function configureStore(rootReducer, initialState) {
   const finalCreateStore = compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
-  let cotwStore = finalCreateStore(cotwReducer);
+
+  const store = finalCreateStore(rootReducer, initialState);
+
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../../modules/reducers', () => {
+      const nextRootReducer = require('../../modules/reducers/index');
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+
+  return store;
+}
+
+Meteor.startup( () => {
+
+
+  let cotwStore = configureStore(cotwReducer, {});
   const history = createBrowserHistory();
   console.dir('store state: ' + cotwStore.getState());
 

@@ -17,7 +17,7 @@ const CharCreation = ({
       <div className="ui stacked vertical segment">
         <div className="ui vertical segment">
           <div className="ui labeled fluid input">
-            <div className="ui label">Character Name:</div>
+            <div className="ui label">Character name:</div>
             <input
               type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"
               onChange={(e) => onChangeName(e.target.value)}

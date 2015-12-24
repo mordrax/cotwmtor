@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import '../../node_modules/semantic-ui-css/semantic.min.css';
 import '../../public/assets/main.css';
 
 var Title = React.createClass({
