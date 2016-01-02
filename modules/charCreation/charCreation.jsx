@@ -33,7 +33,7 @@ const CharCreation = ({
           </div>
         </div>
         <GameDifficulty difficulty={player.difficulty} />
-        <div className="ui button primary" onClick={onCompleted}>Ok</div>
+        <div className="ui button primary" onClick={onCompleted.bind(this, player)}>Ok</div>
         <div className="ui button" onClick={onCancelled}>Cancel</div>
         <div className="ui button">View Icon</div>
         <div className="ui button">Help</div>
@@ -50,7 +50,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onCompleted: () => {
+    onCompleted: (player) => {
+      Meteor.call('newGame', player);
       console.error('TODO: create the player!')
     },
     onCancelled: () => {

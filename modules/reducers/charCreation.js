@@ -46,6 +46,8 @@ export default (state = defaultState, action) => {
       newAttributes[action.attr].value += action.value;
 
       return {...state, attributes: newAttributes};
+    case 'UPDATE_DATA':
+      return state;
     default:
       return state;
   }

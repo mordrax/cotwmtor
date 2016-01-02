@@ -26,3 +26,11 @@ export const changeName = (name) => {
     name
   }
 }
+
+export const updateData = (data) => {
+  console.dir('calling update data:', data);
+  return {
+    type: "UPDATE_DATA",
+    data
+  }
+}

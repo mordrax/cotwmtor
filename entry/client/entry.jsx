@@ -11,15 +11,8 @@ import { createStore, compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import cotwReducer from '../../modules/reducers/index';
 
-let App = React.createClass({
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    )
-  }
-});
+import Game from '../../modules/game/index';
+import './subscribe';
 
 function configureStore(rootReducer, initialState) {
   const finalCreateStore = compose(
@@ -40,8 +33,6 @@ function configureStore(rootReducer, initialState) {
 }
 
 Meteor.startup( () => {
-
-
   let cotwStore = configureStore(cotwReducer, {});
   const history = createBrowserHistory();
   console.dir('store state: ' + cotwStore.getState());
@@ -49,7 +40,7 @@ Meteor.startup( () => {
   ReactDOM.render(
     <Provider store={cotwStore}>
       <Router history={history}>
-        <Route path='/' component={App}>
+        <Route path='/' component={Game}>
           <IndexRoute component={Title}/>
           <Route path='new' component={CharCreationContainer}/>
           <Route path='load' component={CharCreationContainer}/>
