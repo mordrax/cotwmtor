@@ -3,6 +3,8 @@ import cotw from '../../enums/enums.jsx';
 import * as actions from '../../actions';
 import {connect} from 'react-redux';
 import classNames from 'classnames/bind';
+//import db from '../../collections/index';
+import Game from '../../collections/games';
 
 let difficultyLevels = [
   {icon: "huge green circle icon", level: cotw.DifficultyLevel.Easy},
@@ -13,13 +15,13 @@ let difficultyLevels = [
 
 const GameDifficultyView = ({
   difficulty,
+  game,
   setDifficulty
 }) => {
-
+  console.dir('games in game difficulty: ', game&&game.games, game&&game.games&&game.games[0]);
   return (
     <div className="four ui buttons">
       {difficultyLevels.map(function (level, i) {
-
         return (
           <div
             className={classNames('ui icon button', {active:difficulty === level.level}) }
@@ -37,7 +39,8 @@ const GameDifficultyView = ({
 const GameDifficulty = connect (
   (state) => {
     return {
-      difficulty: state.player.difficulty
+      difficulty: state.player.difficulty,
+      game: state.game
     }
   },
   (dispatch) => {
