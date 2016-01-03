@@ -1,6 +1,6 @@
 import React from 'react';
-import cotw from '../../enums/enums.jsx';
-import * as actions from '../../actions';
+import cotw from '../../enums/enums';
+import actions from '../../actions';
 import {connect} from 'react-redux';
 import classNames from 'classnames/bind';
 import Game from '../../collections/games';

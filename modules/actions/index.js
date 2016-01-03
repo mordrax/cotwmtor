@@ -1,36 +1,38 @@
-export const setGender = (gender) => {
-  return {
-    type: "SET_GENDER",
-    gender
-  };
-};
+export default {
+  setGender: (gender) => {
+    return {
+      type: "SET_GENDER",
+      gender
+    };
+  },
 
-export const setDifficulty = (level) => {
-  return {
-    type: "SET_DIFFICULTY",
-    level
-  }
-};
+  setDifficulty: (level) => {
+    return {
+      type: "SET_DIFFICULTY",
+      level
+    }
+  },
 
-export const setAttribute = (attr, value) => {
-  return {
-    type: "SET_ATTRIBUTE",
-    attr,
-    value
-  }
-}
+  setAttribute: (attr, value) => {
+    return {
+      type: "SET_ATTRIBUTE",
+      attr,
+      value
+    }
+  },
 
-export const changeName = (name) => {
-  return {
-    type: "CHANGE_NAME",
-    name
-  }
-}
+  changeName: (name) => {
+    return {
+      type: "CHANGE_NAME",
+      name
+    }
+  },
 
-export const updateData = (data) => {
-  console.dir('calling update data:', data);
-  return {
-    type: "UPDATE_DATA",
-    data
+  updateData: (data) => {
+    console.dir('calling update data:', data);
+    return {
+      type: "UPDATE_DATA",
+      data
+    }
   }
 }

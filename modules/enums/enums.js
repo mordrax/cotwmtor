@@ -1,5 +1,3 @@
-
-
 var cotw = {};
 
 cotw.DifficultyLevel = {

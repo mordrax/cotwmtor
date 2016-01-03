@@ -5,13 +5,13 @@ import { Router, Route, Link, IndexRoute } from 'react-router';
 import createBrowserHistory from '../../node_modules/history/lib/createBrowserHistory';
 
 import {Title} from '../../modules/title/title.jsx';
-import CharCreationContainer from '../../modules/charCreation/charCreation';
+import CharCreationContainer from '../../modules/charCreation/client/charCreation.jsx';
 
 import { createStore, compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import cotwReducer from '../../modules/reducers/index';
 
-import Game from '../../modules/game/index';
+import Game from '../../modules/game/index.jsx';
 import './subscribe';
 
 function configureStore(rootReducer, initialState) {

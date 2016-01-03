@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import '../../public/assets/main.css';
 
-var Title = React.createClass({
+class Title extends Component {
   componentDidMount() {
     //console.log('setting timeout for fadein');
     //setTimeout(function () {$('#subtitle').addClass('fadein');}, 1000);
-  },
+  }
   render() {
     return (
       <div id="title" style={{backgroundColor:'black'}} className="ui middle aligned center aligned grid fullscreen">
@@ -38,6 +37,6 @@ var Title = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = {Title}
+export default Title;

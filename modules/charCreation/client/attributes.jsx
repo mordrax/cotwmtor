@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import cotw from '../../enums/enums.jsx';
+import cotw from '../../enums/enums';
 import {connect} from 'react-redux';
-import * as actions from '../../actions';
+import actions from '../../actions';
 
 class AttributesView extends Component {
   renderButtons(onChangeAttribute, attr) {

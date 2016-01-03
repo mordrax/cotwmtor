@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import {connect} from 'react-redux';
-import * as actions from '../../actions';
+import actions from '../../actions';
 
 const GenderView = ({
   gender,

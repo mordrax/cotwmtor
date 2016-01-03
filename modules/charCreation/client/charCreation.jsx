@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import Attributes from './components/attributes';
-import GameDifficulty from './components/gameDifficulty';
-import Gender from './components/gender';
+import Attributes from './attributes.jsx';
+import GameDifficulty from './gameDifficulty.jsx';
+import Gender from './gender.jsx';
 import { connect } from 'react-redux';
-import cotw from '../enums/enums';
-import * as actions from '../actions';
+import cotw from '../../enums/enums';
+import actions from '../../actions';
 
 const CharCreation = ({
   player,
