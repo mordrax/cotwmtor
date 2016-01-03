@@ -3,7 +3,6 @@ import cotw from '../../enums/enums.jsx';
 import * as actions from '../../actions';
 import {connect} from 'react-redux';
 import classNames from 'classnames/bind';
-//import db from '../../collections/index';
 import Game from '../../collections/games';
 
 let difficultyLevels = [
