@@ -1,33 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import cotw from '../enums/enums';
-//import actions from '../actions';
-//import ReactMixin from 'react-mixin';
+import actions from '../actions';
 import Games from '../collections/games';
 
-//@ReactMixin.decorate(ReactMeteorData)
-class GameView extends Component {
+var GameView = React.createClass({
+  mixins: [ReactMeteorData],
   render() {
     return (
       <div>
         {this.props.children}
       </div>
     );
+  },
+  getMeteorData() {
+    Meteor.subscribe('games');
+
+
+    Tracker.autorun(computation => {
+      const games = Games.find().fetch();
+
+      if (computation.firstRun) return; // ignore first empty run
+
+      this.props.onMeteorData({games});
+    });
+    return {};
   }
-  //getMeteorData() {
-  //  Meteor.subscribe('games');
-  //
-  //
-  //  Tracker.autorun(computation => {
-  //    const games = Games.find().fetch();
-  //
-  //    if (computation.firstRun) return; // ignore first empty run
-  //
-  //    this.props.onMeteorData({games});
-  //  });
-  //  return {};
-  //}
-}
+});
 
 let Game = connect(
   (state) => {

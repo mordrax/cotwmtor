@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRoute } from 'react-router';
 import createBrowserHistory from '../../node_modules/history/lib/createBrowserHistory';
 
-import {Title} from '../../modules/title/title.jsx';
+import Title from '../../modules/title/title.jsx';
 import CharCreationContainer from '../../modules/charCreation/client/charCreation.jsx';
 
 import { createStore, compose } from 'redux';

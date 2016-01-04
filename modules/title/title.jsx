@@ -12,7 +12,7 @@ class Title extends Component {
       <div id="title" style={{backgroundColor:'black'}} className="ui middle aligned center aligned grid fullscreen">
         <div className="ui one column">
           <div className="ui column">
-            <img src={require('../../public/assets/landing_cotw1.jpg')}/>
+            <img src='assets/landing_cotw1.jpg'/>
           </div>
 
           <div className="ui column">
@@ -21,7 +21,7 @@ class Title extends Component {
                                      transitionAppearTimeout={500}
                                      transitionEnterTimeout={500}
                                      transitionLeaveTimeout={500}>
-              <img src={require('../../public/assets/landing_cotw2.jpg')}/>
+              <img src='assets/landing_cotw2.jpg'/>
             </ReactCSSTransitionGroup>
           </div>
 
