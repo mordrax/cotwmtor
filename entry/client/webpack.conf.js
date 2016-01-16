@@ -1,8 +1,13 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var babelSettings = { presets: ['react', 'es2015', 'stage-0'] };
-babelSettings.plugins = ['transform-decorators-legacy'];
+var babelSettings = {
+  presets: ['react', 'es2015', 'stage-0']
+};
+babelSettings.plugins = [
+  'transform-decorators-legacy',
+  ["transform-react-jsx", { "pragma": "hJSX" }]
+];
 
 if (process.env.NODE_ENV !== 'production' && !process.env.IS_MIRROR) {
   babelSettings.plugins.push(['react-transform', {
@@ -40,10 +45,15 @@ module.exports = {
   module: {
     hot: true,
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel', query: babelSettings, exclude: /node_modules/ },
+      { test: /\.jsx?$/,
+        loader: 'babel',
+        query: babelSettings,
+        exclude: /(node_modules|bower_components)/
+      },
       { test: /\.css$/, loader: cssLoader },
       { test: /\.(png|jpe?g)(\?.*)?$/, loader: 'url?limit=8182' },
-      { test: /\.(svg|ttf|woff|eot)(\?.*)?$/, loader: 'file' }
+      { test: /\.(svg|ttf|woff|eot)(\?.*)?$/, loader: 'file' },
+
     ]
   }
 };

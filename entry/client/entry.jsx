@@ -14,6 +14,12 @@ import cotwReducer from '../../modules/reducers/index';
 import Game from '../../modules/game/index';
 import './subscribe';
 
+import Cycle from '@cycle/core';
+import CycleDOM, {makeDOMDriver} from '@cycle/dom';
+import Rx from 'rx';
+import cycleMain from './cycle.entry.jsx'
+
+
 function configureStore(rootReducer, initialState) {
   const finalCreateStore = compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -36,17 +42,23 @@ Meteor.startup( () => {
   let cotwStore = configureStore(cotwReducer, {});
   const history = createBrowserHistory();
   console.dir('store state: ' + cotwStore.getState());
+  //
+  //ReactDOM.render(
+  //  <Provider store={cotwStore}>
+  //    <Router history={history}>
+  //      <Route path='/' component={Game}>
+  //        <IndexRoute component={Title}/>
+  //        <Route path='new' component={CharCreationContainer}/>
+  //        <Route path='load' component={CharCreationContainer}/>
+  //        <Route path='overview' component={CharCreationContainer}/>
+  //      </Route>
+  //    </Router>
+  //  </Provider>
+  //  , document.getElementById('app'));
 
-  ReactDOM.render(
-    <Provider store={cotwStore}>
-      <Router history={history}>
-        <Route path='/' component={Game}>
-          <IndexRoute component={Title}/>
-          <Route path='new' component={CharCreationContainer}/>
-          <Route path='load' component={CharCreationContainer}/>
-          <Route path='overview' component={CharCreationContainer}/>
-        </Route>
-      </Router>
-    </Provider>
-    , document.getElementById('app'));
+  const drivers = {
+    DOM: makeDOMDriver('#cycle')
+  };
+
+  Cycle.run(cycleMain, drivers);
 });
