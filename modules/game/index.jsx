@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import cotw from '../enums/enums';
 import actions from '../actions';
-import Games from '../collections/games';
+import Games from '/collections/games';
 
 var GameView = React.createClass({
   mixins: [ReactMeteorData],

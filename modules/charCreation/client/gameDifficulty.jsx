@@ -3,7 +3,7 @@ import cotw from '../../enums/enums';
 import actions from '../../actions';
 import {connect} from 'react-redux';
 import classNames from 'classnames/bind';
-import Game from '../../collections/games';
+import Game from '/collections/games';
 
 let difficultyLevels = [
   {icon: "huge green circle icon", level: cotw.DifficultyLevel.Easy},

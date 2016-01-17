@@ -1,5 +1,5 @@
-import '../../modules/collections/server/publish';
-import Games from '../../modules/collections/games';
+import '../collections/server/publish';
+import Games from '../collections/games';
 import _ from 'lodash';
 
 Meteor.methods({

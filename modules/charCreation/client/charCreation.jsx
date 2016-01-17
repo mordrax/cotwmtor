@@ -5,6 +5,7 @@ import Gender from './gender.jsx';
 import { connect } from 'react-redux';
 import cotw from '../../enums/enums';
 import actions from '../../actions';
+import { routeActions } from 'redux-simple-router';
 
 const CharCreation = ({
   player,
@@ -52,10 +53,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCompleted: (player) => {
       Meteor.call('newGame', player);
-      console.error('TODO: create the player!')
+      dispatch(routeActions.push('/game'));
     },
     onCancelled: () => {
-      console.error('cancelled!');
+      dispatch(routeActions.push('/'));
     },
     onChangeName: (input) => {
       dispatch(actions.changeName(input));

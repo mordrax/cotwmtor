@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import charCreation from './charCreation';
+import {routeReducer} from 'redux-simple-router';
 
 const game = (state = {}, action) => {
   switch (action.type) {
@@ -15,7 +16,8 @@ const game = (state = {}, action) => {
 
 const cotwApp = combineReducers({
   player: charCreation,
-  game: game
+  game: game,
+  routing: routeReducer
 });
 
 export default cotwApp;
