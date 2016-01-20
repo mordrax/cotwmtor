@@ -1,6 +1,6 @@
-var cotw = {};
+const cotw = {};
 
-cotw.DifficultyLevel = {
+export const DifficultyLevel = {
   "Easy": 0,
   "Intermediate": 1,
   "Difficult": 2,
@@ -10,8 +10,9 @@ cotw.DifficultyLevel = {
   2: "Difficult",
   3: "Experts Only"
 };
+cotw.DifficultyLevel = DifficultyLevel;
 
-cotw.AttributeDescriptions = {
+export const AttributeDescriptions = {
   Available: [
     {value: 0, text: "You are at your maximum potential! Go get'em tiger!"},
     {value: 100, text: "Training is for wimps, you like pain, you like it alot!"}
@@ -36,11 +37,29 @@ cotw.AttributeDescriptions = {
     {value: 50, text: ""}
   ]
 };
+cotw.AttributeDescriptions = AttributeDescriptions;
 
-cotw.getAttributeDescription = (name, value) => {
+/**
+ * getAttributeDescription('Strength', 45)
+ * @returns the description for a strength of 45.
+ */
+export const getAttributeDescription = (name, value) => {
   return (_.find(cotw.AttributeDescriptions[name], function (desc) {
     return value <= desc.value;
   }) || {}).text || '';
 };
+cotw.getAttributeDescription = getAttributeDescription;
 
-export default cotw
+export const GameArea = {
+  0: 'Village',
+  Village: 0,
+  1: 'Farm',
+  Farm: 1,
+  2: 'MinesLvl1',
+  MinesLvl1: 2,
+  3: 'MinesLvl2',
+  MinesLvl2: 3
+};
+cotw.gameArea = GameArea;
+
+export default cotw;

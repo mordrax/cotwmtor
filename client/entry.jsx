@@ -15,6 +15,8 @@ import Game from '../modules/game/index.jsx';
 import Main from '../modules/main/index.jsx';
 import './subscribe';
 
+import cotw from '../modules/enums/enums.js';
+
 function configureStore(rootReducer, initialState) {
   const toolsCreateStore = compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -35,6 +37,8 @@ function configureStore(rootReducer, initialState) {
 Meteor.startup( () => {
   let cotwStore = configureStore(cotwReducer, {});
   console.dir('store state: ' + cotwStore.getState());
+
+  window.cotw = cotw;
 
   ReactDOM.render(
     <Provider store={cotwStore}>
