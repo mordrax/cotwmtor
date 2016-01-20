@@ -19,12 +19,14 @@ const MainView = ({
           return (<div style={{height: '32px'}}>
             {
               _.map(row, function (cell) {
-                let offset = `-${ASCIITiles[cell].sprite.x}px -${ASCIITiles[cell].sprite.y}px`;
+                let asset = ASCIITiles[cell];
+                asset.size = asset.size || {w: 32, h: 32};
+                let offset = `-${asset.sprite.x}px -${asset.sprite.y}px`;
                 let style = {
                   background: 'url(assets/original/tiles.png) ' + offset,
-                  height: '32px',
-                  width: '32px',
-                  display: 'inline-block'
+                  height    : `${asset.size.h}px`,
+                  width     : `${asset.size.w}px`,
+                  display   : 'inline-block'
                 };
                 return <i style={style}></i>
               })
