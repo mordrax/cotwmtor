@@ -1,13 +1,17 @@
 let defaultState = {
-  gender: 'male',
+  gender    : 'male',
   difficulty: 1,
-  name: 'Testing',
+  name      : 'Testing',
   attributes: {
-    Available: {value: 100, name: 'Available'},
-    Strength: {value: 50, name: 'Strength'},
+    Available   : {value: 100, name: 'Available'},
+    Strength    : {value: 50, name: 'Strength'},
     Intelligence: {value: 50, name: 'Intelligence'},
     Constitution: {value: 50, name: 'Constitution'},
-    Dexterity: {value: 50, name: 'Dexterity'}
+    Dexterity   : {value: 50, name: 'Dexterity'}
+  },
+  coords    : {
+    x: 11,
+    y: 17
   }
 };
 export default (state = defaultState, action) => {
@@ -46,6 +50,48 @@ export default (state = defaultState, action) => {
       newAttributes[action.attr].value += action.value;
 
       return {...state, attributes: newAttributes};
+    case 'KEY_PRESS':
+      switch (action.event.keyCode) {
+        case 83:
+        case 38:
+          return {
+            ...state,
+            coords: {
+              ...state.coords,
+              y: state.coords.y+1
+            }
+          };
+        case 87:
+        case 40:
+          return {
+            ...state,
+            coords: {
+              ...state.coords,
+              y: state.coords.y-1
+            }
+          };
+        case 68:
+        case 39:
+          return {
+            ...state,
+            coords: {
+              ...state.coords,
+              x: state.coords.x+1
+            }
+          };
+        case 65:
+        case 37:
+          return {
+            ...state,
+            coords: {
+              ...state.coords,
+              x: state.coords.x-1
+            }
+          };
+        default:
+          return state;
+      }
+      console.error('Key pressed unhandled!');
     default:
       return state;
   }

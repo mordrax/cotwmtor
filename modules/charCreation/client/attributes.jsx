@@ -44,7 +44,7 @@ class AttributesView extends Component {
 AttributesView.PropTypes = {
   attributes: PropTypes.string,
   onChangeAttribute: PropTypes.func
-}
+};
 
 const Attributes = connect(
   (state) => {
