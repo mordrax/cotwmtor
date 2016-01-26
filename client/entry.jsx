@@ -38,7 +38,7 @@ Meteor.startup( () => {
   let cotwStore = configureStore(cotwReducer, {});
   console.dir('store state: ' + cotwStore.getState());
 
-  window.addEventListener('keyup', function(e) {
+  window.addEventListener('keydown', function(e) {
     console.log(`key pressed: ${e.keyCode}`);
     cotwStore.dispatch({type: 'KEY_PRESS', event:e});
   }, false);

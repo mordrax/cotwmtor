@@ -106,45 +106,51 @@ export const Items = {
 
 export const Buildings = {
   Gate_NS           : {
+    name: 'Gate_NS',
     sprite    : {x: 0, y: 0},
     size      : {w: 96, h: 32},
     entryPoint: {x: 1, y: 0}
   },
   Hut_EF            : {
-    sprite    : {x: 0, y: 0},
+    name: 'Hut_EF',
+    sprite    : {x: 96, y: 0},
     size      : {w: 64, h: 64},
     entryPoint: {x: 1, y: 0}
   },
   StrawHouse_EF     : {
-    sprite    : {x: 0, y: 0},
+    name: 'StrawHouse_EF',
+    sprite    : {x: 0, y: 64},
     size      : {w: 96, h: 96},
     entryPoint: {x: 2, y: 1}
   },
   StrawHouse_WF     : {
-    sprite    : {x: 192, y: 0},
+    name: 'StrawHouse_WF',
+    sprite    : {x: 192, y: 64},
     size      : {w: 96, h: 96},
     entryPoint: {x: 0, y: 1}
   },
   BurntStrawHouse_WF: {
-    sprite    : {x: 288, y: 0},
+    name: 'BurntStrawHouse_WF',
+    sprite    : {x: 288, y: 64},
     size      : {w: 96, h: 96},
     entryPoint: {x: 0, y: 1}
   },
   HutTemple_NF      : {
-    sprite    : {x: 0, y: 0},
+    name: 'HutTemple_NF',
+    sprite    : {x: 0, y: 288},
     size      : {w: 160, h: 160},
     entryPoint: {x: 2, y: 1}
   },
-  MineEntrance      : {sprite: {x: 64, y: 0}},
-  Fountain          : {sprite: {x: 96, y: 96}},
-  Sign              : {sprite: {x: 160, y: 0}},
-  Well              : {sprite: {x: 160, y: 32}},
-  VegePatch         : {sprite: {x: 128, y: 32}},
-  Wagon             : {sprite: {x: 192, y: 32}},
-  StairsDown        : {sprite: {x: 96, y: 128}},
-  StairsUp          : {sprite: {x: 64, y: 128}},
-  DoorClosed        : {sprite: {x: 64, y: 160}},
-  DoorOpen          : {sprite: {x: 96, y: 160}}
+  MineEntrance : {name: 'MineEntrance'},
+  Fountain     : {name: 'Fountain'},
+  Sign         : {name: 'Sign'},
+  Well         : {name: 'Well'},
+  VegePatch    : {name: 'VegePatch'},
+  Wagon        : {name: 'Wagon'},
+  StairsDown   : {name: 'StairsDown'},
+  StairsUp     : {name: 'StairsUp'},
+  DoorClosed   : {name: 'DoorClosed'},
+  DoorOpen     : {name: 'DoorOpen'}
   //MineEntrance:       {                            sprite:{file:ResourceFile.Tiles, offset: {x: 64, y: 0}}},
   //Fountain:           {                            sprite:{file:ResourceFile.Tiles, offset: {x: 96, y: 96}}},
   //Sign:               {                            sprite:{file:ResourceFile.Tiles, offset: {x: 160, y: 0}}},

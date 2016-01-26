@@ -53,7 +53,7 @@ export default (state = defaultState, action) => {
     case 'KEY_PRESS':
       switch (action.event.keyCode) {
         case 83:
-        case 38:
+        case 40:
           return {
             ...state,
             coords: {
@@ -62,7 +62,7 @@ export default (state = defaultState, action) => {
             }
           };
         case 87:
-        case 40:
+        case 38:
           return {
             ...state,
             coords: {
