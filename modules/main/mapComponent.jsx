@@ -37,7 +37,7 @@ const MapView = ({
               if (cell == ';')
                 style['transform'] = `rotate(-${CalculatePathRotation(map, coords, '.')}deg)`;
 
-              let cellView = (<i className={`tile ${(asset.name||'').toLowerCase()}`}
+              let cellView = (<i className={`tile ${(asset.name||'').toLowerCase()} ${cell == '!'?'grass':''}`}
                                  key={`cell.${coords.x}`}
                                  style={style}/>);
               coords.x++;

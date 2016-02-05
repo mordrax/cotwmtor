@@ -1,8 +1,8 @@
 import {GameArea} from './enums';
 import {Buildings} from './cotwContent';
 
-const maps = {};
-const buildings = {};
+export const maps = {};
+export const buildings = {};
 
 maps[GameArea.Village] = [
 // 0 2 4 6 8 0 2 4 6 8 0 2 4
@@ -10,8 +10,8 @@ maps[GameArea.Village] = [
   '========,,,.,,,,========',
   '========,,,.,,,,========', // 2
   '========,,,.,,,,========',
-  '========,,,.,,,#========', // 4
-  '===,,,,,;...,,,,###=====',
+  '========,,,.,,,,========', // 4
+  '===,,,,,;...,,,!###=====',
   '===###!;.;,.,,;.+##=====', // 6
   '===##+..;,,.,;.;###=====',
   '===###,,,,,...;,,,,,,===', // 8
@@ -126,4 +126,6 @@ maps[GameArea.MinesLv1] = [
   '^^^^^^^^^^^^^^^^^^^^^^o^^^^^^^^^^^^^^^^^^',
   '^^^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^^^^^^^^^'
 ];
-export default {maps, buildings};
+
+export default {maps, buildings}
+

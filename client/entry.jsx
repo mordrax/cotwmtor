@@ -1,21 +1,25 @@
+//react
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// router
 import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
 import { syncHistory, routeReducer } from 'redux-simple-router';
 
-import Title from '../modules/title/title.jsx';
-import CharCreationContainer from '../modules/charCreation/client/charCreation.jsx';
-
+// redux
 import { createStore, compose, applyMiddleware } from 'redux';
 import { connect, Provider } from 'react-redux';
 import cotwReducer from '../modules/reducers/index';
 
+// game
+import Title from '../modules/title/title.jsx';
+import CharCreationContainer from '../modules/charCreation/client/charCreation.jsx';
 import Game from '../modules/game/index.jsx';
 import Main from '../modules/main/index.jsx';
 import './subscribe';
+import cotw from '../modules/enums/enums';
+import collision from '/modules/engines/collision';
 
-import cotw from '../modules/enums/enums.js';
 
 function configureStore(rootReducer, initialState) {
   const toolsCreateStore = compose(
@@ -40,7 +44,10 @@ Meteor.startup( () => {
 
   window.addEventListener('keydown', function(e) {
     console.log(`key pressed: ${e.keyCode}`);
-    cotwStore.dispatch({type: 'KEY_PRESS', event:e});
+
+    collision.onKeyPress(e, cotwStore);
+
+
   }, false);
 
   window.cotw = cotw;
