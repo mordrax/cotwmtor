@@ -106,51 +106,51 @@ export const Items = {
 
 export const Buildings = {
   Gate_NS           : {
-    name: 'Gate_NS',
+    name      : 'Gate_NS',
     sprite    : {x: 0, y: 0},
     size      : {w: 96, h: 32},
     entryPoint: {x: 1, y: 0}
   },
   Hut_EF            : {
-    name: 'Hut_EF',
+    name      : 'Hut_EF',
     sprite    : {x: 96, y: 0},
     size      : {w: 64, h: 64},
     entryPoint: {x: 1, y: 0}
   },
   StrawHouse_EF     : {
-    name: 'StrawHouse_EF',
+    name      : 'StrawHouse_EF',
     sprite    : {x: 0, y: 64},
     size      : {w: 96, h: 96},
     entryPoint: {x: 2, y: 1}
   },
   StrawHouse_WF     : {
-    name: 'StrawHouse_WF',
+    name      : 'StrawHouse_WF',
     sprite    : {x: 192, y: 64},
     size      : {w: 96, h: 96},
     entryPoint: {x: 0, y: 1}
   },
   BurntStrawHouse_WF: {
-    name: 'BurntStrawHouse_WF',
+    name      : 'BurntStrawHouse_WF',
     sprite    : {x: 288, y: 64},
     size      : {w: 96, h: 96},
     entryPoint: {x: 0, y: 1}
   },
   HutTemple_NF      : {
-    name: 'HutTemple_NF',
+    name      : 'HutTemple_NF',
     sprite    : {x: 0, y: 288},
     size      : {w: 160, h: 160},
     entryPoint: {x: 2, y: 1}
   },
-  MineEntrance : {name: 'MineEntrance'},
-  Fountain     : {name: 'Fountain'},
-  Sign         : {name: 'Sign'},
-  Well         : {name: 'Well'},
-  VegePatch    : {name: 'VegePatch'},
-  Wagon        : {name: 'Wagon'},
-  StairsDown   : {name: 'StairsDown'},
-  StairsUp     : {name: 'StairsUp'},
-  DoorClosed   : {name: 'DoorClosed'},
-  DoorOpen     : {name: 'DoorOpen'}
+  MineEntrance      : {name: 'MineEntrance'},
+  Fountain          : {name: 'Fountain'},
+  Sign              : {name: 'Sign'},
+  Well              : {name: 'Well'},
+  VegePatch         : {name: 'VegePatch'},
+  Wagon             : {name: 'Wagon'},
+  StairsDown        : {name: 'StairsDown'},
+  StairsUp          : {name: 'StairsUp'},
+  DoorClosed        : {name: 'DoorClosed'},
+  DoorOpen          : {name: 'DoorOpen'}
   //MineEntrance:       {                            sprite:{file:ResourceFile.Tiles, offset: {x: 64, y: 0}}},
   //Fountain:           {                            sprite:{file:ResourceFile.Tiles, offset: {x: 96, y: 96}}},
   //Sign:               {                            sprite:{file:ResourceFile.Tiles, offset: {x: 160, y: 0}}},
@@ -164,7 +164,11 @@ export const Buildings = {
 };
 
 export const Tiles = {
-  Rock         : {solid: true, name: 'Rock', sprite: {x: 0, y: 0}},
+  Rock         : {
+    solid : true,
+    name  : 'Rock',
+    sprite: {x: 0, y: 0}
+  },
   Grass        : {solid: false, name: 'Grass', sprite: {x: 0, y: 32}},
   DarkDgn      : {solid: false, name: 'DarkDgn', sprite: {x: 0, y: 64}},
   Water        : {solid: false, name: 'Water', sprite: {x: 0, y: 96}},
@@ -181,7 +185,12 @@ export const Tiles = {
   White50Cave50: {solid: true, name: 'White50Cave50', sprite: {x: 0, y: 224}},
   White90Cave10: {solid: true, name: 'White90Cave10', sprite: {x: 32, y: 224}},
   Crop         : {solid: true, name: 'Crop', sprite: {x: 64, y: 32}},
-  Entry        : {solid: false, name: 'Entry', sprite: {x: 0, y: 32}},
+  Entry        : {
+    solid : false,
+    name  : 'Entry',
+    sprite: {x: 0, y: 32},
+    link  : {area: '', screen: ''}
+  },
   Building     : {solid: true, name: 'Building', sprite: {x: 0, y: 32}},
   TreasurePile : {solid: false, name: 'TreasurePile', sprite: {x: 128, y: 640}}
 };

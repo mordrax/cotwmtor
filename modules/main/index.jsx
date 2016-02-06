@@ -9,13 +9,14 @@ import PlayerView from './playerComponent.jsx';
 import BuildingView from './buildingComponent.jsx';
 
 const MainView = ({
+  game,
   map,
   player,
   buildings
   }) => {
   return (
     <div>
-      <h1>Welcome to Castle of the Winds - Past Present Future</h1>
+      <h1>Welcome to Castle of the Winds - ({game.name})</h1>
       <div style={{position:'relative'}}>
         <MapView map={map} />
         <PlayerView player={player}/>
@@ -30,6 +31,7 @@ let MainContainer = connect(
     return {
       map   : gameMaps.maps[cotw.gameArea.Village],
       player: state.player,
+      game: state.game,
       buildings: gameMaps.buildings[cotw.gameArea.Village]
     }
   },

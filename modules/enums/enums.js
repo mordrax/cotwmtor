@@ -62,4 +62,12 @@ export const GameArea = {
 };
 cotw.gameArea = GameArea;
 
+export const GameScreen = {
+  0: 'Map',
+  Map: 0,
+  1: 'Inventory',
+  Inventory: 1
+};
+cotw.gameScreen = GameScreen;
+
 export default cotw;

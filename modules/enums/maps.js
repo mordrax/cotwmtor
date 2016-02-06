@@ -127,5 +127,14 @@ maps[GameArea.MinesLv1] = [
   '^^^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^^^^^^^^^'
 ];
 
+const initMap = (area) => {
+  var map = [];
+  _.forEach(maps[area], function (row) {
+    _.forEach(row, function (column) {
+
+    })
+  })
+};
+
 export default {maps, buildings}
 

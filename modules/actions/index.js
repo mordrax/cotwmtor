@@ -34,5 +34,11 @@ export default {
       type: "UPDATE_DATA",
       data
     }
+  },
+
+  initGame: () => {
+    return {
+      type: "INIT_GAME"
+    }
   }
 }

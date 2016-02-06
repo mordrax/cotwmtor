@@ -52,8 +52,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onCompleted: (player) => {
-      Meteor.call('newGame', player);
+      Meteor.call('newGame', player, function (data) {
+        console.log('new game return: ' + data);
+      });
       dispatch(routeActions.push('/game'));
+      dispatch(actions.initGame());
     },
     onCancelled: () => {
       dispatch(routeActions.push('/'));
