@@ -58,6 +58,11 @@ export default (state = defaultState, action) => {
           y: state.coords.y + action.dir.y
         }
       };
+    //case 'AREA_CHANGE':
+    //  return {
+    //    ...state,
+    //    coords: action.coords
+    //  };
     default:
       return state;
   }

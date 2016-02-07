@@ -50,24 +50,4 @@ export const getAttributeDescription = (name, value) => {
 };
 cotw.getAttributeDescription = getAttributeDescription;
 
-export const GameArea = {
-  0: 'Village',
-  Village: 0,
-  1: 'Farm',
-  Farm: 1,
-  2: 'MinesLvl1',
-  MinesLvl1: 2,
-  3: 'MinesLvl2',
-  MinesLvl2: 3
-};
-cotw.gameArea = GameArea;
-
-export const GameScreen = {
-  0: 'Map',
-  Map: 0,
-  1: 'Inventory',
-  Inventory: 1
-};
-cotw.gameScreen = GameScreen;
-
 export default cotw;

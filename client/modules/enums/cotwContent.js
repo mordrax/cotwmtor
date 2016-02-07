@@ -104,7 +104,7 @@ export const Items = {
   BrokenBoot    : {x: 288, y: 800}
 };
 
-export const Buildings = {
+export const BuildingTypes = {
   Gate_NS           : {
     name      : 'Gate_NS',
     sprite    : {x: 0, y: 0},
@@ -188,9 +188,9 @@ export const Tiles = {
   Entry        : {
     solid : false,
     name  : 'Entry',
-    sprite: {x: 0, y: 32},
-    link  : {area: '', screen: ''}
+    sprite: {x: 0, y: 32}
   },
+  Well         : {solid: true, name: 'Well', sprite: {x: 160, y: 32}},
   Building     : {solid: true, name: 'Building', sprite: {x: 0, y: 32}},
   TreasurePile : {solid: false, name: 'TreasurePile', sprite: {x: 128, y: 640}}
 };
@@ -215,9 +215,10 @@ export const ASCIITiles = {
   '=': Tiles.Crop,
   '+': Tiles.Entry,
   '#': Tiles.Building,
-  '[': Buildings.DoorClosed,
-  '/': Buildings.DoorOpen,
-  '!': Buildings.Sign
+  'e': Tiles.Well,
+  '[': BuildingTypes.DoorClosed,
+  '/': BuildingTypes.DoorOpen,
+  '!': BuildingTypes.Sign
 };
 
 export default ASCIITiles;

@@ -11,8 +11,7 @@ import BuildingView from './buildingComponent.jsx';
 const MainView = ({
   game,
   map,
-  player,
-  buildings
+  player
   }) => {
   return (
     <div>
@@ -20,7 +19,8 @@ const MainView = ({
       <div style={{position:'relative'}}>
         <MapView map={map} />
         <PlayerView player={player}/>
-        <BuildingView buildings={buildings}/>
+        {//<BuildingView buildings={buildings}/>
+        }
       </div>
     </div>
   )
@@ -29,10 +29,10 @@ const MainView = ({
 let MainContainer = connect(
   (state) => {
     return {
-      map   : gameMaps.maps[cotw.gameArea.Village],
+      map   : state.game.map[state.game.area],
       player: state.player,
       game: state.game,
-      buildings: gameMaps.buildings[cotw.gameArea.Village]
+      //buildings: gameMaps.buildings[cotw.gameArea.Village]
     }
   },
   (dispatch) => {

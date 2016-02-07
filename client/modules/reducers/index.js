@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import player from './player';
 import {routeReducer} from 'redux-simple-router';
-import {GameArea, GameScreen} from '/modules/enums/enums';
+import {GameArea, GameScreen, generateNewMap} from '/client/modules/enums/maps';
 var moment = require('moment');
 
 var defaultState = {
   name: `Created - ${moment().format('MMM Do')}`,
-  location: GameArea.Village,
+  area: GameArea.Village,
   screen: GameScreen.Map,
-  map:{}
+  map:generateNewMap()
 };
 const game = (state = defaultState, action) => {
   switch (action.type) {
@@ -18,8 +18,18 @@ const game = (state = defaultState, action) => {
         games: action.data
       };
     case 'INIT_GAME':
-      state.map[GameArea.Village] = initMap();
+      state.map = state.map || generateNewMap();
       return state;
+    case 'AREA_CHANGE':
+      return {
+        ...state,
+        area: action.area
+      };
+    case 'SCREEN_CHANGE':
+      return {
+        ...state,
+        screen: action.screen
+      };
     default:
       return state;
   }
