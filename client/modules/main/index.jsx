@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import cotw from '../enums/enums';
-import gameMaps from '../enums/maps';
+import {GameScreen} from '../enums/maps';
 import _ from 'lodash';
 import createFragment from 'react-addons-create-fragment';
 import MapView from './mapComponent.jsx';
-import PlayerView from './playerComponent.jsx';
-import BuildingView from './buildingComponent.jsx';
+import ScreenView from './screenComponent.jsx';
 
 const MainView = ({
   game,
@@ -16,12 +15,11 @@ const MainView = ({
   return (
     <div>
       <h1>Welcome to Castle of the Winds - ({game.name})</h1>
-      <div style={{position:'relative'}}>
-        <MapView map={map} />
-        <PlayerView player={player}/>
-        {//<BuildingView buildings={buildings}/>
-        }
-      </div>
+      {
+        (game.screen == GameScreen.Map) ?
+          <MapView map={map} player={player}/> :
+          <ScreenView building={game.buildingScreen} />
+      }
     </div>
   )
 };
@@ -31,8 +29,7 @@ let MainContainer = connect(
     return {
       map   : state.game.map[state.game.area],
       player: state.player,
-      game: state.game,
-      //buildings: gameMaps.buildings[cotw.gameArea.Village]
+      game  : state.game
     }
   },
   (dispatch) => {

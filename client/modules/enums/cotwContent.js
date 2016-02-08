@@ -141,7 +141,7 @@ export const BuildingTypes = {
     size      : {w: 160, h: 160},
     entryPoint: {x: 2, y: 1}
   },
-  MineEntrance      : {name: 'MineEntrance'},
+  MineEntrance      : {name: 'MineEntrance', sprite:{x:32, y:0}, size:{w:32, h:32}, isTile: true},
   Fountain          : {name: 'Fountain'},
   Sign              : {name: 'Sign'},
   Well              : {name: 'Well'},
@@ -185,9 +185,9 @@ export const Tiles = {
   White50Cave50: {solid: true, name: 'White50Cave50', sprite: {x: 0, y: 224}},
   White90Cave10: {solid: true, name: 'White90Cave10', sprite: {x: 32, y: 224}},
   Crop         : {solid: true, name: 'Crop', sprite: {x: 64, y: 32}},
-  Entry        : {
+  MineEntrance        : {
     solid : false,
-    name  : 'Entry',
+    name  : 'MineEntrance',
     sprite: {x: 0, y: 32}
   },
   Well         : {solid: true, name: 'Well', sprite: {x: 160, y: 32}},
@@ -213,7 +213,7 @@ export const ASCIITiles = {
   'c': Tiles.White50Cave50,
   'C': Tiles.White90Cave10,
   '=': Tiles.Crop,
-  '+': Tiles.Entry,
+  'M': Tiles.MineEntrance,
   '#': Tiles.Building,
   'e': Tiles.Well,
   '[': BuildingTypes.DoorClosed,

@@ -1,4 +1,3 @@
-
 import  {Items, BuildingTypes, Tiles, ASCIITiles} from './cotwContent';
 
 export const GameArea = {
@@ -18,7 +17,9 @@ export const GameScreen = {
   1        : 'Inventory',
   Inventory: 1,
   2        : 'Temple',
-  Temple   : 2
+  Temple   : 2,
+  3        : 'Shop',
+  Shop     : 3
 };
 
 const mapTiles = {};
@@ -55,28 +56,28 @@ mapTiles[GameArea.Village] = [
 ];
 let village = {
   VillageGate  : {name: 'Village Gate', type: BuildingTypes.Gate_NS, coords: [10, 0], area: GameArea.Village},
-  JunkShop     : {name: 'Junk Shop', type: BuildingTypes.StrawHouse_EF, coords: [3, 6], screen: GameScreen.Inventory},
+  JunkShop     : {name: 'Junk Shop', type: BuildingTypes.StrawHouse_EF, coords: [3, 6], screen: GameScreen.Shop},
   PrivateHouse : {name: 'Private House', type: BuildingTypes.StrawHouse_WF, coords: [16, 5]},
-  PotionStore  : {name: 'Potion Store', type: BuildingTypes.Hut_EF, coords: [7, 13], screen: GameScreen.Inventory},
+  PotionStore  : {name: 'Potion Store', type: BuildingTypes.Hut_EF, coords: [7, 13], screen: GameScreen.Shop},
   PrivateHouse2: {name: 'Private House 2', type: BuildingTypes.StrawHouse_WF, coords: [14, 12]},
   WeaponShop   : {
     name  : 'Weapon Shop',
     type  : BuildingTypes.StrawHouse_EF,
     coords: [6, 17],
-    screen: GameScreen.Inventory
+    screen: GameScreen.Shop
   },
   GeneralStore : {
     name  : 'General Store',
     type  : BuildingTypes.StrawHouse_WF,
     coords: [14, 17],
-    screen: GameScreen.Inventory
+    screen: GameScreen.Shop
   },
   OdinsTemple  : {name: "Odin's Temple", type: BuildingTypes.HutTemple_NF, coords: [9, 22], screen: GameScreen.Temple}
 };
 
 mapTiles[GameArea.Farm] = [
   '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^',
-  '^^^^^^^^^^^^^^^^^^^^^^^^+^^^^^^^^^^^^^^^^^^^^^^^^',
+  '^^^^^^^^^^^^^^^^^^^^^^^^M^^^^^^^^^^^^^^^^^^^^^^^^',
   '^^^^^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^^^^^^^^^^^^^^^',
   '^^^^^^^^^^^^^^^^^^^^^^^^.,,,^^^^^^^^^^^^^^^^^^^^^',
   '^^^^^^^^^^^^^^^^^^^^^^,,.,,,,,^^^^^^^^^^^^^^^^^^^',
@@ -99,7 +100,7 @@ mapTiles[GameArea.Farm] = [
   ',,,,,,,,,,,,,,,,,,,;.;,,,,,,,,,,,,,,,,,,,,,,,,,,=',
   ',,,,,,,,,,,,,,,,,,;.;,,,,,,,,,,,,,,,,,,,,,,,,,,,=',
   ',,,,,,,,,,,,,,,,,;.;,,,,,,,,,,,,,,,,,,,,,,,###,,=',
-  ',,,,,,,,,,,,,,,,;..........................+##,,=',
+  ',,,,,,,,,,,,,,,,;..........................###,,=',
   ',,,,,,,,,,,,,,,;.;,,,,,,,,,,,,,,,,,,,,,,,,,###,,=',
   ',,,,,,,,,,,,,,;.;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,=',
   ',,,,,,,,,,,,,;.;,,,,,,,,,,,,,,,,,,,,,,,,,,=======',
@@ -107,12 +108,12 @@ mapTiles[GameArea.Farm] = [
   '========,,,;.;,,,,,,,,,,,,,,,,,,,,,,,,,,,,=======',
   '========,,,.;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,=======',
   '========,,,.,,,,,=======,,,,,,,,,,,,,,,,,,=======',
-  '========,,#+#,,,,=======,,,,,,,,,,,,,,,,,,,,,,,,,'
+  '========,,###,,,,=======,,,,,,,,,,,,,,,,,,,,,,,,,'
 ];
 let farm = {
-  FarmGate    : {name: 'Farm Gate', type: BuildingTypes.Gate_NS, coords: [0, 0], area: GameArea.Farm},
-  MineEntrance: {name: 'Cave Entrance', type: BuildingTypes.MineEntrance, coords: [0, 10], area: GameArea.Farm},
-  AdoptedHouse: {name: 'Adopted Parents House', type: BuildingTypes.StrawHouse_EF, coords: [20, 10]}
+  FarmGate    : {name: 'Farm Gate', type: BuildingTypes.Gate_NS, coords: [10, 32], area: GameArea.Farm},
+  MineEntrance: {name: 'Cave Entrance', type: BuildingTypes.MineEntrance, coords: [24, 1], area: GameArea.Farm},
+  AdoptedHouse: {name: 'Adopted Parents House', type: BuildingTypes.StrawHouse_WF, coords: [43, 23]}
 };
 
 mapTiles[GameArea.MinesLvl1] = [
@@ -159,7 +160,7 @@ mapTiles[GameArea.MinesLvl1] = [
   '^^^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^^^^^^^^^'
 ];
 let mines = {
-  MineEntrance: {name: 'Entrance', type: BuildingTypes.MineEntrance, coords: [10, 10], area: GameArea.MinesLvl1}
+  MineEntrance: {name: 'Entrance', type: BuildingTypes.MineEntrance, coords: [22, 40], area: GameArea.MinesLvl1}
 };
 
 const link = (a, b) => {
@@ -220,7 +221,7 @@ const generateNewArea = (area) => {
     }
 
     _.extend(mapArea[topLeft.x][topLeft.y], {
-      building: building,
+      building       : building,
       buildingTopLeft: true
     });
     _.extend(mapArea[entry.x][entry.y], {

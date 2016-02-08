@@ -28,7 +28,8 @@ const game = (state = defaultState, action) => {
     case 'SCREEN_CHANGE':
       return {
         ...state,
-        screen: action.screen
+        screen: action.screen,
+        buildingScreen: action.buildingScreen
       };
     default:
       return state;

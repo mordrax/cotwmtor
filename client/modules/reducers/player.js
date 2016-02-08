@@ -58,6 +58,11 @@ export default (state = defaultState, action) => {
           y: state.coords.y + action.dir.y
         }
       };
+    case 'PLAYER_MOVE_TELEPORT':
+      return {
+        ...state,
+        coords: action.coords
+      };
     //case 'AREA_CHANGE':
     //  return {
     //    ...state,
