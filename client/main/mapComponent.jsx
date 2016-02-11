@@ -1,4 +1,4 @@
-import ASCIITiles from '../enums/cotwContent';
+import ASCIITiles from '/client/enums/cotwContent';
 import React from 'react';
 import PlayerView from './playerComponent.jsx';
 

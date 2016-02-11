@@ -3,8 +3,8 @@ import Attributes from './attributes.jsx';
 import GameDifficulty from './gameDifficulty.jsx';
 import Gender from './gender.jsx';
 import { connect } from 'react-redux';
-import cotw from '../../enums/enums';
-import actions from '../../actions';
+import cotw from '/client/enums/enums.jsx';
+import actions from '/client/actions/index';
 import { routeActions } from 'redux-simple-router';
 
 const CharCreation = ({

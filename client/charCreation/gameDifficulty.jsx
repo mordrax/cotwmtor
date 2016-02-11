@@ -1,8 +1,8 @@
 import React from 'react';
-import cotw from '../../enums/enums';
-import actions from '../../actions';
+import {cotw}from '/client/enums/enums.jsx';
+import actions from '/client/actions/index';
 import {connect} from 'react-redux';
-import classNames from 'classnames/bind';
+import classNames from '/node_modules/classnames/bind';
 import Game from '/collections/games';
 
 let difficultyLevels = [

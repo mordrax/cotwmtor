@@ -9,16 +9,16 @@ import { syncHistory, routeReducer } from 'redux-simple-router';
 // redux
 import { createStore, compose, applyMiddleware } from 'redux';
 import { connect, Provider } from 'react-redux';
-import cotwReducer from '/client/modules/reducers/index';
+import cotwReducer from '/client/reducers/index';
 
 // game
-import Title from '/client/modules/title/title.jsx';
-import CharCreationContainer from '/client/modules/charCreation/client/charCreation.jsx';
-import Game from '/client/modules/game/index.jsx';
-import Main from '/client/modules/main/index.jsx';
+import Title from '/client/title/title.jsx';
+import CharCreationContainer from '/client/charCreation/charCreation.jsx';
+import Game from '/client/game/index.jsx';
+import Main from '/client/main/index.jsx';
 import './subscribe';
-import cotw from '/client/modules/enums/enums';
-import collision from '/client/modules/engines/collision';
+import cotw from '/client/enums/enums.jsx';
+import collision from '/client/engines/collision';
 
 
 function configureStore(rootReducer, initialState) {

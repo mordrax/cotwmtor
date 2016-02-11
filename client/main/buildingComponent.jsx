@@ -1,11 +1,8 @@
-import ASCIITiles from '../enums/cotwContent';
+import ASCIITiles from '/client/enums/cotwContent';
 import React from 'react';
 
-const BuildingView = ({
-  buildings
-  }) => {
-  let coords = {x: 0, y: 0};
-  return (<div>
+const BuildingView = ({buildings}) => (
+  <div>
     {
       _.map(buildings, function (building) {
         let buildingView = <i
@@ -18,7 +15,7 @@ const BuildingView = ({
         return buildingView;
       })
     }
-  </div>)
-};
+  </div>
+);
 
 export default BuildingView;

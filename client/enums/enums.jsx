@@ -1,4 +1,9 @@
-const cotw = {};
+import React from 'react';
+
+const FakeComponent = () => (
+  <div></div>
+);
+export const cotw = {};
 
 export const DifficultyLevel = {
   "Easy": 0,
@@ -21,7 +26,7 @@ export const AttributeDescriptions = {
   Strength: [
     {value: 0, text: "Unable to push open a unlocked door whos hinges has recently been serviced with WD40."},
     {value: 50, text: "Of average strength!"},
-    {value: 100, text: "Hammers are for wimps, you hit with your FISTS!"}
+    {value: 100, text: "Hammers are for wimps! You hit with your FISTS!"}
 
   ],
   Intelligence: [
@@ -49,5 +54,3 @@ export const getAttributeDescription = (name, value) => {
   }) || {}).text || '';
 };
 cotw.getAttributeDescription = getAttributeDescription;
-
-export default cotw;

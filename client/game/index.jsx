@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import cotw from '../enums/enums';
-import actions from '../actions';
+import cotw from '/client/enums/enums.jsx';
+import actions from '/client/actions';
 import Games from '/collections/games';
 
 var GameView = React.createClass({

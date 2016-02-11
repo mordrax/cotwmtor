@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import player from './player';
+import player from './player.js';
 import {routeReducer} from 'redux-simple-router';
-import {GameArea, GameScreen, generateNewMap} from '/client/modules/enums/maps';
+import {GameArea, GameScreen, generateNewMap} from '/client/enums/maps';
 var moment = require('moment');
 
 var defaultState = {

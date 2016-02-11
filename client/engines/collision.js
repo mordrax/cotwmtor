@@ -1,5 +1,5 @@
-import {GameScreen, GameArea} from '/client/modules/enums/maps';
-import cotw from '/client/modules/enums/enums';
+import {GameScreen, GameArea} from '/client/enums/maps';
+import cotw from '/client/enums/enums.jsx';
 
 let _store;
 const onKeyPress = (e, store) => {
