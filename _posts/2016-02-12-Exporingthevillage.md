@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Exploring the village, ASCII maps (literally)"
-date:   2016-02-11 23:47:00
+date:   2016-02-12 0:35:00
 published: true
 comments: true
 ---
