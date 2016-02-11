@@ -10,7 +10,7 @@ comments: true
 
 I spent some time going through my old code from a year back when I was a budding javascript enthusiast, still too scared to step into the ocean and only dared to try it via typescript. Found some gems like this:
 
-~~~~
+~~~ javascript
 ASCII_MAPS[GameArea.Village] = [
     '========,,#+#,,,========',
     '========,,,.,,,,========',
@@ -41,10 +41,10 @@ ASCII_MAPS[GameArea.Village] = [
     '======,,,#####,=========',
     '========================'
 ];
-~~~~
+~~~
 
 And then turned it into this:
-![Character Creation](/cotwmtor/images/village.png)
+![Village](/cotwmtor/images/village.png)
 
 **Rendering Engine**
 
