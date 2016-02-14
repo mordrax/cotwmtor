@@ -1,211 +1,211 @@
 
-.tile.maleHero {
+.maleHero {
     background: url('assets/original/monsters.png') -0px -0px;
 }
-.tile.femaleHero {
+.femaleHero {
     background: url('assets/original/monsters.png') -32px -0px;
 }
-.tile.kobold {
+.kobold {
     background: url('assets/original/monsters.png') -64px -0px;
 }
-.tile.giantRat {
+.giantRat {
     background: url('assets/original/monsters.png') -96px -0px;
 }
-.tile.largeSnake {
+.largeSnake {
     background: url('assets/original/monsters.png') -128px -0px;
 }
-.tile.giantAnt {
+.giantAnt {
     background: url('assets/original/monsters.png') -160px -0px;
 }
-.tile.wildDog {
+.wildDog {
     background: url('assets/original/monsters.png') -192px -0px;
 }
-.tile.skeleton {
+.skeleton {
     background: url('assets/original/monsters.png') -224px -0px;
 }
-.tile.giantTrapdoorSpider {
+.giantTrapdoorSpider {
     background: url('assets/original/monsters.png') -256px -0px;
 }
-.tile.giantBat {
+.giantBat {
     background: url('assets/original/monsters.png') -288px -0px;
 }
-.tile.carrionCreeper {
+.carrionCreeper {
     background: url('assets/original/monsters.png') -320px -0px;
 }
-.tile.giantScorpion {
+.giantScorpion {
     background: url('assets/original/monsters.png') -352px -0px;
 }
-.tile.greenSlime {
+.greenSlime {
     background: url('assets/original/monsters.png') -384px -0px;
 }
-.tile.viper {
+.viper {
     background: url('assets/original/monsters.png') -416px -0px;
 }
-.tile.ogre {
+.ogre {
     background: url('assets/original/monsters.png') -0px -32px;
 }
-.tile.walkingCorpse {
+.walkingCorpse {
     background: url('assets/original/monsters.png') -32px -32px;
 }
-.tile.hugeLizard {
+.hugeLizard {
     background: url('assets/original/monsters.png') -64px -32px;
 }
-.tile.goblin {
+.goblin {
     background: url('assets/original/monsters.png') -96px -32px;
 }
-.tile.hobgoblin {
+.hobgoblin {
     background: url('assets/original/monsters.png') -128px -32px;
 }
-.tile.spectre {
+.spectre {
     background: url('assets/original/monsters.png') -160px -32px;
 }
-.tile.thief {
+.thief {
     background: url('assets/original/monsters.png') -192px -32px;
 }
-.tile.wolf {
+.wolf {
     background: url('assets/original/monsters.png') -224px -32px;
 }
-.tile.direWolf {
+.direWolf {
     background: url('assets/original/monsters.png') -256px -32px;
 }
-.tile.brownBear {
+.brownBear {
     background: url('assets/original/monsters.png') -288px -32px;
 }
-.tile.caveBear {
+.caveBear {
     background: url('assets/original/monsters.png') -320px -32px;
 }
-.tile.gelatinousGlob {
+.gelatinousGlob {
     background: url('assets/original/monsters.png') -352px -32px;
 }
-.tile.troll {
+.troll {
     background: url('assets/original/monsters.png') -384px -32px;
 }
-.tile.manticore {
+.manticore {
     background: url('assets/original/monsters.png') -416px -32px;
 }
-.tile.bronzeGolem {
+.bronzeGolem {
     background: url('assets/original/monsters.png') -0px -64px;
 }
-.tile.ironGolem {
+.ironGolem {
     background: url('assets/original/monsters.png') -32px -64px;
 }
-.tile.diamondGolem {
+.diamondGolem {
     background: url('assets/original/monsters.png') -64px -64px;
 }
-.tile.woodenGolem {
+.woodenGolem {
     background: url('assets/original/monsters.png') -96px -64px;
 }
-.tile.bandit {
+.bandit {
     background: url('assets/original/monsters.png') -128px -64px;
 }
-.tile.warrior {
+.warrior {
     background: url('assets/original/monsters.png') -160px -64px;
 }
-.tile.wizard {
+.wizard {
     background: url('assets/original/monsters.png') -192px -64px;
 }
-.tile.necromancer {
+.necromancer {
     background: url('assets/original/monsters.png') -224px -64px;
 }
-.tile.wight {
+.wight {
     background: url('assets/original/monsters.png') -256px -64px;
 }
-.tile.wraith {
+.wraith {
     background: url('assets/original/monsters.png') -288px -64px;
 }
-.tile.ghost {
+.ghost {
     background: url('assets/original/monsters.png') -320px -64px;
 }
-.tile.shadow {
+.shadow {
     background: url('assets/original/monsters.png') -352px -64px;
 }
-.tile.vampire {
+.vampire {
     background: url('assets/original/monsters.png') -384px -64px;
 }
-.tile.iceDevil {
+.iceDevil {
     background: url('assets/original/monsters.png') -416px -64px;
 }
-.tile.ratMan {
+.ratMan {
     background: url('assets/original/monsters.png') -0px -96px;
 }
-.tile.wolfMan {
+.wolfMan {
     background: url('assets/original/monsters.png') -32px -96px;
 }
-.tile.bearMan {
+.bearMan {
     background: url('assets/original/monsters.png') -64px -96px;
 }
-.tile.bullMan {
+.bullMan {
     background: url('assets/original/monsters.png') -96px -96px;
 }
-.tile.spikedDevil {
+.spikedDevil {
     background: url('assets/original/monsters.png') -128px -96px;
 }
-.tile.hornedDevil {
+.hornedDevil {
     background: url('assets/original/monsters.png') -160px -96px;
 }
-.tile.abyssFiend {
+.abyssFiend {
     background: url('assets/original/monsters.png') -192px -96px;
 }
-.tile.windElemental {
+.windElemental {
     background: url('assets/original/monsters.png') -224px -96px;
 }
-.tile.dustElemental {
+.dustElemental {
     background: url('assets/original/monsters.png') -256px -96px;
 }
-.tile.fireElemental {
+.fireElemental {
     background: url('assets/original/monsters.png') -288px -96px;
 }
-.tile.waterElemental {
+.waterElemental {
     background: url('assets/original/monsters.png') -320px -96px;
 }
-.tile.magmaElemental {
+.magmaElemental {
     background: url('assets/original/monsters.png') -352px -96px;
 }
-.tile.iceElemental {
+.iceElemental {
     background: url('assets/original/monsters.png') -384px -96px;
 }
-.tile.earthElemental {
+.earthElemental {
     background: url('assets/original/monsters.png') -416px -96px;
 }
-.tile.hillGiant {
+.hillGiant {
     background: url('assets/original/monsters.png') -0px -128px;
 }
-.tile.twoHeadGiant {
+.twoHeadGiant {
     background: url('assets/original/monsters.png') -32px -128px;
 }
-.tile.frostGiant {
+.frostGiant {
     background: url('assets/original/monsters.png') -64px -128px;
 }
-.tile.stoneGiant {
+.stoneGiant {
     background: url('assets/original/monsters.png') -96px -128px;
 }
-.tile.fireGiant {
+.fireGiant {
     background: url('assets/original/monsters.png') -128px -128px;
 }
-.tile.surtur {
+.surtur {
     background: url('assets/original/monsters.png') -160px -128px;
 }
-.tile.fireGiantKing {
+.fireGiantKing {
     background: url('assets/original/monsters.png') -192px -128px;
 }
-.tile.frostGiantKing {
+.frostGiantKing {
     background: url('assets/original/monsters.png') -224px -128px;
 }
-.tile.hillGiantKing {
+.hillGiantKing {
     background: url('assets/original/monsters.png') -256px -128px;
 }
-.tile.stoneGiantKing {
+.stoneGiantKing {
     background: url('assets/original/monsters.png') -288px -128px;
 }
-.tile.redDragon {
+.redDragon {
     background: url('assets/original/monsters.png') -320px -128px;
 }
-.tile.blueDragon {
+.blueDragon {
     background: url('assets/original/monsters.png') -352px -128px;
 }
-.tile.whiteDragon {
+.whiteDragon {
     background: url('assets/original/monsters.png') -384px -128px;
 }
-.tile.greenDragon {
+.greenDragon {
     background: url('assets/original/monsters.png') -416px -128px;
 }

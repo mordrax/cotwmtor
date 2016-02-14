@@ -1,5 +1,6 @@
 import {GameScreen, GameArea} from '/client/enums/maps';
-import cotw from '/client/enums/enums.jsx';
+import {cotw} from '/client/enums/enums.jsx';
+import { routeActions } from 'redux-simple-router';
 
 let _store;
 const onKeyPress = (e, store) => {
@@ -17,6 +18,7 @@ const onKeyPress = (e, store) => {
 
   if (e.keyCode === 27) {
     store.dispatch({type: 'SCREEN_CHANGE', screen: GameScreen.Map});
+    store.dispatch(routeActions.push('/game'));
   }
 };
 
@@ -25,9 +27,10 @@ const followLink = (area, curCoords, dir) => {
   if (!newCell.entry)
     return false;
 
-  if (newCell.building.screen)
+  if (newCell.building.screen) {
     _store.dispatch({type: 'SCREEN_CHANGE', screen: newCell.building.screen, buildingScreen: newCell.building});
-  else if (newCell.building.link) {
+    _store.dispatch(routeActions.push('/shop'));
+  } else if (newCell.building.link) {
     _store.dispatch({
       type: 'AREA_CHANGE',
       area: newCell.building.link.area

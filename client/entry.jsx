@@ -16,8 +16,9 @@ import Title from '/client/title/title.jsx';
 import CharCreationContainer from '/client/charCreation/charCreation.jsx';
 import Game from '/client/game/index.jsx';
 import Main from '/client/main/index.jsx';
+import Shop from '/client/shop/shopComponent.jsx';
 import './subscribe';
-import cotw from '/client/enums/enums.jsx';
+import {cotw} from '/client/enums/enums.jsx';
 import collision from '/client/engines/collision';
 
 
@@ -61,6 +62,7 @@ Meteor.startup( () => {
           <Route path='load' component={CharCreationContainer}/>
           <Route path='overview' component={CharCreationContainer}/>
           <Route path='game' component={Main}/>
+          <Route path='shop' component={Shop}/>
         </Route>
       </Router>
     </Provider>

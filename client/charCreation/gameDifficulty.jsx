@@ -5,11 +5,22 @@ import {connect} from 'react-redux';
 import classNames from '/node_modules/classnames/bind';
 import Game from '/collections/games';
 
+export const DifficultyLevel = {
+  "Easy": 0,
+  "Intermediate": 1,
+  "Difficult": 2,
+  "ExpertsOnly": 3,
+  0: "Easy",
+  1: "Intermediate",
+  2: "Difficult",
+  3: "Experts Only"
+};
+
 let difficultyLevels = [
-  {icon: "huge green circle icon", level: cotw.DifficultyLevel.Easy},
-  {icon: "huge blue square icon", level: cotw.DifficultyLevel.Intermediate},
-  {icon: "huge black square icon", level: cotw.DifficultyLevel.Difficult},
-  {icon: "huge yellow warning sign icon", level: cotw.DifficultyLevel.ExpertsOnly}
+  {icon: "huge green circle icon", level: DifficultyLevel.Easy},
+  {icon: "huge blue square icon", level: DifficultyLevel.Intermediate},
+  {icon: "huge black square icon", level: DifficultyLevel.Difficult},
+  {icon: "huge yellow warning sign icon", level: DifficultyLevel.ExpertsOnly}
 ];
 
 const GameDifficultyView = ({
@@ -27,7 +38,7 @@ const GameDifficultyView = ({
             onClick={() => setDifficulty(level.level)}
             key={i}>
             <div><i className={level.icon} /></div>
-            <label>{cotw.DifficultyLevel[level.level]}</label>
+            <label>{DifficultyLevel[level.level]}</label>
           </div>
         );
       }, this)}

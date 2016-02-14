@@ -5,15 +5,12 @@ import {GameScreen} from '/client/enums/maps';
 import _ from 'lodash';
 import createFragment from 'react-addons-create-fragment';
 import MapView from './mapComponent.jsx';
-import ScreenView from './screenComponent.jsx';
 
 const MainView = ({game, map, player}) => (
   <div>
     <h1>Welcome to Castle of the Winds - ({game.name})</h1>
     {
-      (game.screen == GameScreen.Map) ?
-        <MapView map={map} player={player}/> :
-        <ScreenView building={game.buildingScreen}/>
+        <MapView map={map} player={player}/>
     }
   </div>
 );

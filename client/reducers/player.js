@@ -1,3 +1,12 @@
+import {Items} from '/client/enums/cotwContent.js';
+import _ from 'lodash';
+
+class Item {
+  constructor(item) {
+    _.extend(this, item);
+  }
+}
+
 let defaultState = {
   gender    : 'male',
   difficulty: 1,
@@ -8,6 +17,23 @@ let defaultState = {
     Intelligence: {value: 50, name: 'Intelligence'},
     Constitution: {value: 50, name: 'Constitution'},
     Dexterity   : {value: 50, name: 'Dexterity'}
+  },
+  equipment: {
+    armor: new Item(Items.Armour.ChainMail),
+    neckwear: new Item(Items.Neckwear.OrdinaryAmulet),
+    overgarment: {},
+    helmet:{},
+    shield: new Item(Items.Shield.LargeMeteoricSteelShield),
+    bracers:new Item(Items.Bracer.BracersOfDefenseNormal),
+    gauntlets: new Item(Items.Gauntlet.GauntletOfDexterity),
+    weapon:{},
+    freehand:{},
+    rightring:{},
+    leftring:{},
+    belt:{},
+    boots:{},
+    pack:{},
+    purse:{}
   },
   coords    : {
     x: 11,
