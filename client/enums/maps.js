@@ -1,4 +1,6 @@
-import  {Items, BuildingTypes, Tiles, ASCIITiles} from './cotwContent';
+import  {Items, Tiles, ASCIITiles} from './cotwContent';
+import Building, {BuildingTypes} from '/client/core/building.js';
+import Point from '/client/core/cartesian.js';
 
 export const GameArea = {
   0        : 'Village',
@@ -55,24 +57,14 @@ mapTiles[GameArea.Village] = [
   '========================'
 ];
 let village = {
-  VillageGate  : {name: 'Village Gate', type: BuildingTypes.Gate_NS, coords: [10, 0], area: GameArea.Village},
-  JunkShop     : {name: 'Junk Shop', type: BuildingTypes.StrawHouse_EF, coords: [3, 6], screen: GameScreen.Shop},
-  PrivateHouse : {name: 'Private House', type: BuildingTypes.StrawHouse_WF, coords: [16, 5]},
-  PotionStore  : {name: 'Potion Store', type: BuildingTypes.Hut_EF, coords: [7, 13], screen: GameScreen.Shop},
-  PrivateHouse2: {name: 'Private House 2', type: BuildingTypes.StrawHouse_WF, coords: [14, 12]},
-  WeaponShop   : {
-    name  : 'Weapon Shop',
-    type  : BuildingTypes.StrawHouse_EF,
-    coords: [6, 17],
-    screen: GameScreen.Shop
-  },
-  GeneralStore : {
-    name  : 'General Store',
-    type  : BuildingTypes.StrawHouse_WF,
-    coords: [14, 17],
-    screen: GameScreen.Shop
-  },
-  OdinsTemple  : {name: "Odin's Temple", type: BuildingTypes.HutTemple_NF, coords: [9, 22], screen: GameScreen.Temple}
+  VillageGate  : new Building('Village Gate', BuildingTypes.Gate_NS, GameArea.Village, new Point(10, 0)),
+  JunkShop     : new Building('Junk Shop', BuildingTypes.StrawHouse_EF, GameArea.Village, new Point(3, 6)),
+  PrivateHouse : new Building('Private House', BuildingTypes.StrawHouse_WF, GameArea.Village, new Point(16, 5)),
+  PotionStore  : new Building('Potion Store', BuildingTypes.Hut_EF, GameArea.Village, new Point(7, 13)),
+  PrivateHouse2: new Building('Private House 2', BuildingTypes.StrawHouse_WF, GameArea.Village, new Point(14, 12)),
+  WeaponShop   : new Building('Weapon Shop', BuildingTypes.StrawHouse_EF, GameArea.Village, new Point(6, 17)),
+  GeneralStore : new Building('General Store', BuildingTypes.StrawHouse_WF, GameArea.Village, new Point(14, 17)),
+  OdinsTemple  : new Building("Odin's Temple", BuildingTypes.HutTemple_NF, GameArea.Village, new Point(9, 22))
 };
 
 mapTiles[GameArea.Farm] = [
@@ -111,9 +103,9 @@ mapTiles[GameArea.Farm] = [
   '========,,###,,,,=======,,,,,,,,,,,,,,,,,,,,,,,,,'
 ];
 let farm = {
-  FarmGate    : {name: 'Farm Gate', type: BuildingTypes.Gate_NS, coords: [10, 32], area: GameArea.Farm},
-  MineEntrance: {name: 'Cave Entrance', type: BuildingTypes.MineEntrance, coords: [24, 1], area: GameArea.Farm},
-  AdoptedHouse: {name: 'Adopted Parents House', type: BuildingTypes.StrawHouse_WF, coords: [43, 23]}
+  FarmGate    : new Building('Farm Gate', BuildingTypes.Gate_NS, GameArea.Farm, new Point(10, 32)),
+  MineEntrance: new Building('Cave Entrance', BuildingTypes.MineEntrance, GameArea.Farm, new Point(24, 1)),
+  AdoptedHouse: new Building('Adopted Parents House', BuildingTypes.StrawHouse_WF, GameArea.Farm, new Point(43, 23))
 };
 
 mapTiles[GameArea.MinesLvl1] = [
@@ -160,16 +152,11 @@ mapTiles[GameArea.MinesLvl1] = [
   '^^^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^^^^^^^^^'
 ];
 let mines = {
-  MineEntrance: {name: 'Entrance', type: BuildingTypes.MineEntrance, coords: [22, 40], area: GameArea.MinesLvl1}
+  MineEntrance: new Building('Entrance', BuildingTypes.MineEntrance, GameArea.MinesLvl1, new Point(22, 40))
 };
 
-const link = (a, b) => {
-  a.link = b;
-  b.link = a;
-};
-
-link(village.VillageGate, farm.FarmGate);
-link(farm.MineEntrance, mines.MineEntrance);
+village.VillageGate.linkBuilding(farm.FarmGate);
+farm.MineEntrance.linkBuilding(mines.MineEntrance);
 
 const mapBuildings = {};
 mapBuildings[GameArea.Village] = village;
@@ -178,7 +165,7 @@ mapBuildings[GameArea.MinesLvl1] = mines;
 
 export const generateNewMap = () => {
   console.log('generateNewMap');
-  var map = {};
+  let map = {};
 
   //generate village
   _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], function (area) {
@@ -186,6 +173,18 @@ export const generateNewMap = () => {
   });
 
   return map;
+};
+
+export const generateBuildings = () => {
+  console.log('generateBuildings');
+  let buildings = {};
+
+  _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], function (area) {
+    _.forEach(mapBuildings[area], (building) => {
+
+    })
+  });
+
 };
 
 const generateNewArea = (area) => {
@@ -210,17 +209,13 @@ const generateNewArea = (area) => {
 
   // add buildings
   _.forEach(mapBuildings[area], function (building, key) {
-    let topLeft = {x: building.coords[0], y: building.coords[1]};
-    let entry = {
-      x: topLeft.x,
-      y: topLeft.y
-    };
+    let entry = new Point(building.coord);
+
     if (building.type.entryPoint) {
-      entry.x += building.type.entryPoint.x;
-      entry.y += building.type.entryPoint.y;
+      entry.add(building.type.entryPoint);
     }
 
-    _.extend(mapArea[topLeft.x][topLeft.y], {
+    _.extend(mapArea[building.coord.x][building.coord.y], {
       building       : building,
       buildingTopLeft: true
     });

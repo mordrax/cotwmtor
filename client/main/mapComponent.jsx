@@ -3,10 +3,10 @@ import React from 'react';
 import PlayerView from './playerComponent.jsx';
 
 function CalculatePathRotation(map, coord, match) {
-  let left = map[coord.x - 1][coord.y]['tile'].name;
-  let right = map[coord.x + 1][coord.y]['tile'].name;
-  let top = map[coord.x][coord.y - 1]['tile'].name;
-  let bottom = map[coord.x][coord.y + 1]['tile'].name;
+  let left = map[coord.x - 1][coord.y]['tile'].css;
+  let right = map[coord.x + 1][coord.y]['tile'].css;
+  let top = map[coord.x][coord.y - 1]['tile'].css;
+  let bottom = map[coord.x][coord.y + 1]['tile'].css;
 
   let rotation =
     left == match ?
@@ -23,6 +23,7 @@ function CalculatePathRotation(map, coord, match) {
 
 const MapView = ({map, player}) => {
   return (<div style={{position:'relative'}}> {
+
     _.map(map, function (mapRow) {
       return (_.map(mapRow, function (cell) {
         let style = {
@@ -32,15 +33,15 @@ const MapView = ({map, player}) => {
         let className;
         if (cell.building && cell.buildingTopLeft) {
           if (cell.building.type.isTile) {
-            className = 'tile ' + cell.building.type.name.toLowerCase();
+            className = 'tile ' + cell.building.type.css;
           } else {
-            className = 'building ' + cell.building.type.name;
+            className = 'building ' + cell.building.type.css;
           }
         } else if (cell.tile) {
-          className = 'tile ' + cell.tile.name.toLowerCase();
-          let rotations = {'PathGrass':'Path','WallDarkDgn': 'Rock'};
-          _.forEach(rotations, function(value, key) {
-            if (cell.tile.name == key) {
+          className = 'tile ' + cell.tile.css;
+          let rotations = {'PathGrass': 'Path', 'WallDarkDgn': 'Rock'};
+          _.forEach(rotations, function (value, key) {
+            if (cell.tile.css == key) {
               style['transform'] = `rotate(-${CalculatePathRotation(map, cell.coords, value)}deg)`;
             }
           });
@@ -54,7 +55,7 @@ const MapView = ({map, player}) => {
     })
   }
     <PlayerView player={player}/>
-    </div>)
-  };
+  </div>)
+};
 
-    export default MapView;
+export default MapView;

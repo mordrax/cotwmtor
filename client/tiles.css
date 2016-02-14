@@ -5,109 +5,94 @@
     position: absolute;
 }
 
-.rock {
+.Rock {
     background: url('assets/original/tiles.png') -0px -0px;
 }
-
-.grass {
+.Grass {
     background: url('assets/original/tiles.png') -0px -32px;
 }
-
-.darkdgn {
+.DarkDgn {
     background: url('assets/original/tiles.png') -0px -64px;
 }
-
-.water {
+.Water {
     background: url('assets/original/tiles.png') -0px -96px;
 }
-
-.path {
+.Path {
     background: url('assets/original/tiles.png') -0px -128px;
 }
-
-.litdgn {
+.LitDgn {
     background: url('assets/original/tiles.png') -0px -160px;
 }
-
-.pathrock {
+.PathRock {
     background: url('assets/original/tiles.png') -32px -0px;
 }
-
-.pathgrass {
+.PathGrass {
     background: url('assets/original/tiles.png') -32px -32px;
 }
-
-.walldarkdgn {
+.WallDarkDgn {
     background: url('assets/original/tiles.png') -32px -64px;
 }
-
-.watergrass {
+.WaterGrass {
     background: url('assets/original/tiles.png') -32px -96px;
 }
-
-.waterpath {
+.WaterPath {
     background: url('assets/original/tiles.png') -32px -128px;
 }
-
-.walllitdgn {
+.WallLitDgn {
     background: url('assets/original/tiles.png') -32px -160px;
 }
-
-.grass50cave50 {
+.Grass50Cave50 {
     background: url('assets/original/tiles.png') -0px -192px;
 }
-
-.grass10cave90 {
+.Grass10Cave90 {
     background: url('assets/original/tiles.png') -32px -192px;
 }
-
-.white50cave50 {
+.White50Cave50 {
     background: url('assets/original/tiles.png') -0px -224px;
 }
-
-.white90cave10 {
+.White90Cave10 {
     background: url('assets/original/tiles.png') -32px -224px;
 }
-
-.crop {
+.Crop {
     background: url('assets/original/tiles.png') -64px -32px;
 }
-
-.entry {
+.MineEntrance {
     background: url('assets/original/tiles.png') -0px -32px;
 }
-
-.treasurepile {
+.Well {
+    background: url('assets/original/tiles.png') -160px -32px;
+}
+.Building {
+    /*blank*/
+}
+.TreasurePile {
     background: url('assets/original/tiles.png') -128px -640px;
 }
 
-.mineentrance {
-    background: url('assets/original/tiles.png') -64px -0px;
-}
-.fountain {
+.Fountain {
     background: url('assets/original/tiles.png') -96px -96px;
 }
-.sign {
+.Sign {
     background: url('assets/original/tiles.png') -160px -0px;
 }
-.well {
+.Well {
     background: url('assets/original/tiles.png') -160px -32px;
 }
-.vegepatch {
+.VegePatch {
     background: url('assets/original/tiles.png') -128px -32px;
 }
-.wagon {
+.Wagon {
     background: url('assets/original/tiles.png') -192px -32px;
 }
-.stairsdown {
+.StairsDown {
     background: url('assets/original/tiles.png') -96px -128px;
 }
-.stairsup {
+.StairsUp {
     background: url('assets/original/tiles.png') -64px -128px;
 }
-.doorclosed {
+.DoorClosed {
     background: url('assets/original/tiles.png') -64px -160px;
 }
-.dooropen {
+.DoorOpen {
     background: url('assets/original/tiles.png') -96px -160px;
 }

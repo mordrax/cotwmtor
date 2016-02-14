@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
 import player from './player.js';
 import {routeReducer} from 'redux-simple-router';
-import {GameArea, GameScreen, generateNewMap} from '/client/enums/maps';
+import {GameArea, GameScreen, generateNewMap, generateBuildings} from '/client/enums/maps';
 var moment = require('moment');
 
 var defaultState = {
   name: `Created - ${moment().format('MMM Do')}`,
   area: GameArea.Village,
   screen: GameScreen.Map,
-  map:generateNewMap()
+  map: generateNewMap(),
+  buildings: generateBuildings()
 };
+
 const game = (state = defaultState, action) => {
   switch (action.type) {
     case 'UPDATE_DATA':

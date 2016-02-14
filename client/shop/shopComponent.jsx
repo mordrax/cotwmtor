@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import _ from 'lodash';
 /*
  <div className="six wide column">
  <div className="row">
@@ -116,12 +116,13 @@ const ShopView = ({building, equipment}) => (
           <div className="three wide column">
             <Slot item={equipment.purse} type='Purse'/>
           </div>
-
         </div>
       </div>
-
       <div className="ten wide column">
         <div className="ui segment">Shop inventory</div>
+        {building && _.map(building.items, (item) => (
+          <Slot item={item} />
+        ))}
       </div>
     </div>
   </div>

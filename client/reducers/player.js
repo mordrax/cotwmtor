@@ -26,14 +26,14 @@ let defaultState = {
     shield: new Item(Items.Shield.LargeMeteoricSteelShield),
     bracers:new Item(Items.Bracer.BracersOfDefenseNormal),
     gauntlets: new Item(Items.Gauntlet.GauntletOfDexterity),
-    weapon:{},
-    freehand:{},
+    weapon:new Item(Items.Weapon.Club),
+    freehand: new Item(Items.Weapon.BattleAxe),
     rightring:{},
     leftring:{},
     belt:{},
     boots:{},
-    pack:{},
-    purse:{}
+    pack: new Item(Items.Pack.LargePack),
+    purse: new Item(Items.Purse.Purse)
   },
   coords    : {
     x: 11,

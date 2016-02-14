@@ -23,23 +23,23 @@ const onKeyPress = (e, store) => {
 };
 
 const followLink = (area, curCoords, dir) => {
-  let newCell = area[curCoords.x + dir.x][curCoords.y + dir.y];
-  if (!newCell.entry)
+  let destCell = area[curCoords.x + dir.x][curCoords.y + dir.y];
+  if (!destCell.entry)
     return false;
 
-  if (newCell.building.screen) {
-    _store.dispatch({type: 'SCREEN_CHANGE', screen: newCell.building.screen, buildingScreen: newCell.building});
+  if (destCell.building.items) {
+    _store.dispatch({type: 'SCREEN_CHANGE', screen: GameScreen.Shop, buildingScreen: destCell.building});
     _store.dispatch(routeActions.push('/shop'));
-  } else if (newCell.building.link) {
+  } else if (destCell.building.link) {
     _store.dispatch({
       type: 'AREA_CHANGE',
-      area: newCell.building.link.area
+      area: destCell.building.link.area
     });
-    let entryPoint = newCell.building.link.type.entryPoint || {x:0,y:0};
+    let entryPoint = destCell.building.link.type.entryPoint || {x:0,y:0};
     _store.dispatch({
       type: 'PLAYER_MOVE_TELEPORT', coords: {
-        x: newCell.building.link.coords[0] + entryPoint.x,
-        y: newCell.building.link.coords[1] + entryPoint.y
+        x: destCell.building.link.coords[0] + entryPoint.x,
+        y: destCell.building.link.coords[1] + entryPoint.y
       }
     })
   }
