@@ -20,8 +20,11 @@ const game = (state = defaultState, action) => {
         games: action.data
       };
     case 'INIT_GAME':
-      state.map = state.map || generateNewMap();
-      return state;
+      return {
+        ...state,
+        map: action.map,
+        buildings: action.buildings
+      };
     case 'AREA_CHANGE':
       return {
         ...state,
@@ -32,6 +35,26 @@ const game = (state = defaultState, action) => {
         ...state,
         screen: action.screen,
         buildingScreen: action.buildingScreen
+      };
+    case 'SELECT_ITEM':
+      return {
+        ...state,
+        movingItem: {
+          item: action.movingItem,
+          dx:0,
+          dy:0
+
+        }
+      };
+    case 'MOVE_ITEM':
+      console.log('moving item');
+      return {
+        ...state,
+        movingItem: {
+          ...state.movingItem,
+          dx: action.dx,
+          dy: action.dy
+        }
       };
     default:
       return state;

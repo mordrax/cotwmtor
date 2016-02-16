@@ -62,8 +62,10 @@ let village = {
   PrivateHouse : new Building('Private House', BuildingTypes.StrawHouse_WF, GameArea.Village, new Point(16, 5)),
   PotionStore  : new Building('Potion Store', BuildingTypes.Hut_EF, GameArea.Village, new Point(7, 13)),
   PrivateHouse2: new Building('Private House 2', BuildingTypes.StrawHouse_WF, GameArea.Village, new Point(14, 12)),
-  WeaponShop   : new Building('Weapon Shop', BuildingTypes.StrawHouse_EF, GameArea.Village, new Point(6, 17)),
-  GeneralStore : new Building('General Store', BuildingTypes.StrawHouse_WF, GameArea.Village, new Point(14, 17)),
+  WeaponShop   : new Building('Weapon Shop', BuildingTypes.StrawHouse_EF, GameArea.Village, new Point(6, 17),
+    [Items.Weapon]),
+  GeneralStore : new Building('General Store', BuildingTypes.StrawHouse_WF, GameArea.Village, new Point(14, 17),
+    [Items.Armour, Items.Bag, Items.Belt, Items.Bracer, Items.Chest, Items.Gauntlet]),
   OdinsTemple  : new Building("Odin's Temple", BuildingTypes.HutTemple_NF, GameArea.Village, new Point(9, 22))
 };
 

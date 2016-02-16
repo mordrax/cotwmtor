@@ -1,8 +1,9 @@
 import {GameScreen, GameArea} from '/client/enums/maps';
-import {cotw} from '/client/enums/enums.jsx';
+import {cotw} from '/client/enums/enums.js';
 import { routeActions } from 'redux-simple-router';
 
 let _store;
+
 const onKeyPress = (e, store) => {
   _store = store;
   var state = store.getState();
@@ -83,4 +84,4 @@ const calculateDirection = (e) => {
   return dir;
 };
 
-export default {onKeyPress};
+export default {onKeyPress}

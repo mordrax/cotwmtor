@@ -18,8 +18,8 @@ import Game from '/client/game/index.jsx';
 import Main from '/client/main/index.jsx';
 import Shop from '/client/shop/shopComponent.jsx';
 import './subscribe';
-import {cotw} from '/client/enums/enums.jsx';
-import collision from '/client/engines/collision';
+import {cotw} from '/client/enums/enums.js';
+import collision from '/client/engines/collision.js';
 
 
 function configureStore(rootReducer, initialState) {
@@ -44,11 +44,7 @@ Meteor.startup( () => {
   console.dir('store state: ' + cotwStore.getState());
 
   window.addEventListener('keydown', function(e) {
-    console.log(`key pressed: ${e.keyCode}`);
-
     collision.onKeyPress(e, cotwStore);
-
-
   }, false);
 
   window.cotw = cotw;

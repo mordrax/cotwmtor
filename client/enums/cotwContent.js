@@ -21,15 +21,7 @@ export const Items = {
     Mace          : {name: 'Mace', weight: 2500, bulk: 4375, buy: 1728, sell: 960, weaponClass: 5, css: 'Mace'},
     Flail         : {name: 'Flail', weight: 2000, bulk: 3250, buy: 1512, sell: 840, weaponClass: 6, css: 'Flail'},
     Axe           : {name: 'Axe', weight: 2000, bulk: 5000, buy: 1944, sell: 1080, weaponClass: 6, css: 'Axe'},
-    WarHammer     : {
-      name       : 'War Hammer',
-      weight     : 1400,
-      bulk       : 7500,
-      buy        : 2160,
-      sell       : 1200,
-      weaponClass: 7,
-      css        : 'Hammer'
-    },
+    WarHammer     : {name: 'War Hammer', weight: 1400, bulk: 7500, buy: 2160, sell: 1200, weaponClass: 7, css : 'Hammer'},
     LongSword     : {name: 'Long Sword', weight: 1500, bulk: 8000, buy: 3240, sell: 1800, weaponClass: 8, css: 'Sword'},
     BattleAxe     : {name: 'Battle Axe', weight: 3000, bulk: 6000, buy: 2160, sell: 1200, weaponClass: 8, css: 'Axe'},
     BroadSword    : {

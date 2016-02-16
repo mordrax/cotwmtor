@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {cotw} from '/client/enums/enums.jsx';
+import {cotw} from '/client/enums/enums.js';
 import {connect} from 'react-redux';
 import actions from '/client/actions/index';
 

@@ -2,7 +2,7 @@ import ASCIITiles from '/client/enums/cotwContent';
 import React from 'react';
 import PlayerView from './playerComponent.jsx';
 
-function CalculatePathRotation(map, coord, match) {
+const CalculatePathRotation = (map, coord, match) => {
   let left = map[coord.x - 1][coord.y]['tile'].css;
   let right = map[coord.x + 1][coord.y]['tile'].css;
   let top = map[coord.x][coord.y - 1]['tile'].css;
@@ -19,7 +19,7 @@ function CalculatePathRotation(map, coord, match) {
         90;   // right bottom
 
   return rotation;
-}
+};
 
 const MapView = ({map, player}) => {
   return (<div style={{position:'relative'}}> {

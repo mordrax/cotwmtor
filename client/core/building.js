@@ -1,3 +1,4 @@
+import Item from '/client/core/item.js'
 
 export const BuildingTypes = {
   Gate_NS           : {
@@ -55,7 +56,7 @@ export default class Building {
     this.items = [];
     // once off generation of items
     _.forEach(stockedItemTypes, (stockedItemType) => {
-
+      this.items.push(new Item(_.sample(_.values(stockedItemType))));
     })
   }
 
