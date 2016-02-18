@@ -18,28 +18,26 @@ let defaultState = {
     Constitution: {value: 50, name: 'Constitution'},
     Dexterity   : {value: 50, name: 'Dexterity'}
   },
-  equipment: {
-    armor: new Item(Items.Armour.ChainMail),
-    neckwear: new Item(Items.Neckwear.OrdinaryAmulet),
+  equipment : {
+    armor      : new Item(Items.Armour.ChainMail),
+    neckwear   : new Item(Items.Neckwear.OrdinaryAmulet),
     overgarment: {},
-    helmet:{},
-    shield: new Item(Items.Shield.LargeMeteoricSteelShield),
-    bracers:new Item(Items.Bracer.BracersOfDefenseNormal),
-    gauntlets: new Item(Items.Gauntlet.GauntletOfDexterity),
-    weapon:new Item(Items.Weapon.Club),
-    freehand: new Item(Items.Weapon.BattleAxe),
-    rightring:{},
-    leftring:{},
-    belt:{},
-    boots:{},
-    pack: new Item(Items.Pack.LargePack),
-    purse: new Item(Items.Purse.Purse)
+    helmet     : {},
+    shield     : new Item(Items.Shield.LargeMeteoricSteelShield),
+    bracers    : new Item(Items.Bracer.BracersOfDefenseNormal),
+    gauntlets  : new Item(Items.Gauntlet.GauntletOfDexterity),
+    weapon     : new Item(Items.Weapon.Club),
+    freehand   : new Item(Items.Weapon.BattleAxe),
+    rightring  : {},
+    leftring   : {},
+    belt       : {},
+    boots      : {},
+    pack       : new Item(Items.Pack.LargePack),
+    purse      : new Item(Items.Purse.Purse)
   },
-  coords    : {
-    x: 11,
-    y: 17
-  }
+  coord     : [11, 17]
 };
+
 export default (state = defaultState, action) => {
   switch (action.type) {
     case 'SET_GENDER':
@@ -79,20 +77,20 @@ export default (state = defaultState, action) => {
     case 'PLAYER_MOVE':
       return {
         ...state,
-        coords: {
-          x: state.coords.x + action.dir.x,
-          y: state.coords.y + action.dir.y
-        }
+        coord: [
+          state.coord[0] + action.dir[0],
+          state.coord[1] + action.dir[1]
+        ]
       };
     case 'PLAYER_MOVE_TELEPORT':
       return {
         ...state,
-        coords: action.coords
+        coord: action.coord
       };
     //case 'AREA_CHANGE':
     //  return {
     //    ...state,
-    //    coords: action.coords
+    //    coord: action.coord
     //  };
     default:
       return state;

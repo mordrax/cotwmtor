@@ -40,26 +40,13 @@ export default {
   },
 
   initGame: () => {
+    let map = generateNewMap();
+    let buildings = generateBuildings(map);
+
     return {
       type     : "INIT_GAME",
-      map      : generateNewMap(),
-      buildings: generateBuildings()
-    }
-  },
-
-  selectItem: (item) => {
-    console.log('select item (action): ' + item.name);
-    return {
-      type  : "SELECT_ITEM",
-      movingItem: new Item(item)
-    }
-  },
-
-  moveItem: (mouseEvent) => {
-    return {
-      type: "MOVE_ITEM",
-      dx  : mouseEvent.clientX,
-      dy  : mouseEvent.clientY
+      map,
+      buildings
     }
   }
 }

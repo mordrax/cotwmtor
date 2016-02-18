@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
 import {DragDropTypes} from '/client/enums/enums.js';
+import _ from 'lodash';
 
 const ItemView = ({ item, type, connectDragSource, isDragging }) => {
   return connectDragSource(
@@ -34,7 +35,7 @@ function collect(connect, monitor) {
 
 const source = {
   beginDrag(props) {
-    return {};
+    return _.extend({}, props);
   }
 };
 

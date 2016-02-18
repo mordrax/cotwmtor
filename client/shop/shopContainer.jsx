@@ -3,7 +3,7 @@ import React from 'react';
 import {DragDropTypes} from '/client/enums/enums.js';
 import { DropTarget } from 'react-dnd';
 
-const Container = ({children, connectDropTarget, isOver}) => {
+const Container = ({children, shop, onDrop, connectDropTarget, isOver}) => {
   return connectDropTarget(
   <div style={{
     border: isOver?'5px blue solid':''
@@ -11,10 +11,13 @@ const Container = ({children, connectDropTarget, isOver}) => {
 )};
 
 const target = {
-  drop(props) {
-    console.log('dropped item: ' + props.x + ' ' + props.y);
+  drop(props, monitor) {
+    let source = monitor.getItem();
+    props.onDrop(source);
+    console.log('dropping ' + source.item.name + ' into ' + props.shop);
   }
 };
+
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),

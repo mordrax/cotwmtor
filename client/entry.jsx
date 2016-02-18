@@ -15,12 +15,13 @@ import cotwReducer from '/client/reducers/index';
 import Title from '/client/title/title.jsx';
 import CharCreationContainer from '/client/charCreation/charCreation.jsx';
 import Game from '/client/game/index.jsx';
-import Main from '/client/main/index.jsx';
+import Main from '/client/main/main.jsx';
 import Shop from '/client/shop/shopComponent.jsx';
 import './subscribe';
 import {cotw} from '/client/enums/enums.js';
 import collision from '/client/engines/collision.js';
 
+import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
 
 function configureStore(rootReducer, initialState) {
   const toolsCreateStore = compose(
@@ -39,15 +40,22 @@ function configureStore(rootReducer, initialState) {
   return store;
 }
 
-Meteor.startup( () => {
+Meteor.startup(() => {
   let cotwStore = configureStore(cotwReducer, {});
   console.dir('store state: ' + cotwStore.getState());
 
-  window.addEventListener('keydown', function(e) {
+  window.addEventListener('keydown', function (e) {
     collision.onKeyPress(e, cotwStore);
   }, false);
 
   window.cotw = cotw;
+
+
+  let areas = generateAreas();
+  cotwStore.dispatch({type: "INIT_AREAS", areas});
+
+  let buildings = generateBuildings();
+  cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
 
   ReactDOM.render(
     <Provider store={cotwStore}>

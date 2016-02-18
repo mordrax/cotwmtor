@@ -9,8 +9,9 @@ const BuildingView = ({buildings}) => (
           key={building.name}
           className={`building ${building.type.name}`}
           style={{
-            top: `${building.coords[1]*32}px`,
-            left: `${building.coords[0]*32}px`
+            left: `${building.coord[0]*32}px`,
+            top: `${building.coord[1]*32}px`
+
           }}/>;
         return buildingView;
       })

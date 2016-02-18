@@ -3,10 +3,10 @@ import React from 'react';
 import PlayerView from './playerComponent.jsx';
 
 const CalculatePathRotation = (map, coord, match) => {
-  let left = map[coord.x - 1][coord.y]['tile'].css;
-  let right = map[coord.x + 1][coord.y]['tile'].css;
-  let top = map[coord.x][coord.y - 1]['tile'].css;
-  let bottom = map[coord.x][coord.y + 1]['tile'].css;
+  let left = map[coord[0] - 1][coord[1]]['tile'].css;
+  let right = map[coord[0] + 1][coord[1]]['tile'].css;
+  let top = map[coord[0]][coord[1] - 1]['tile'].css;
+  let bottom = map[coord[0]][coord[1] + 1]['tile'].css;
 
   let rotation =
     left == match ?
@@ -27,28 +27,28 @@ const MapView = ({map, player}) => {
     _.map(map, function (mapRow) {
       return (_.map(mapRow, function (cell) {
         let style = {
-          left: `${cell.coords.x * 32}px`,
-          top : `${cell.coords.y * 32}px`
+          left: `${cell.coord[0] * 32}px`,
+          top : `${cell.coord[1] * 32}px`
         };
         let className;
-        if (cell.building && cell.buildingTopLeft) {
-          if (cell.building.type.isTile) {
-            className = 'tile ' + cell.building.type.css;
+        if (cell.buildingType && cell.buildingTopLeft) {
+          if (cell.buildingType.isTile) {
+            className = 'tile ' + cell.buildingType.css;
           } else {
-            className = 'building ' + cell.building.type.css;
+            className = 'building ' + cell.buildingType.css;
           }
         } else if (cell.tile) {
           className = 'tile ' + cell.tile.css;
           let rotations = {'PathGrass': 'Path', 'WallDarkDgn': 'Rock'};
           _.forEach(rotations, function (value, key) {
             if (cell.tile.css == key) {
-              style['transform'] = `rotate(-${CalculatePathRotation(map, cell.coords, value)}deg)`;
+              style['transform'] = `rotate(-${CalculatePathRotation(map, cell.coord, value)}deg)`;
             }
           });
         }
 
         let cellView = (<i className={className}
-                           key={`cell.${cell.coords.x}.${cell.coords.y}`}
+                           key={`cell.${cell.coord[0]}.${cell.coord[1]}`}
                            style={style}/>);
         return cellView;
       }))

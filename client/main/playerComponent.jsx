@@ -6,8 +6,9 @@ const PlayerView = ({
   <i className={`tile maleHero`}
      style={{
          position:'absolute',
-         top:`${player.coords.y*32}px`,
-         left:`${player.coords.x*32}px`}}/>
+         left:`${player.coord[0]*32}px`,
+         top:`${player.coord[1]*32}px`
+         }}/>
 );
 
 export default PlayerView;

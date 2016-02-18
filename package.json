@@ -17,5 +17,8 @@
     "redbox-react": "^1.2.0",
     "redux": "^3.3.1",
     "redux-simple-router": "^2.0.3"
+  },
+  "devDependencies": {
+    "immutable": "^3.7.6"
   }
 }
