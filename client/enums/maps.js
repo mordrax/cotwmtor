@@ -1,4 +1,5 @@
 import  {Items, Tiles, ASCIITiles, BuildingTypes} from './cotwContent';
+import {generateItems} from '/client/core/item.js';
 
 export const GameArea = {
   0        : 'Village',
@@ -243,7 +244,14 @@ export const generateBuildings = () => {
   let buildings = {};
   _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], (area) => {
     _.forEach(mapBuildings[area], (blueprint, id) => {
-      buildings[id] = _.extend({}, blueprint);
+      let building = _.extend({}, blueprint);
+      building.id = id;
+
+      if (building.stockedItemTypes) {
+        building.items = generateItems(building.stockedItemTypes);
+      }
+
+      buildings[id] = building;
     });
   });
 

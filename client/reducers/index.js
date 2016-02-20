@@ -5,8 +5,6 @@ import area from '/client/reducers/areaReducer.js';
 import buildings from '/client/reducers/buildingReducer.js';
 
 import {routeReducer} from 'redux-simple-router';
-import {GameArea, GameScreen, generateNewMap, generateBuildings} from '/client/enums/maps';
-import {Map} from 'immutable';
 
 const cotwApp = combineReducers({
   player: player,

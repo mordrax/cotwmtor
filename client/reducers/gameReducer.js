@@ -14,21 +14,13 @@ export default (state = defaultState, action) => {
         ...state,
         games: action.data
       };
-    case 'INIT_GAME':
+    case 'SET_GAME_STATE':
       console.log('init game');
       return {
         ...state,
-        currentBuilding: action.building
-      };
-    case 'AREA_CHANGE':
-      return {
-        ...state,
-        currentArea: action.area
-      };
-    case 'SCREEN_CHANGE':
-      return {
-        ...state,
-        currentScreen: action.screen
+        currentBuilding: action.currentBuilding || state.currentBuilding,
+        currentArea: action.area || state.currentArea,
+        currentScreen: action.screen || state.currentScreen
       };
     default:
       return state;

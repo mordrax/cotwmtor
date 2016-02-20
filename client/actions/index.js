@@ -1,4 +1,4 @@
-import {GameArea, GameScreen, generateNewMap, generateBuildings} from '/client/enums/maps';
+import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
 import Item from '/client/core/item.js';
 
 export default {
@@ -40,8 +40,8 @@ export default {
   },
 
   initGame: () => {
-    let map = generateNewMap();
-    let buildings = generateBuildings(map);
+    let map = generateAreas();
+    let buildings = generateBuildings();
 
     return {
       type     : "INIT_GAME",

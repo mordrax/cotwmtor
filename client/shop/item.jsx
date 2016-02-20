@@ -12,7 +12,7 @@ const ItemView = ({ item, type, connectDragSource, isDragging }) => {
     height: '64px'
   }}>
     <div className="image">
-      <i className={`cotwItem ${item.css}`} alt=""/>
+      <i className={`cotwItem ${item.base.css}`} alt=""/>
     </div>
     <div className="content">
       <a className="header">{type}</a>
@@ -20,7 +20,7 @@ const ItemView = ({ item, type, connectDragSource, isDragging }) => {
         <span className="date"></span>
       </div>
       <div className="description" style={{maxWidth:'7em'}}>
-        {item.name}
+        {item.base.name}
       </div>
     </div>
   </div>

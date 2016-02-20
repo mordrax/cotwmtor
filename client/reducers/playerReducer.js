@@ -1,11 +1,6 @@
 import {Items} from '/client/enums/cotwContent.js';
 import _ from 'lodash';
-
-class Item {
-  constructor(item) {
-    _.extend(this, item);
-  }
-}
+import {generateItem} from '/client/core/item.js';
 
 let defaultState = {
   gender    : 'male',
@@ -19,21 +14,21 @@ let defaultState = {
     Dexterity   : {value: 50, name: 'Dexterity'}
   },
   equipment : {
-    armor      : new Item(Items.Armour.ChainMail),
-    neckwear   : new Item(Items.Neckwear.OrdinaryAmulet),
-    overgarment: {},
-    helmet     : {},
-    shield     : new Item(Items.Shield.LargeMeteoricSteelShield),
-    bracers    : new Item(Items.Bracer.BracersOfDefenseNormal),
-    gauntlets  : new Item(Items.Gauntlet.GauntletOfDexterity),
-    weapon     : new Item(Items.Weapon.Club),
-    freehand   : new Item(Items.Weapon.BattleAxe),
-    rightring  : {},
-    leftring   : {},
-    belt       : {},
-    boots      : {},
-    pack       : new Item(Items.Pack.LargePack),
-    purse      : new Item(Items.Purse.Purse)
+    armor      : generateItem(Items.Armour.ChainMail),
+    neckwear   : generateItem(Items.Neckwear.OrdinaryAmulet),
+    overgarment: null,
+    helmet     : null,
+    shield     : generateItem(Items.Shield.LargeMeteoricSteelShield),
+    bracers    : generateItem(Items.Bracer.BracersOfDefenseNormal),
+    gauntlets  : generateItem(Items.Gauntlet.GauntletOfDexterity),
+    weapon     : generateItem(Items.Weapon.Club),
+    freehand   : generateItem(Items.Weapon.BattleAxe),
+    rightring  : null,
+    leftring   : null,
+    belt       : null,
+    boots      : null,
+    pack       : generateItem(Items.Pack.LargePack),
+    purse      : generateItem(Items.Purse.Purse)
   },
   coord     : [11, 17]
 };

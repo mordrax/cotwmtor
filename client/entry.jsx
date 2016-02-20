@@ -50,12 +50,14 @@ Meteor.startup(() => {
 
   window.cotw = cotw;
 
-
   let areas = generateAreas();
   cotwStore.dispatch({type: "INIT_AREAS", areas});
 
   let buildings = generateBuildings();
   cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
+
+  let generalStore = _.filter(buildings, (x)=>x.name == 'General Store')[0];
+  cotwStore.dispatch({type:"SET_GAME_STATE", currentBuilding: generalStore.id});
 
   ReactDOM.render(
     <Provider store={cotwStore}>
