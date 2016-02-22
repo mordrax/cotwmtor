@@ -22,6 +22,8 @@ import {cotw} from '/client/enums/enums.js';
 import collision from '/client/engines/collision.js';
 
 import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
+import {generateItem} from '/client/core/item.js';
+import {Items} from '/client/enums/cotwContent.js';
 
 function configureStore(rootReducer, initialState) {
   const toolsCreateStore = compose(
@@ -41,6 +43,9 @@ function configureStore(rootReducer, initialState) {
 }
 
 Meteor.startup(() => {
+
+  process.nextTick = Meteor.defer;
+
   let cotwStore = configureStore(cotwReducer, {});
   console.dir('store state: ' + cotwStore.getState());
 
@@ -53,11 +58,30 @@ Meteor.startup(() => {
   let areas = generateAreas();
   cotwStore.dispatch({type: "INIT_AREAS", areas});
 
-  let buildings = generateBuildings();
+  let buildings = generateBuildings(cotwStore);
   cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
 
+  let initialGear = {
+    armor    : generateItem(Items.Armour.ChainMail),
+    neckwear : generateItem(Items.Neckwear.OrdinaryAmulet),
+    shield   : generateItem(Items.Shield.LargeMeteoricSteelShield),
+    bracers  : generateItem(Items.Bracer.BracersOfDefenseNormal),
+    gauntlets: generateItem(Items.Gauntlet.GauntletOfDexterity),
+    weapon   : generateItem(Items.Weapon.Club),
+    freehand : generateItem(Items.Weapon.BattleAxe),
+    pack     : generateItem(Items.Pack.LargePack),
+    purse    : generateItem(Items.Purse.Purse)
+  };
+
+  _.forEach(initialGear, (item, equipmentType) => {
+    console.log(`Initial gear: adding ${equipmentType} id: ${item.id}`);
+    cotwStore.dispatch({type: "PLAYER_EQUIP", equipmentType, iid: item.id});
+    cotwStore.dispatch({type: "ITEM_ADD", item});
+    cotwStore.dispatch({type: "CONTAINER_ADD_ITEM", cid:equipmentType, iid:item.id });
+  });
+
   let generalStore = _.filter(buildings, (x)=>x.name == 'General Store')[0];
-  cotwStore.dispatch({type:"SET_GAME_STATE", currentBuilding: generalStore.id});
+  cotwStore.dispatch({type: "SET_GAME_STATE", currentBuilding: generalStore.id});
 
   ReactDOM.render(
     <Provider store={cotwStore}>
@@ -73,4 +97,5 @@ Meteor.startup(() => {
       </Router>
     </Provider>
     , document.getElementById('app'));
-});
+})
+;

@@ -3,7 +3,8 @@ import { DragSource } from 'react-dnd';
 import {DragDropTypes} from '/client/enums/enums.js';
 import _ from 'lodash';
 
-const ItemView = ({ item, type, connectDragSource, isDragging }) => {
+const ItemView = ({ cid, item, type, connectDragSource, isDragging }) => {
+
   return connectDragSource(
   <div className="ui item" style={{
     opacity: isDragging ? 0.5: 1,
@@ -17,7 +18,7 @@ const ItemView = ({ item, type, connectDragSource, isDragging }) => {
     <div className="content">
       <a className="header">{type}</a>
       <div className="meta">
-        <span className="date"></span>
+        <span className="date" />
       </div>
       <div className="description" style={{maxWidth:'7em'}}>
         {item.base.name}

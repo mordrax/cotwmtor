@@ -14,21 +14,21 @@ let defaultState = {
     Dexterity   : {value: 50, name: 'Dexterity'}
   },
   equipment : {
-    armor      : generateItem(Items.Armour.ChainMail),
-    neckwear   : generateItem(Items.Neckwear.OrdinaryAmulet),
-    overgarment: null,
-    helmet     : null,
-    shield     : generateItem(Items.Shield.LargeMeteoricSteelShield),
-    bracers    : generateItem(Items.Bracer.BracersOfDefenseNormal),
-    gauntlets  : generateItem(Items.Gauntlet.GauntletOfDexterity),
-    weapon     : generateItem(Items.Weapon.Club),
-    freehand   : generateItem(Items.Weapon.BattleAxe),
-    rightring  : null,
-    leftring   : null,
-    belt       : null,
-    boots      : null,
-    pack       : generateItem(Items.Pack.LargePack),
-    purse      : generateItem(Items.Purse.Purse)
+    armor      : null
+    , neckwear   : null
+    , overgarment: null
+    , helmet     : null
+    , shield     : null
+    , bracers    : null
+    , gauntlets  : null
+    , weapon     : null
+    , freehand   : null
+    , rightring  : null
+    , leftring   : null
+    , belt       : null
+    , boots      : null
+    , pack       : null
+    , purse      : null
   },
   coord     : [11, 17]
 };
@@ -82,11 +82,14 @@ export default (state = defaultState, action) => {
         ...state,
         coord: action.coord
       };
-    //case 'AREA_CHANGE':
-    //  return {
-    //    ...state,
-    //    coord: action.coord
-    //  };
+    case 'PLAYER_EQUIP':
+      return {
+        ...state,
+        equipment: {
+          ...state.equipment,
+          [action.equipmentType] : action.iid
+        }
+      };
     default:
       return state;
   }

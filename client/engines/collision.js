@@ -30,7 +30,7 @@ const followLink = (area, curcoord, dir) => {
     return false;
 
   let building = _state.buildings[destCell.bid];
-  if (building.items) {
+  if (building.cid) {
     _store.dispatch({type: 'SCREEN_CHANGE', currentScreen: GameScreen.Shop, /*TODO*/buildingScreen: building.id});
     _store.dispatch(routeActions.push('/shop'));
   } else if (building.link) {

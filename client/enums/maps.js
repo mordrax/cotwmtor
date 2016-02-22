@@ -220,7 +220,7 @@ export const generateAreas = () => {
 
     _.forEach(mapBuildings[area], (building, id) => {
       let topLeft = _.extend([], building.coord);
-      let entryOffset = building.type.entryPoint || [0,0];
+      let entryOffset = building.type.entryPoint || [0, 0];
       let entry = [topLeft[0] + entryOffset[0], topLeft[1] + entryOffset[1]];
 
       _.extend(areas[area][topLeft[0]][topLeft[1]], {
@@ -230,7 +230,7 @@ export const generateAreas = () => {
 
       _.extend(areas[area][entry[0]][entry[1]], {
         buildingType: building.type,
-        bid: id
+        bid         : id
       });
     });
   });
@@ -238,7 +238,7 @@ export const generateAreas = () => {
   return areas;
 };
 
-export const generateBuildings = () => {
+export const generateBuildings = (store) => {
   console.log('generateBuildings');
 
   let buildings = {};
@@ -246,12 +246,15 @@ export const generateBuildings = () => {
     _.forEach(mapBuildings[area], (blueprint, id) => {
       let building = _.extend({}, blueprint);
       building.id = id;
+      building.cid = _.uniqueId();
+      buildings[id] = building;
 
       if (building.stockedItemTypes) {
-        building.items = generateItems(building.stockedItemTypes);
+        _.forEach(generateItems(building.stockedItemTypes), (item) => {
+          store.dispatch({type: "CONTAINER_ADD_ITEM", cid: building.cid, iid: item.id});
+          store.dispatch({type: "ITEM_ADD", item: item});
+        });
       }
-
-      buildings[id] = building;
     });
   });
 
@@ -273,7 +276,7 @@ const generateArea = (area) => {
       if (y === 0)
         map[x] = [];
       let cell = {
-        tile  : _.extend({}, ASCIITiles[asciiTile]),
+        tile : _.extend({}, ASCIITiles[asciiTile]),
         coord: [x, y]
       };
       map[x][y] = cell;
