@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Inventory, React DnD, gadicc:hot-reload"
-date:   2016-02-23 00:04:00
+date:   2016-02-23 0:4:00
 published: true
 comments: true
 ---
