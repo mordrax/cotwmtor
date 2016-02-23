@@ -6,7 +6,7 @@ There is a devlog detailing the making of this remake here: http://mordra.github
 
 ##1.1 Screens
 
-###1.1.1 Title screen [Done]
+###1.1.1 ~~Title screen~~ [Done]
 
 ###1.1.2 Character Creation
   - Needs a bit more styling
@@ -18,7 +18,7 @@ There is a devlog detailing the making of this remake here: http://mordra.github
   - Messages view
   - List of spells hotkeys
   - List of actions
-  - Main map
+  - ~~Main map~~
 
 ###1.1.4 Inventory
   - Items
@@ -27,8 +27,8 @@ There is a devlog detailing the making of this remake here: http://mordra.github
   - Dropping items
 
 ###1.1.5 Shop
-  - Items
-  - Shop items
+  - ~~Items~~
+  - ~~Shop items~~
   - Buy/sell
 
 ###1.1.6 Character Info
