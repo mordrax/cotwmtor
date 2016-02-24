@@ -33,10 +33,6 @@ ejson@1.0.8-beta.11
 email@1.0.9-beta.11
 es5-shim@4.3.2-beta.11
 fastclick@1.0.8-beta.11
-gadicc:babel-compiler-hot@0.0.3-beta.11
-gadicc:ecmascript-hot@0.0.4-beta.11
-gadicc:hot@0.0.4
-gadicc:modules-runtime-hot@0.0.2-beta.11
 geojson-utils@1.0.5-beta.11
 gwendall:body-events@0.1.6
 hot-code-push@1.0.1-beta.11

@@ -55,7 +55,7 @@ Meteor.startup(() => {
   let areas = generateAreas();
   cotwStore.dispatch({type: "INIT_AREAS", areas});
 
-  let buildings = generateBuildings(cotwStore);
+  let buildings = generateBuildings(cotwStore.dispatch);
   cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
 
   let initialGear = {

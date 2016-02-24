@@ -37,16 +37,5 @@ export default {
       type: "UPDATE_DATA",
       data
     }
-  },
-
-  initGame: () => {
-    let map = generateAreas();
-    let buildings = generateBuildings();
-
-    return {
-      type     : "INIT_GAME",
-      map,
-      buildings
-    }
   }
 }

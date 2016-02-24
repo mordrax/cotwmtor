@@ -5,6 +5,7 @@ import Gender from './gender.jsx';
 import { connect } from 'react-redux';
 import actions from '/client/actions/index';
 import { routeActions } from 'redux-simple-router';
+import {generateAreas, generateBuildings} from '/client/enums/maps.js';
 
 const CharCreation = ({
   player,
@@ -55,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
         console.log('new game return: ' + data);
       });
       dispatch(routeActions.push('/game'));
-      dispatch(actions.initGame());
+      dispatch({type:"INIT_GAME", map:generateAreas(), buildings:generateBuildings(dispatch)});
     },
     onCancelled: () => {
       dispatch(routeActions.push('/'));

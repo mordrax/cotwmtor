@@ -239,7 +239,7 @@ export const generateAreas = () => {
   return areas;
 };
 
-export const generateBuildings = (store) => {
+export const generateBuildings = (dispatch) => {
   console.log('generateBuildings');
 
   let buildings = {};
@@ -252,8 +252,8 @@ export const generateBuildings = (store) => {
 
       if (building.stockedItemTypes) {
         _.forEach(generateItems(building.stockedItemTypes), (item) => {
-          store.dispatch({type: "CONTAINER_ADD_ITEM", cid: building.cid, iid: item.id});
-          store.dispatch({type: "ITEM_ADD", item: item});
+          dispatch({type: "CONTAINER_ADD_ITEM", cid: building.cid, iid: item.id});
+          dispatch({type: "ITEM_ADD", item: item});
         });
       }
     });

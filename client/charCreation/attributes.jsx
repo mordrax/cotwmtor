@@ -72,8 +72,7 @@ let buttons = (onClick, attr) => {
 const Attributes = connect(
   (state) => {
     return {
-      attributes: state.player.attributes,
-      cotw
+      attributes: state.player.attributes
     }
   },
   (dispatch) => {
