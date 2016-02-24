@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {DragDropTypes} from '/client/enums/enums.js';
 import { DropTarget } from 'react-dnd';
 
 const ShopContainerView = ({children, id, onDrop, name, connectDropTarget, isOver}) => {
@@ -28,16 +27,21 @@ function collect(connect, monitor) {
   };
 }
 
-const ShopDrop = DropTarget(DragDropTypes.Item, target, collect)(ShopContainerView);
+const ShopDrop = DropTarget((props) => {
+  console.log(`Drop: ${props.dropTargetType} for id(${props.id}) name(${props.name})`);
+  return props.dropTargetType || 'abc';}, target, collect)(ShopContainerView);
 
-export default ShopContainer = connect(null, (dispatch) => {
+export default ShopContainer = connect(() => { return {}}, (dispatch) => {
   return {
     onDrop : (iid, sourceCid, destCid) => {
       console.log(`OnDrop iid(${iid}) sourceCid(${sourceCid}) destCid(${destCid})`);
+      if (sourceCid === destCid) {
+        console.log('Dropping into the same container! Abort!');
+        return;
+      }
       dispatch({type: 'CONTAINER_ADD_ITEM', iid, cid: destCid});
       dispatch({type: 'CONTAINER_REMOVE_ITEM', iid, cid: sourceCid});
     }
   }
 })(ShopDrop);
-
 

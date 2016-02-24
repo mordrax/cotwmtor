@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import {cotw} from '/client/enums/enums.js';
 import {connect} from 'react-redux';
 import actions from '/client/actions/index';
 
-const AttributesView = ({attributes, onChangeAttribute, cotw}) => (
+const AttributesView = ({attributes, onChangeAttribute}) => (
   <div>
     {
       _.map(attributes, function (attribute, i) {

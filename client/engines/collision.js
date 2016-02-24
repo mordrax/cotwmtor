@@ -1,5 +1,4 @@
 import {GameScreen, GameArea} from '/client/enums/maps';
-import {cotw} from '/client/enums/enums.js';
 import { routeActions } from 'redux-simple-router';
 
 let _store;

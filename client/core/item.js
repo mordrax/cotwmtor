@@ -1,14 +1,17 @@
 import _ from 'lodash';
+import {Items, ItemType} from '/client/enums/cotwContent.js';
 
 export const generateItems = (itemTypes, amt=10) => {
   let items = {};
   // once off generation of items
   while(amt-- > 0) {
     // get a random item from a random item type in the item types array
-    let base = _.sample(_.values(itemTypes[_.sample(_.keys(itemTypes))]));
+    let itemType = _.sample(itemTypes);
+    let base = _.sample(_.values(Items[itemType]));
 
     let item = generateItem(base, {
-      price : base.buy
+      price : base.buy,
+      type: itemType
     });
 
     items[item.id] = item;

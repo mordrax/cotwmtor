@@ -18,12 +18,11 @@ import Game from '/client/game/index.jsx';
 import Main from '/client/main/main.jsx';
 import Shop from '/client/shop/shopComponent.jsx';
 import './subscribe';
-import {cotw} from '/client/enums/enums.js';
 import collision from '/client/engines/collision.js';
 
 import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
 import {generateItem} from '/client/core/item.js';
-import {Items} from '/client/enums/cotwContent.js';
+import {Items, ItemType} from '/client/enums/cotwContent.js';
 
 function configureStore(rootReducer, initialState) {
   const toolsCreateStore = compose(
@@ -53,8 +52,6 @@ Meteor.startup(() => {
     collision.onKeyPress(e, cotwStore);
   }, false);
 
-  window.cotw = cotw;
-
   let areas = generateAreas();
   cotwStore.dispatch({type: "INIT_AREAS", areas});
 
@@ -62,15 +59,15 @@ Meteor.startup(() => {
   cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
 
   let initialGear = {
-    armor    : generateItem(Items.Armour.ChainMail),
-    neckwear : generateItem(Items.Neckwear.OrdinaryAmulet),
-    shield   : generateItem(Items.Shield.LargeMeteoricSteelShield),
-    bracers  : generateItem(Items.Bracer.BracersOfDefenseNormal),
-    gauntlets: generateItem(Items.Gauntlet.GauntletOfDexterity),
-    weapon   : generateItem(Items.Weapon.Club),
-    freehand : generateItem(Items.Weapon.BattleAxe),
-    pack     : generateItem(Items.Pack.LargePack),
-    purse    : generateItem(Items.Purse.Purse)
+    armour    : generateItem(Items.Armour.ChainMail, {type: ItemType.Armour}),
+    neckwear : generateItem(Items.Neckwear.OrdinaryAmulet, {type:ItemType.Neckwear}),
+    shield   : generateItem(Items.Shield.LargeMeteoricSteelShield, {type:ItemType.Shield}),
+    bracers  : generateItem(Items.Bracers.BracersOfDefenseNormal, {type:ItemType.Bracers}),
+    gauntlets: generateItem(Items.Gauntlet.GauntletOfDexterity, {type:ItemType.Gauntlet}),
+    weapon   : generateItem(Items.Weapon.Club, {type:ItemType.Weapon}),
+    freehand : generateItem(Items.Weapon.BattleAxe, {type:ItemType.Weapon}),
+    pack     : generateItem(Items.Pack.LargePack, {type:ItemType.Pack}),
+    purse    : generateItem(Items.Purse.Purse, {type:ItemType.Purse})
   };
 
   _.forEach(initialGear, (item, equipmentType) => {

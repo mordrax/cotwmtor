@@ -1,5 +1,5 @@
 let defaultState = {
-  'armor':{}
+  'armour':{}
   , 'neckwear':{}
   , 'overgarment':{}
   , 'helmet':{}

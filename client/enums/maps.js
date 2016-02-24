@@ -1,5 +1,6 @@
-import  {Items, Tiles, ASCIITiles, BuildingTypes} from './cotwContent';
+import  {Items, ItemType, Tiles, ASCIITiles, BuildingTypes} from './cotwContent';
 import {generateItems} from '/client/core/item.js';
+
 
 export const GameArea = {
   0        : 'Village',
@@ -80,14 +81,14 @@ mapBuildings[GameArea.Village] = {
   },
   WeaponShop   : {
     name            : 'Weapon Shop', type: BuildingTypes.StrawHouse_EF, area: GameArea.Village, coord: [6, 17],
-    stockedItemTypes: [Items.Weapon]
+    stockedItemTypes: [ItemType.Weapon]
   },
   GeneralStore : {
     name            : 'General Store',
     type            : BuildingTypes.StrawHouse_WF,
     area            : GameArea.Village,
     coord           : [14, 17],
-    stockedItemTypes: [Items.Armour, Items.Bag, Items.Belt, Items.Bracer, Items.Chest, Items.Gauntlet]
+    stockedItemTypes: [ItemType.Armour, ItemType.Pack, ItemType.Belt, ItemType.Bracers, ItemType.Gauntlet]
   },
   OdinsTemple  : {
     name : "Odin's Temple",

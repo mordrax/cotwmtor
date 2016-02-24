@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import cotw from '/client/enums/enums.js';
 import {GameScreen} from '/client/enums/maps.js';
 import _ from 'lodash';
 import createFragment from 'react-addons-create-fragment';

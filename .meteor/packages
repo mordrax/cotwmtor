@@ -10,7 +10,6 @@ mongo                   # The database Meteor supports right now
 blaze-html-templates    # Compile .html files into Meteor Blaze views
 tracker                 # Meteor's client-side reactive programming library
 
-standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 
 autopublish             # Publish all data to the clients (for prototyping)
@@ -22,4 +21,6 @@ ejson
 meteortoys:allthings
 react-meteor-data
 #ecmascript
-gadicc:ecmascript-hot@0.0.3-modules.7
+gadicc:ecmascript-hot@0.0.4-beta.11
+standard-minifier-css
+standard-minifier-js

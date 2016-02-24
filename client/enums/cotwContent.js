@@ -1,14 +1,6 @@
 export const Items = {
   Weapon       : {
-    BrokenSword   : {
-      name       : 'Broken Sword',
-      weight     : 1000,
-      bulk       : 5000,
-      buy        : NaN,
-      sell       : 25,
-      weaponClass: 0,
-      css        : 'BrokenSword'
-    },
+    BrokenSword   : {name: 'Broken Sword', weight: 1000, bulk: 5000, buy: NaN, sell: 25, weaponClass: 0, css: 'BrokenSword'},
     Club          : {name: 'Club', weight: 1500, bulk: 3000, buy: 105, sell: 60, weaponClass: 1, css: 'Club'},
     Dagger        : {name: 'Dagger', weight: 500, bulk: 500, buy: 420, sell: 240, weaponClass: 2, css: 'Sword'},
     Hammer        : {name: 'Hammer', weight: 2000, bulk: 3000, buy: 420, sell: 240, weaponClass: 2, css: 'Hammer'},
@@ -19,45 +11,15 @@ export const Items = {
     Mace          : {name: 'Mace', weight: 2500, bulk: 4375, buy: 1728, sell: 960, weaponClass: 5, css: 'Mace'},
     Flail         : {name: 'Flail', weight: 2000, bulk: 3250, buy: 1512, sell: 840, weaponClass: 6, css: 'Flail'},
     Axe           : {name: 'Axe', weight: 2000, bulk: 5000, buy: 1944, sell: 1080, weaponClass: 6, css: 'Axe'},
-    WarHammer     : {name: 'War Hammer', weight: 1400, bulk: 7500, buy: 2160, sell: 1200, weaponClass: 7, css : 'Hammer'},
+    WarHammer     : {
+      name: 'War Hammer', weight: 1400, bulk: 7500, buy: 2160, sell: 1200, weaponClass: 7, css: 'Hammer'
+    },
     LongSword     : {name: 'Long Sword', weight: 1500, bulk: 8000, buy: 3240, sell: 1800, weaponClass: 8, css: 'Sword'},
     BattleAxe     : {name: 'Battle Axe', weight: 3000, bulk: 6000, buy: 2160, sell: 1200, weaponClass: 8, css: 'Axe'},
-    BroadSword    : {
-      name       : 'Broad Sword',
-      weight     : 1600,
-      bulk       : 9000,
-      buy        : 3240,
-      sell       : 1800,
-      weaponClass: 9,
-      css        : 'Sword'
-    },
-    MorningStar   : {
-      name       : 'Morning Star',
-      weight     : 3000,
-      bulk       : 9000,
-      buy        : 2160,
-      sell       : 1200,
-      weaponClass: 10,
-      css        : 'MorningStar'
-    },
-    BastardSword  : {
-      name       : 'Bastard Sword',
-      weight     : 3000,
-      bulk       : 10000,
-      buy        : 4320,
-      sell       : 2400,
-      weaponClass: 11,
-      css        : 'Sword'
-    },
-    TwoHandedSword: {
-      name       : 'Two Handed Sword',
-      weight     : 5000,
-      bulk       : 12000,
-      buy        : 6360,
-      sell       : 3600,
-      weaponClass: 12,
-      css        : 'Sword'
-    }
+    BroadSword    : {name: 'Broad Sword', weight: 1600, bulk: 9000, buy: 3240, sell: 1800, weaponClass: 9, css: 'Sword'},
+    MorningStar   : {name: 'Morning Star', weight: 3000, bulk: 9000, buy: 2160, sell: 1200, weaponClass: 10, css: 'MorningStar'},
+    BastardSword  : {name: 'Bastard Sword', weight: 3000, bulk: 10000, buy: 4320, sell: 2400, weaponClass: 11, css: 'Sword'},
+    TwoHandedSword: {name: 'Two Handed Sword', weight: 5000, bulk: 12000, buy: 6360, sell: 3600, weaponClass: 12, css: 'Sword'}
   },
   Armour       : {
     RustyArmour         : {
@@ -344,7 +306,7 @@ export const Items = {
       css   : 'EnchantedHelmOfStorms'
     }
   },
-  Bracer       : {
+  Bracers      : {
     Bracers               : {name: 'Bracers', weight: 500, bulk: 2000, buy: 108, sell: 60, ac: 3, css: 'Bracers'},
     BracersOfDefenseNormal: {
       name  : 'Bracers Of Defense Normal',
@@ -563,7 +525,7 @@ export const Items = {
       css      : 'Purse'
     }
   },
-  Bag          : {
+  Pack         : {
     SmallBag : {
       name     : 'Small Bag',
       weight   : 300,
@@ -596,9 +558,7 @@ export const Items = {
       weightCap: 15000,
       bulkCap  : 18000,
       css      : 'Bag'
-    }
-  },
-  Pack         : {
+    },
     SmallPack : {
       name     : 'Small Pack',
       weight   : 1000,
@@ -631,9 +591,7 @@ export const Items = {
       weightCap: 35000,
       bulkCap  : 100000,
       css      : 'Pack'
-    }
-  },
-  Chest        : {
+    },
     SmallChest : {
       name     : 'Small Chest',
       weight   : 5000,
@@ -666,9 +624,7 @@ export const Items = {
       weightCap: 100000,
       bulkCap  : 250000,
       css      : 'Chest'
-    }
-  },
-  PackOfHolding: {
+    },
     EnchantedSmallPackOfHolding : {
       name     : 'Enchanted Small Pack Of Holding',
       weight   : 5000,
@@ -705,7 +661,51 @@ export const Items = {
   },
   Neckwear     : {
     OrdinaryAmulet: {name: 'Decorative Broch', weight: 300, bulk: 300, buy: 100, sell: 50, css: 'Amulet'}
-  }
+  },
+  Overgarment  : {},
+  Ring         : {},
+  Boots        : {}
+};
+
+export const ItemType = {
+  Weapon       : 'Weapon',
+  Armour       : 'Armour',
+  Shield       : 'Shield',
+  Helmet       : 'Helmet',
+  Bracers      : 'Bracers',
+  Gauntlet     : 'Gauntlet',
+  Belt         : 'Belt',
+  Purse        : 'Purse',
+  Bag          : 'Bag',
+  Pack         : 'Pack',
+  Chest        : 'Chest',
+  PackOfHolding: 'PackOfHolding',
+  Neckwear     : 'Neckwear',
+  Overgarment  : 'Overgarment',
+  Ring         : 'Ring',
+  Boots        : 'Boots'
+};
+
+let allItemTypes = [ItemType.Armour, ItemType.Neckwear, ItemType.Overgarment, ItemType.Helmet, ItemType.Shield, ItemType.Bracers, ItemType.Gauntlet, ItemType.Ring, ItemType.Ring, ItemType.Belt, ItemType.Boots, ItemType.Pack, ItemType.Purse];
+/**
+ * slot name to accepted item types
+ */
+export const EquipmentSlots = {
+  'armour'       : ItemType.Armour
+  , 'neckwear'   : ItemType.Neckwear
+  , 'overgarment': ItemType.Overgarment
+  , 'helmet'     : ItemType.Helmet
+  , 'shield'     : ItemType.Shield
+  , 'bracers'    : ItemType.Bracers
+  , 'gauntlets'  : ItemType.Gauntlet
+  , 'weapon'     : allItemTypes
+  , 'freehand'   : allItemTypes
+  , 'rightring'  : ItemType.Ring
+  , 'leftring'   : ItemType.Ring
+  , 'belt'       : ItemType.Belt
+  , 'boots'      : ItemType.Boots
+  , 'pack'       : ItemType.Pack
+  , 'purse'      : ItemType.Purse
 };
 
 export const Tiles = {
@@ -734,30 +734,30 @@ export const Tiles = {
 
 export const BuildingTypes = {
   Gate_NS           : {
-    css      : 'Gate_NS',
-    entryPoint: [1,0]
+    css       : 'Gate_NS',
+    entryPoint: [1, 0]
   },
   Hut_EF            : {
-    css      : 'Hut_EF',
-    entryPoint: [1,0]
+    css       : 'Hut_EF',
+    entryPoint: [1, 0]
   },
   StrawHouse_EF     : {
-    css      : 'StrawHouse_EF',
-    entryPoint: [2,1]
+    css       : 'StrawHouse_EF',
+    entryPoint: [2, 1]
   },
   StrawHouse_WF     : {
-    css      : 'StrawHouse_WF',
-    entryPoint: [0,1]
+    css       : 'StrawHouse_WF',
+    entryPoint: [0, 1]
   },
   BurntStrawHouse_WF: {
-    css      : 'BurntStrawHouse_WF',
-    entryPoint: [0,1]
+    css       : 'BurntStrawHouse_WF',
+    entryPoint: [0, 1]
   },
   HutTemple_NF      : {
-    css      : 'HutTemple_NF',
-    entryPoint: [2,1]
+    css       : 'HutTemple_NF',
+    entryPoint: [2, 1]
   },
-  MineEntrance      : {css: 'MineEntrance', sprite:{x:32, y:0}, size:{w:32, h:32}, isTile: true},
+  MineEntrance      : {css: 'MineEntrance', sprite: {x: 32, y: 0}, size: {w: 32, h: 32}, isTile: true},
   Fountain          : {css: 'Fountain'},
   Sign              : {css: 'Sign'},
   Well              : {css: 'Well'},

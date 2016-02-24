@@ -14,7 +14,7 @@ let defaultState = {
     Dexterity   : {value: 50, name: 'Dexterity'}
   },
   equipment : {
-    armor      : null
+    armour      : null
     , neckwear   : null
     , overgarment: null
     , helmet     : null
