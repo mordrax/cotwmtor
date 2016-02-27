@@ -686,7 +686,21 @@ export const ItemType = {
   Boots        : 'Boots'
 };
 
-let allItemTypes = [ItemType.Armour, ItemType.Neckwear, ItemType.Overgarment, ItemType.Helmet, ItemType.Shield, ItemType.Bracers, ItemType.Gauntlet, ItemType.Ring, ItemType.Ring, ItemType.Belt, ItemType.Boots, ItemType.Pack, ItemType.Purse];
+let allItemTypes = [
+  ItemType.Weapon,
+  ItemType.Armour,
+  ItemType.Neckwear,
+  ItemType.Overgarment,
+  ItemType.Helmet,
+  ItemType.Shield,
+  ItemType.Bracers,
+  ItemType.Gauntlet,
+  ItemType.Ring,
+  ItemType.Ring,
+  ItemType.Belt,
+  ItemType.Boots,
+  ItemType.Pack,
+  ItemType.Purse];
 /**
  * slot name to accepted item types
  */

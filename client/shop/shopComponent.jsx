@@ -11,7 +11,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import Container from './shopContainer.jsx';
 import {EquipmentSlots} from '/client/enums/cotwContent.js';
 
-const ShopView = ({building, equipment, containers, items}) => (  <div>
+const ShopView = ({building, equipment, containers, items, pack}) => (
+  <div>
     <h1>Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
     <div className="ui two column grid">
@@ -33,8 +34,8 @@ const ShopView = ({building, equipment, containers, items}) => (  <div>
         </div>
       </div>
       <div className="ten wide column">
-        <div className="ui block header">Shop</div>
         <Container dropTargetType={_.values(ItemType)} id={building.cid} type='Item'>
+          <div className="ui block header">Shop</div>
           <div className="ui grid" style={{border: '1px black dashed', minHeight: '20px'}}>
             {
               building && containers && _.map(containers[building.cid], (isExists, iid) => {
@@ -46,6 +47,22 @@ const ShopView = ({building, equipment, containers, items}) => (  <div>
             }
           </div>
         </Container>
+        {
+          !pack ? '' :
+            <Container dropTargetType={_.values(ItemType)} id={pack.cid} type='Item'>
+              <div className="ui block header">Pack</div>
+              <div className="ui grid" style={{border: '1px black dashed', minHeight: '20px'}}>
+                {
+                  _.map(containers[pack.cid], (isExists, iid) => {
+                    if (isExists)
+                      return <Item dragTargetType={items[iid].type} cid={pack.cid} item={items[iid]} key={iid}/>;
+                    else
+                      return ''
+                  })
+                }
+              </div>
+            </Container>
+        }
       </div>
     </div>
   </div>
@@ -57,7 +74,7 @@ const Shop = connect(
       containers: state.containers,
       building  : state.buildings[state.game.currentBuilding],
       equipment : state.player.equipment,
-
+      pack: state.items[state.player.equipment['pack']],
       items: state.items
     }
   },

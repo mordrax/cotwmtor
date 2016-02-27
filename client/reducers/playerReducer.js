@@ -90,6 +90,14 @@ export default (state = defaultState, action) => {
           [action.equipmentType] : action.iid
         }
       };
+    case 'PLAYER_UNEQUIP':
+      return {
+        ...state,
+        equipment: {
+          ...state.equipment,
+          [action.equipmentType] : null
+        }
+      };
     default:
       return state;
   }

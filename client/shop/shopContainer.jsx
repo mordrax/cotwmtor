@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
+import {EquipmentSlots} from '/client/enums/cotwContent.js';
 
-const ShopContainerView = ({children, id, onDrop, name, connectDropTarget, isOver}) => {
+const ContainerView = ({children, id, onDrop, name, connectDropTarget, isOver}) => {
   return connectDropTarget(
   <div style={{
     border: isOver?'5px blue solid':''
@@ -27,11 +28,11 @@ function collect(connect, monitor) {
   };
 }
 
-const ShopDrop = DropTarget((props) => {
+const dropTarget = DropTarget((props) => {
   console.log(`Drop: ${props.dropTargetType} for id(${props.id}) name(${props.name})`);
-  return props.dropTargetType || 'abc';}, target, collect)(ShopContainerView);
+  return props.dropTargetType || 'abc';}, target, collect)(ContainerView);
 
-export default ShopContainer = connect(() => { return {}}, (dispatch) => {
+export default Container = connect(() => { return {}}, (dispatch) => {
   return {
     onDrop : (iid, sourceCid, destCid) => {
       console.log(`OnDrop iid(${iid}) sourceCid(${sourceCid}) destCid(${destCid})`);
@@ -39,9 +40,14 @@ export default ShopContainer = connect(() => { return {}}, (dispatch) => {
         console.log('Dropping into the same container! Abort!');
         return;
       }
+      if (_.contains(_.keys(EquipmentSlots), sourceCid))
+        dispatch({type: 'PLAYER_UNEQUIP', iid, equipmentType:sourceCid});
+      if (_.contains(_.keys(EquipmentSlots), destCid))
+        dispatch({type: 'PLAYER_EQUIP', iid, equipmentType:destCid});
+
       dispatch({type: 'CONTAINER_ADD_ITEM', iid, cid: destCid});
       dispatch({type: 'CONTAINER_REMOVE_ITEM', iid, cid: sourceCid});
     }
   }
-})(ShopDrop);
+})(dropTarget);
 

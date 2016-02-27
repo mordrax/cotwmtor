@@ -1,29 +1,34 @@
 let defaultState = {
-  'armour':{}
-  , 'neckwear':{}
-  , 'overgarment':{}
-  , 'helmet':{}
-  , 'shield':{}
-  , 'bracers':{}
-  , 'gauntlets':{}
-  , 'weapon':{}
-  , 'freehand':{}
-  , 'rightring':{}
-  , 'leftring':{}
-  , 'belt':{}
-  , 'boots':{}
-  , 'pack':{}
-  , 'purse':{}
+  'armour'       : {}
+  , 'neckwear'   : {}
+  , 'overgarment': {}
+  , 'helmet'     : {}
+  , 'shield'     : {}
+  , 'bracers'    : {}
+  , 'gauntlets'  : {}
+  , 'weapon'     : {}
+  , 'freehand'   : {}
+  , 'rightring'  : {}
+  , 'leftring'   : {}
+  , 'belt'       : {}
+  , 'boots'      : {}
+  , 'pack'       : {}
+  , 'purse'      : {}
 };
 
-export default (state=defaultState, action) => {
+export default (state = defaultState, action) => {
   switch (action.type) {
+    case "ADD_CONTAINER":
+      return {
+        ...state,
+        [action.cid]: {}
+      };
     case "CONTAINER_ADD_ITEM":
       return {
         ...state,
-        [action.cid] : {
+        [action.cid]: {
           ...state[action.cid],
-          [action.iid] : true
+          [action.iid]: true
         }
       };
 
@@ -33,7 +38,7 @@ export default (state=defaultState, action) => {
 
       return {
         ...state,
-        [action.cid] : container
+        [action.cid]: container
       };
 
     default:
