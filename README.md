@@ -8,3 +8,15 @@ Check out the current work in progress here: https://cotwmtor.meteor.com
 There is a devlog detailing the making (aka my rants) of this remake here: http://mordra.github.io/cotwmtor/
 
 Current status of project tracked on trello here: https://trello.com/b/EByoUHwY/cotwmtor
+
+# Build from source #
+
+#### Prerequisites ####
+Please install these following packages for your OS:
+- [NodeJS](https://nodejs.org/en/)
+- [MeteorJS](https://www.meteor.com/install)
+
+#### Build ####
+1. `git clone https://github.com/mordra/cotwmtor` in a new directory
+2. `npm i && meteor`, grab a coffee as npm and meteor pulls all the required packages
+3. Goto `http://localhost:3000`
