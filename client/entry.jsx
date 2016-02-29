@@ -8,6 +8,7 @@ import { syncHistory, routeReducer } from 'redux-simple-router';
 
 // redux
 import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { connect, Provider } from 'react-redux';
 import cotwReducer from '/client/reducers/index';
 
@@ -33,7 +34,7 @@ function configureStore(rootReducer, initialState) {
   const reduxRouterMiddleware = syncHistory(browserHistory);
   const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(toolsCreateStore);
 
-  const store = createStoreWithMiddleware(rootReducer);
+  const store = createStoreWithMiddleware(rootReducer, applyMiddleware(thunk));
 
 // Required for replaying actions from devtools to work
   reduxRouterMiddleware.listenForReplays(store);
@@ -59,22 +60,22 @@ Meteor.startup(() => {
   cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
 
   let initialGear = {
-    armour    : generateItem(Items.Armour.ChainMail, {type: ItemType.Armour}),
-    neckwear : generateItem(Items.Neckwear.OrdinaryAmulet, {type:ItemType.Neckwear}),
-    shield   : generateItem(Items.Shield.LargeMeteoricSteelShield, {type:ItemType.Shield}),
-    bracers  : generateItem(Items.Bracers.BracersOfDefenseNormal, {type:ItemType.Bracers}),
-    gauntlets: generateItem(Items.Gauntlet.GauntletOfDexterity, {type:ItemType.Gauntlet}),
-    weapon   : generateItem(Items.Weapon.Club, {type:ItemType.Weapon}),
-    freehand : generateItem(Items.Weapon.BattleAxe, {type:ItemType.Weapon}),
-    pack     : generateItem(Items.Pack.LargePack, {type:ItemType.Pack}),
-    purse    : generateItem(Items.Purse.Purse, {type:ItemType.Purse})
+    armour   : generateItem(Items.Armour.ChainMail, {type: ItemType.Armour}),
+    neckwear : generateItem(Items.Neckwear.OrdinaryAmulet, {type: ItemType.Neckwear}),
+    shield   : generateItem(Items.Shield.LargeMeteoricSteelShield, {type: ItemType.Shield}),
+    bracers  : generateItem(Items.Bracers.BracersOfDefenseNormal, {type: ItemType.Bracers}),
+    gauntlets: generateItem(Items.Gauntlet.GauntletOfDexterity, {type: ItemType.Gauntlet}),
+    weapon   : generateItem(Items.Weapon.Club, {type: ItemType.Weapon}),
+    freehand : generateItem(Items.Weapon.BattleAxe, {type: ItemType.Weapon}),
+    pack     : generateItem(Items.Pack.LargePack, {type: ItemType.Pack}),
+    purse    : generateItem(Items.Purse.Purse, {type: ItemType.Purse})
   };
 
   _.forEach(initialGear, (item, equipmentType) => {
     console.log(`Initial gear: adding ${equipmentType} id: ${item.id}`);
     cotwStore.dispatch({type: "PLAYER_EQUIP", equipmentType, iid: item.id});
     cotwStore.dispatch({type: "ITEM_ADD", item});
-    cotwStore.dispatch({type: "CONTAINER_ADD_ITEM", cid:equipmentType, iid:item.id });
+    cotwStore.dispatch({type: "CONTAINER_ADD_ITEM", cid: equipmentType, iid: item.id});
   });
 
   let generalStore = _.filter(buildings, (x)=>x.name == 'General Store')[0];

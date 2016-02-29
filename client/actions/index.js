@@ -37,5 +37,14 @@ export default {
       type: "UPDATE_DATA",
       data
     }
+  },
+
+  dropItem: (iid, sourceCid, destCid) => {
+    return (dispatch, getState) => {
+      console.log(`hit drop item with: iid(${iid}) getState(${getState()})`);
+      return {
+        type: "BLAH_BLAH"
+      }
+    }
   }
 }

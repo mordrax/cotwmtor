@@ -40,6 +40,5 @@ const source = {
 };
 
 export default DragSource((props) => {
-  console.log(`Drag: ${props.dragTargetType}`);
   return props.dragTargetType;
 }, source, collect)(ItemView);

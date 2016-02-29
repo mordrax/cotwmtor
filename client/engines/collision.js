@@ -7,6 +7,11 @@ const onKeyPress = (e, store) => {
   _store = store;
   _state = store.getState();
 
+  if (e.keyCode === 27) {
+    store.dispatch({type: 'SCREEN_CHANGE', screen: GameScreen.Map});
+    store.dispatch(routeActions.push('/game'));
+  }
+
   if (_state.game.currentScreen === GameScreen.Map) {
     var dir = calculateDirection(e);
 
@@ -15,11 +20,6 @@ const onKeyPress = (e, store) => {
 
     if (movePlayer(_state.areas[_state.game.currentArea], _state.player.coord, dir))
       return;
-  }
-
-  if (e.keyCode === 27) {
-    store.dispatch({type: 'SCREEN_CHANGE', screen: GameScreen.Map});
-    store.dispatch(routeActions.push('/game'));
   }
 };
 
