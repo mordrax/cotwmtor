@@ -46,8 +46,7 @@ const ShopView = ({building, equipment, containers, items, pack, packItems}) => 
 const Shop = connect(
   (state) => {
     let pack = state.items[state.player.equipment['pack']];
-    let packItems = pack && state.containers[pack.cid] && _.map(state.containers[pack.cid].items, (isExists, iid) => state.items[iid]);
-
+    let packItems = pack && state.containers[pack.cid] && _.map(state.containers[pack.cid], (isExists, iid) => state.items[iid]);
 
     return {
       containers: state.containers,

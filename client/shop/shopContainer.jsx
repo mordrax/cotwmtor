@@ -11,7 +11,9 @@ const ContainerView = ({dropTargetType, id, type, name, pack, items, connectDrop
       {
         type !== 'Equipment' ?
           <div className="ui block header">
-            {type} {type === 'Pack' ? `[Weight:${pack.weight}/${pack.base.weight} | Bulk: ${pack.bulk}/${pack.base.bulk}]` : ''}
+            {type} {type === 'Pack' ?
+            `[Weight:${_.reduce(items, (sum, i) => sum + i.base.weight, 0)}/${pack.base.weightCap} |
+            Bulk: ${_.reduce(items, (sum, i) => sum + i.base.bulk, 0)}/${pack.base.bulkCap}]` : ''}
           </div> : <div><b>{name}</b></div>
       }
 
@@ -65,15 +67,15 @@ export default Container = connect(
         let destItem = dest.containerItem;
         let destCid = dest.id || destItem.cid;
 
-        // if container's an item, make sure it fits (weight/bulk)
         if (dest.type === 'Pack') {
-          let destWeight = _.reduce(dest.items, (sum, i) => sum + i.base.weight);
-          let destNewWeight = (destWeight + source.item.weight || source.item.base.weight);
-          if (dest.base.weightCap < destNewWeight) {
-            console.warn(`Too Heavy! ${source.item.id} has weight of ${source.item.weight} which is too heavy for ${dest.id}, current weight ${dest.weight}/${dest.base.weight}`)
+          // if container's an item, make sure it fits (weight/bulk)
+          let destWeight = _.reduce(dest.items, (sum, i) => sum + i.base.weight, 0);
+          let destNewWeight = (destWeight + (source.item.weight || source.item.base.weight));
+          if (dest.pack.base.weightCap < destNewWeight) {
+            console.warn(`Too Heavy! ${source.item.id} has weight of ${source.item.base.weight} which is too heavy for ${dest.pack.id}, current weight ${destWeight}/${dest.pack.base.weight}`)
           }
 
-          dispatch({type: 'UPDATE_ITEM', iid: dest.id, weight: destNewWeight});
+          dispatch({type: 'UPDATE_ITEM', iid: dest.pack.id, weight: destNewWeight});
           //dispatch({type: 'ADD_ITEM_WEIGHT', iid: destItem.id, weight: source.item.weight || source.item.base.weight});
           /*if (dest && (dest.bulk + source.item.bulk || source.item.base.bulk) > dest.base.bulk) {
            console.warn(`Too Heavy! ${source.item.id} has bulk of ${source.item.bulk} which is too heavy for ${dest.id}, current bulk ${dest.bulk}/${dest.base.bulk}`)

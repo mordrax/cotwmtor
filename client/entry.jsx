@@ -67,7 +67,7 @@ Meteor.startup(() => {
     gauntlets: generateItem(Items.Gauntlet.GauntletOfDexterity, {type: ItemType.Gauntlet}),
     weapon   : generateItem(Items.Weapon.Club, {type: ItemType.Weapon}),
     freehand : generateItem(Items.Weapon.BattleAxe, {type: ItemType.Weapon}),
-    pack     : generateItem(Items.Pack.LargePack, {type: ItemType.Pack}),
+    pack     : generateItem(Items.Pack.MediumBag, {type: ItemType.Pack}),
     purse    : generateItem(Items.Purse.Purse, {type: ItemType.Purse})
   };
 

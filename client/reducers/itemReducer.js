@@ -15,6 +15,15 @@ export default (state=defaultState, action) => {
       delete newState[action.item.id];
       return newState;
 
+    case "UPDATE_ITEM":
+      return {
+        ...state,
+        [action.iid] : {
+          ...state[action.iid],
+          weight: action.weight
+        }
+      };
+
     default:
       return state;
   }
