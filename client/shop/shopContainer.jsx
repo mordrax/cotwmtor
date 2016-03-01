@@ -73,14 +73,14 @@ export default Container = connect(
           let destNewWeight = (destWeight + (source.item.weight || source.item.base.weight));
           if (dest.pack.base.weightCap < destNewWeight) {
             console.warn(`Too Heavy! ${source.item.id} has weight of ${source.item.base.weight} which is too heavy for ${dest.pack.id}, current weight ${destWeight}/${dest.pack.base.weight}`)
+            return;
           }
 
           dispatch({type: 'UPDATE_ITEM', iid: dest.pack.id, weight: destNewWeight});
-          //dispatch({type: 'ADD_ITEM_WEIGHT', iid: destItem.id, weight: source.item.weight || source.item.base.weight});
-          /*if (dest && (dest.bulk + source.item.bulk || source.item.base.bulk) > dest.base.bulk) {
-           console.warn(`Too Heavy! ${source.item.id} has bulk of ${source.item.bulk} which is too heavy for ${dest.id}, current bulk ${dest.bulk}/${dest.base.bulk}`)
-           return;
-           }*/
+        } else if (dest.type === 'Equipment' && dest.items[0]) {
+          // if equipment slot already occupied, prevent drop
+          console.warn(`Item already equipped! ${source.item.id} cannot be equipped because there's already something there.`);
+          return;
         }
 
         console.log(`OnDrop iid(${source.id}) sourceCid(${source.cid}) destCid(${destCid})`);
