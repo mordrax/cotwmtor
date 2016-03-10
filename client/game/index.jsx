@@ -15,14 +15,13 @@ var GameView = React.createClass({
   getMeteorData() {
     Meteor.subscribe('games');
 
-
-    Tracker.autorun(computation => {
+    /*Tracker.autorun(computation => {
       const games = Games.find().fetch();
 
       if (computation.firstRun) return; // ignore first empty run
 
       this.props.onMeteorData({games});
-    });
+    });*/
     return {};
   }
 });

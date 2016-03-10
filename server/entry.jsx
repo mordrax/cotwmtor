@@ -17,7 +17,7 @@ Meteor.methods({
 
     //check(player, db.Schemas.Player);
 
-    return Games.insert({player: player});
+    return player; //Games.insert({player: player});
   },
   ping: function (arg) {
     console.log('pong!!!' + arg);

@@ -55,7 +55,7 @@ const AttributeDescriptions = {
 const getAttributeDescription = (name, value) => {
   return (_.find(AttributeDescriptions[name], function (desc) {
       return value <= desc.value;
-    }) || {}).text || '';
+  }) || {}).text || '';
 };
 
 let buttons = (onClick, attr) => {

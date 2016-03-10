@@ -1,1 +1,1 @@
-export default new Mongo.Collection('games');
+export default {}; //new Mongo.Collection('games');
