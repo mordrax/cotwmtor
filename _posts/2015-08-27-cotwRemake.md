@@ -27,4 +27,4 @@ For avid readers interested in doing something similar, this devlog is hosted on
 [meteorjs]: https://meteor.com/
 [old-remake]: https://github.com/mordra/CoTWjs
 [cotwmtor]: https://github.com/mordra/cotwmtor
-[cotwgame]: https://cotwmtor.meteor.com/
+[cotwgame]: https://cotwmtor.meteorapp.com/

@@ -52,5 +52,5 @@ So I'm using React to render tiles. Each tile is a div with some css class that 
 This way, I can randomly generate ascii maps for the dungeon and have it render as html. I haven't gone the canvas path, not particularly concerned about performance at the moment because the map is mostly static so once rendered it won't take up any more CPU.
 
 I've also put in a basic collision detection so you can actually walk into buildings and out of the village!!
-It's live on [cotwmtor.meteor.com](http://cotwmtor.meteor.com) (mind you, meteor takes a while to start). Let the exploration begin!
+It's live on [cotwmtor.meteorapp.com](http://cotwmtor.meteorapp.com) (mind you, meteor takes a while to start). Let the exploration begin!
 

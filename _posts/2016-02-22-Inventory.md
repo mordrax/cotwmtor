@@ -30,7 +30,7 @@ It made the whole process a pleasure to write.
 
 Finally, I was able to refactor my redux state to remove all the classes. However, I hit some really frustrating issues with my react pure components. For some reason, some of the properties that was being passed in had no values but others did. This frustrated me no end as I couldn't work out what was causing it. In the end, I just added a flag safeguard to say, don't execute this code if the props doesn't exist and it seems to have fixed it... I think it has to do with the props coming into the component at different times? I don't know but I hope I don't have to deal with that again... it was a horrible night of coding to get the inventory drag/drop done.
 
-So it's live now, you can give it a go at the same place [cotwmtor.meteor.com](http://cotwmtor.meteor.com). You can move items in between the player equipment on the left and the shop inventory on the right. If there's nothing equipped, drag the item over the equipment slot name, it should come up in a blue border.
+So it's live now, you can give it a go at the same place [cotwmtor.meteorapp.com](http://cotwmtor.meteorapp.com). You can move items in between the player equipment on the left and the shop inventory on the right. If there's nothing equipped, drag the item over the equipment slot name, it should come up in a blue border.
 
 **Next steps**
 
