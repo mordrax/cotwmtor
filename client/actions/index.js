@@ -1,5 +1,5 @@
-import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
-import Item from '/client/core/item.js';
+import {GameArea, GameScreen, generateAreas, generateBuildings} from '../enums/maps.js';
+import Item from '../core/item.js';
 
 export default {
   setGender: (gender) => {

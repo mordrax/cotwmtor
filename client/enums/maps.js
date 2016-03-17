@@ -1,6 +1,5 @@
-import  {Items, ItemType, Tiles, ASCIITiles, BuildingTypes} from './cotwContent';
-import {generateItems} from '/client/core/item.js';
-
+import  {Items, ItemType, Tiles, ASCIITiles, BuildingTypes} from './cotwContent.js';
+import {generateItems} from '../core/item.js';
 
 export const GameArea = {
   0        : 'Village',

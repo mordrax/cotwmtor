@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {Items, ItemType} from '/client/enums/cotwContent.js';
+import {Items, ItemType} from '../enums/cotwContent.js';
 
 export const generateItems = (itemTypes, amt = 10) => {
   let items = {};

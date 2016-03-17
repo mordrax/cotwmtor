@@ -1,43 +1,32 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from '/node_modules/classnames/bind';
+import classNames from '../../node_modules/classnames/bind';
 import {connect} from 'react-redux';
-import actions from '/client/actions';
+import actions from '../actions/index.js';
 
-const GenderView = ({
+const Gender = ({
   gender,
   onChangeGender
   }) => (
-      <div className="equal width column">
-        <div className="ui large buttons">
-          <div className={classNames("ui labeled icon button", {active:gender === 'male'})}
-               onClick={() => {onChangeGender('male');}}>
-            <i className="large male icon" />
-            Male
-          </div>
-          <div className="or"></div>
-          <div className={classNames("ui labeled icon button", {active:gender === 'female'})}
-               onClick={() => {onChangeGender('female')}}>
-            <i className="large female icon" />
-            Female
-          </div>
-        </div>
+  <div className="equal width column">
+    <div className="ui large buttons">
+      <div id="male" className={classNames("ui labeled icon button male", {active:gender === 'male'})}
+           onClick={() => {onChangeGender('male');}}>
+        <i className="large male icon"/>
+        Male
       </div>
-    );
+      <div className="or"></div>
+      <div className={classNames("ui labeled icon button female", {active:gender === 'female'})}
+           onClick={() => {onChangeGender('female')}}>
+        <i className="large female icon"/>
+        Female
+      </div>
+    </div>
+  </div>
+);
 
-const Gender = connect(
-  (state) => {
-    return {
-      gender: state.player.gender
-    }
-  },
-  (dispatch) => {
-    return {
-      onChangeGender: (gender) => {
-        console.log('dispatching gender change: ' + gender)
-        dispatch(actions.setGender(gender));
-      }
-    }
-  }
-)(GenderView);
+Gender.propTypes = {
+  gender: PropTypes.string.isRequired,
+  onChangeGender: PropTypes.func.isRequired
+};
 
 export default Gender;

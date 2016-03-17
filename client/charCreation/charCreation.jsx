@@ -11,7 +11,8 @@ const CharCreation = ({
   player,
   onCompleted,
   onCancelled,
-  onChangeName
+  onChangeName,
+  onChangeGender
   }) => (
   <div className="ui middle aligned center aligned grid">
     <div className="ui one column">
@@ -30,7 +31,7 @@ const CharCreation = ({
         <div className="ui vertical segments">
           <div className="ui vertical segment">Character Gender</div>
           <div className="ui vertical segment">
-            <Gender gender={player.gender} />
+            <Gender gender={player.gender} onChangeGender={onChangeGender} />
           </div>
         </div>
         <GameDifficulty difficulty={player.difficulty} />
@@ -63,6 +64,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     onChangeName: (input) => {
       dispatch(actions.changeName(input));
+    },
+    onChangeGender: (gender) => {
+      console.log('dispatching gender change: ' + gender);
+      dispatch(actions.setGender(gender));
     }
   }
 };
