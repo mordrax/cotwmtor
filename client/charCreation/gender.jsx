@@ -9,13 +9,13 @@ const Gender = ({
   }) => (
   <div className="equal width column">
     <div className="ui large buttons">
-      <div id="male" className={classNames("ui labeled icon button male", {active:gender === 'male'})}
+      <div className={classNames("ui labeled icon button", {active:gender === 'male'})}
            onClick={() => {onChangeGender('male');}}>
         <i className="large male icon"/>
         Male
       </div>
       <div className="or"></div>
-      <div className={classNames("ui labeled icon button female", {active:gender === 'female'})}
+      <div className={classNames("ui labeled icon button", {active:gender === 'female'})}
            onClick={() => {onChangeGender('female')}}>
         <i className="large female icon"/>
         Female

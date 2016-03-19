@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import actions from '/client/actions/index';
+import actions from '../../client/actions/index';
 
-const AttributesView = ({attributes, onChangeAttribute}) => (
+const Attributes = ({attributes, onChangeAttribute}) => (
   <div>
     {
       _.map(attributes, function (attribute, i) {
@@ -25,11 +25,11 @@ const AttributesView = ({attributes, onChangeAttribute}) => (
 );
 
 const AttributeDescriptions = {
-  Available: [
+  Available   : [
     {value: 0, text: "You are at your maximum potential! Go get'em tiger!"},
     {value: 100, text: "Training is for wimps, you like pain, you like it alot!"}
   ],
-  Strength: [
+  Strength    : [
     {value: 0, text: "Unable to push open a unlocked door whos hinges has recently been serviced with WD40."},
     {value: 50, text: "Of average strength!"},
     {value: 100, text: "Hammers are for wimps!! You hit with your FISTS!"}
@@ -43,7 +43,7 @@ const AttributeDescriptions = {
     {value: 0, text: "You're having a BAD day, everyday! It's like you've got two kids that keep waking you up at night, EVERY night!"},
     {value: 50, text: "Able to outrun a hungry hippo!"}
   ],
-  Dexterity: [
+  Dexterity   : [
     {value: 50, text: ""}
   ]
 };
@@ -55,33 +55,19 @@ const AttributeDescriptions = {
 const getAttributeDescription = (name, value) => {
   return (_.find(AttributeDescriptions[name], function (desc) {
       return value <= desc.value;
-  }) || {}).text || '';
+    }) || {}).text || '';
 };
 
 let buttons = (onClick, attr) => {
-  return (<div className="ui buttons">
-    <button className="ui icon button" onClick={() => onClick(attr, -5)}>
-      <i className="ui icon minus"/>
-    </button>
-    <button className="ui icon button" onClick={() => onClick(attr, 5)}>
-      <i className="ui icon plus"/>
-    </button>
-  </div>);
+  return (
+    <div className="ui buttons">
+      <button className="ui icon button" onClick={() => onClick(attr, -5)}>
+        <i className="ui icon minus"/>
+      </button>
+      <button className="ui icon button" onClick={() => onClick(attr, 5)}>
+        <i className="ui icon plus"/>
+      </button>
+    </div>);
 };
-
-const Attributes = connect(
-  (state) => {
-    return {
-      attributes: state.player.attributes
-    }
-  },
-  (dispatch) => {
-    return {
-      onChangeAttribute: (attr, val) => {
-        dispatch(actions.setAttribute(attr, val));
-      }
-    }
-  }
-)(AttributesView);
 
 export default Attributes;

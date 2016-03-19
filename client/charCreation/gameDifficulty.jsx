@@ -1,8 +1,8 @@
 import React from 'react';
-import actions from '/client/actions/index';
+import actions from '../../client/actions/index';
 import {connect} from 'react-redux';
-import classNames from '/node_modules/classnames/bind';
-import Game from '/collections/games';
+import classNames from '../../node_modules/classnames/bind';
+import Game from '../../collections/games';
 
 export const DifficultyLevel = {
   "Easy": 0,
@@ -14,7 +14,6 @@ export const DifficultyLevel = {
   2: "Difficult",
   3: "Experts Only"
 };
-
 let difficultyLevels = [
   {icon: "huge green circle icon", level: DifficultyLevel.Easy},
   {icon: "huge blue square icon", level: DifficultyLevel.Intermediate},
@@ -22,12 +21,10 @@ let difficultyLevels = [
   {icon: "huge yellow warning sign icon", level: DifficultyLevel.ExpertsOnly}
 ];
 
-const GameDifficultyView = ({
+const GameDifficulty = ({
   difficulty,
-  game,
   setDifficulty
 }) => {
-  console.dir('games in game difficulty: ', game&&game.games, game&&game.games&&game.games[0]);
   return (
     <div className="four ui buttons">
       {difficultyLevels.map(function (level, i) {
@@ -44,21 +41,5 @@ const GameDifficultyView = ({
     </div>
   )
 };
-
-const GameDifficulty = connect (
-  (state) => {
-    return {
-      difficulty: state.player.difficulty,
-      game: state.game
-    }
-  },
-  (dispatch) => {
-    return {
-      setDifficulty: (level) => {
-        dispatch(actions.setDifficulty(level))
-      }
-    }
-  }
-)(GameDifficultyView);
 
 export default GameDifficulty;

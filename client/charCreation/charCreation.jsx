@@ -12,7 +12,9 @@ const CharCreation = ({
   onCompleted,
   onCancelled,
   onChangeName,
-  onChangeGender
+  onChangeGender,
+  onSetDifficulty,
+  onChangeAttribute
   }) => (
   <div className="ui middle aligned center aligned grid">
     <div className="ui one column">
@@ -27,14 +29,14 @@ const CharCreation = ({
             />
           </div>
         </div>
-        <Attributes attributes={player.attributes}/>
+        <Attributes attributes={player.attributes} onChangeAttribute={onChangeAttribute}/>
         <div className="ui vertical segments">
           <div className="ui vertical segment">Character Gender</div>
           <div className="ui vertical segment">
             <Gender gender={player.gender} onChangeGender={onChangeGender} />
           </div>
         </div>
-        <GameDifficulty difficulty={player.difficulty} />
+        <GameDifficulty difficulty={player.difficulty} setDifficulty={onSetDifficulty} />
         <div className="ui button primary" onClick={onCompleted.bind(this, player)}>Ok</div>
         <div className="ui button" onClick={onCancelled}>Cancel</div>
         <div className="ui button">View Icon</div>
@@ -59,16 +61,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(routeActions.push('/game'));
       dispatch({type:"INIT_GAME", map:generateAreas(), buildings:generateBuildings(dispatch)});
     },
-    onCancelled: () => {
-      dispatch(routeActions.push('/'));
-    },
-    onChangeName: (input) => {
-      dispatch(actions.changeName(input));
-    },
-    onChangeGender: (gender) => {
-      console.log('dispatching gender change: ' + gender);
-      dispatch(actions.setGender(gender));
-    }
+    onCancelled: () => dispatch(routeActions.push('/')),
+    onChangeName: input => dispatch(actions.changeName(input)),
+    onChangeGender: gender => dispatch(actions.setGender(gender)),
+    onSetDifficulty: lvl => dispatch(actions.setDifficulty(lvl)),
+    onChangeAttribute: (attr, val) => dispatch(actions.setAttribute(attr, val))
   }
 };
 

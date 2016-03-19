@@ -1,12 +1,11 @@
 var webpack = require('webpack');
 
+
 module.exports = function (config) {
   config.set({
     autoWatch        : true,
     browsers         : ['Chrome'], //run in Chrome
-    files            : [
-      'tests.webpack.js' //just load this file
-    ],
+    files            : ['tests.webpack.js'],
     frameworks       : ['jasmine'], //use the mocha test framework
     logLevel         : config.LOG_INFO,
     singleRun        : false, //just run once by default
