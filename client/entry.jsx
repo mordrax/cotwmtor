@@ -13,13 +13,13 @@ import { connect, Provider } from 'react-redux';
 import cotwReducer from '/client/reducers/index';
 
 // game
-import Title from '/client/title/title.jsx';
+import Title from './title/title.jsx';
 import CharCreationContainer from '/client/charCreation/charCreation.jsx';
-import Game from '/client/game/index.jsx';
-import Main from '/client/main/main.jsx';
-import Shop from '/client/shop/shopComponent.jsx';
+import Game from './game/index.jsx';
+import Main from './main/main.jsx';
+import Shop from './shop/shopComponent.jsx';
 import './subscribe';
-import collision from '/client/engines/collision.js';
+import collision from './engines/collision.js';
 
 import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
 import {generateItem} from '/client/core/item.js';

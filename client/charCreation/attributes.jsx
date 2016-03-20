@@ -6,16 +6,17 @@ const Attributes = ({attributes, onChangeAttribute}) => (
   <div>
     {
       _.map(attributes, function (attribute, i) {
+        let attrName = attribute.name;
         return (
           <div className="ui segments" key={i}>
             <div className="ui segment left aligned">
-              <h4 className="ui header">{attribute.name}:</h4>
+              <h4 className="ui header">{attrName}:</h4>
               <div className="ui indicating progress" data-percent={attribute.value}>
-                <div className="bar" style={{width:attribute.value+'%', minWidth:0}}></div>
-                <div className="label">{getAttributeDescription(attribute.name, attribute.value)}</div>
+                <div className={`bar test-${attrName}-bar`} style={{width:attribute.value+'%', minWidth:0}}></div>
+                <div className={`label test-${attrName}-description`}>{getAttributeDescription(attrName, attribute.value)}</div>
               </div>
-              {attribute.name !== "Available" ?
-                buttons(onChangeAttribute, attribute.name) : ''}
+              {attrName !== "Available" ?
+                buttons(onChangeAttribute, attrName) : ''}
             </div>
           </div>
         )
@@ -58,13 +59,13 @@ const getAttributeDescription = (name, value) => {
     }) || {}).text || '';
 };
 
-let buttons = (onClick, attr) => {
+let buttons = (onClick, attrName) => {
   return (
     <div className="ui buttons">
-      <button className="ui icon button" onClick={() => onClick(attr, -5)}>
+      <button className={`ui icon button test-${attrName}-minus` } onClick={() => onClick(attrName, -5)}>
         <i className="ui icon minus"/>
       </button>
-      <button className="ui icon button" onClick={() => onClick(attr, 5)}>
+      <button className={`ui icon button test-${attrName}-plus`} onClick={() => onClick(attrName, 5)}>
         <i className="ui icon plus"/>
       </button>
     </div>);

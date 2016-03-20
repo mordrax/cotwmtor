@@ -3,9 +3,9 @@ import Attributes from './attributes.jsx';
 import GameDifficulty from './gameDifficulty.jsx';
 import Gender from './gender.jsx';
 import { connect } from 'react-redux';
-import actions from '/client/actions/index';
+import actions from '../../client/actions/index';
 import { routeActions } from 'redux-simple-router';
-import {generateAreas, generateBuildings} from '/client/enums/maps.js';
+import {generateAreas, generateBuildings} from '../../client/enums/maps.js';
 
 const CharCreation = ({
   player,
@@ -22,10 +22,10 @@ const CharCreation = ({
         <div className="ui vertical segment">
           <div className="ui labeled fluid input">
             <div className="ui label">Character name:</div>
-            <input
-              type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"
-              onChange={(e) => onChangeName(e.target.value)}
-              value={player.name}
+            <input id="tet"
+                   type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"
+                   onChange={(e) => onChangeName(e.target.value)}
+                   value={player.name}
             />
           </div>
         </div>
@@ -33,10 +33,10 @@ const CharCreation = ({
         <div className="ui vertical segments">
           <div className="ui vertical segment">Character Gender</div>
           <div className="ui vertical segment">
-            <Gender gender={player.gender} onChangeGender={onChangeGender} />
+            <Gender gender={player.gender} onChangeGender={onChangeGender}/>
           </div>
         </div>
-        <GameDifficulty difficulty={player.difficulty} setDifficulty={onSetDifficulty} />
+        <GameDifficulty difficulty={player.difficulty} setDifficulty={onSetDifficulty}/>
         <div className="ui button primary" onClick={onCompleted.bind(this, player)}>Ok</div>
         <div className="ui button" onClick={onCancelled}>Cancel</div>
         <div className="ui button">View Icon</div>
@@ -45,6 +45,7 @@ const CharCreation = ({
     </div>
   </div>
 );
+CharCreation.displayName = 'CharCreation';
 
 const mapStateToProps = (state) => {
   return {
@@ -54,22 +55,22 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onCompleted: (player) => {
+    onCompleted      : (player) => {
       Meteor.call('newGame', player, function (data) {
         console.log('new game return: ' + data);
       });
       dispatch(routeActions.push('/game'));
-      dispatch({type:"INIT_GAME", map:generateAreas(), buildings:generateBuildings(dispatch)});
+      dispatch({type: "INIT_GAME", map: generateAreas(), buildings: generateBuildings(dispatch)});
     },
-    onCancelled: () => dispatch(routeActions.push('/')),
-    onChangeName: input => dispatch(actions.changeName(input)),
-    onChangeGender: gender => dispatch(actions.setGender(gender)),
-    onSetDifficulty: lvl => dispatch(actions.setDifficulty(lvl)),
+    onCancelled      : () => dispatch(routeActions.push('/')),
+    onChangeName     : input => dispatch(actions.changeName(input)),
+    onChangeGender   : gender => dispatch(actions.setGender(gender)),
+    onSetDifficulty  : lvl => dispatch(actions.setDifficulty(lvl)),
     onChangeAttribute: (attr, val) => dispatch(actions.setAttribute(attr, val))
   }
 };
 
-const CharCreationContainer = connect (
+const CharCreationContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(CharCreation);
