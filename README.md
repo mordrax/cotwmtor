@@ -17,6 +17,6 @@ Please install these following packages for your OS:
 - [MeteorJS](https://www.meteor.com/install)
 
 #### Build ####
-1. `git clone https://github.com/mordrax/cotwmtor` in a new directory
+1. `git clone http://github.com/mordrax/cotwmtor` in a new directory
 2. `npm i && meteor`, grab a coffee as npm and meteor pulls all the required packages
 3. Goto `http://localhost:3000`
