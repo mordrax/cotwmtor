@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import Attributes from './attributes.jsx';
 import GameDifficulty from './gameDifficulty.jsx';
 import Gender from './gender.jsx';
+import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import actions from '../../client/actions/index';
 import { routeActions } from 'redux-simple-router';
 import {generateAreas, generateBuildings} from '../../client/enums/maps.js';
 
-const CharCreation = ({
+export const CharCreation = ({
   player,
   onCompleted,
   onCancelled,
@@ -22,7 +23,7 @@ const CharCreation = ({
         <div className="ui vertical segment">
           <div className="ui labeled fluid input">
             <div className="ui label">Character name:</div>
-            <input id="tet"
+            <input
                    type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"
                    onChange={(e) => onChangeName(e.target.value)}
                    value={player.name}
@@ -37,7 +38,7 @@ const CharCreation = ({
           </div>
         </div>
         <GameDifficulty difficulty={player.difficulty} setDifficulty={onSetDifficulty}/>
-        <div className="ui button primary" onClick={onCompleted.bind(this, player)}>Ok</div>
+        <div className="ui button primary" onClick={() => onCompleted(player)}>Ok</div>
         <div className="ui button" onClick={onCancelled}>Cancel</div>
         <div className="ui button">View Icon</div>
         <div className="ui button">Help</div>
@@ -47,13 +48,13 @@ const CharCreation = ({
 );
 CharCreation.displayName = 'CharCreation';
 
-const mapStateToProps = (state) => {
+export const mapState = (state) => {
   return {
     player: state.player
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatch = (dispatch) => {
   return {
     onCompleted      : (player) => {
       Meteor.call('newGame', player, function (data) {
@@ -71,8 +72,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const CharCreationContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapState,
+  mapDispatch
 )(CharCreation);
 
 export default CharCreationContainer;

@@ -1,42 +1,57 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow, mount, render} from 'enzyme';
-import CharCreation from '../../client/charCreation/charCreation.jsx';
+import {CharCreation, mapDispatch, mapState } from '../../client/charCreation/charCreation.jsx';
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
+import {routeActions} from 'redux-simple-router';
+import actions from '../../client/actions/index';
 
 describe("<CharCreation>", () => {
   let component;
   let props = {
-    attributes: {},
-    onChangeAttribute: () => {}
-  };
-  let store = createStore((state, _) => state, {
     player: {
       name: 'bob',
       gender: 'Male'
     }
-  });
+  };
 
   beforeEach(() => {
-    spyOn(props, 'onChangeAttribute');
-    component = shallow(<Provider store={store}><CharCreation /></Provider>);
+    component = shallow(<CharCreation {...props} />);
   });
 
   it('should display the player name correctly', () => {
-    debugger;
-    expect(component.find('#tet').prop('value')).toEqual('bob');
+    expect(component.find('input').prop('value')).toEqual('bob');
   });
 
-  it('should allow cancelling of creation, changing route to title screen (/)', () => {
-    throw 'TODO';
+  describe('mapState', () => {
+    let state = mapState({abc:1, player: {name:'bob'}});
+    it('should map the player to the state', () => {
+      expect(state.player.name).toEqual('bob');
+      expect(state.abc).toBeUndefined();
+    })
   });
 
-  it('should tell the server about the player on creation of game', () => {
-    throw 'TODO';
-  });
+  describe('mapDispatch', () => {
+    let props = {dispatch : () => {}};
+    let testDispatch;
+    beforeEach(() => {
+      spyOn(props, 'dispatch');
+      testDispatch = mapDispatch(props.dispatch);
+    });
 
-  it('should route to the game screen on creation of game', () => {
-    throw 'TODO';
-  });
+    it('should dispatch a route action "/" on cancel', () => {
+      testDispatch.onCancelled();;
+      expect(props.dispatch).toHaveBeenCalledWith(routeActions.push('/'))
+    });
+
+    it('should increase stats', () => {
+      testDispatch.onChangeAttribute('Strength', 5);
+      expect(props.dispatch).toHaveBeenCalledWith(actions.setAttribute('Strength', 5))
+    });
+
+    it('should save the game to server and route to /game on a new game', () => {
+      throw 'TODO: Server spy, async spy and route action';
+    })
+  })
 });

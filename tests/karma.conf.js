@@ -23,7 +23,10 @@ module.exports = function (config) {
             exclude: /\/node_modules\//,
             loader : 'babel-loader',
             query  : {
-              presets: ['es2015', 'stage-0', 'react'] //airbnb
+              presets: [
+                'es2015',
+                require.resolve('babel-preset-stage-0'),
+                'react'] //airbnb
             }
           }
         ]

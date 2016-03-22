@@ -13,7 +13,7 @@ var GameView = React.createClass({
     );
   },
   getMeteorData() {
-    Meteor.subscribe('games');
+    /*Meteor.subscribe('games');
 
     /*Tracker.autorun(computation => {
       const games = Games.find().fetch();
