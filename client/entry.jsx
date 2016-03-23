@@ -20,6 +20,7 @@ import Main from './main/main.jsx';
 import Shop from './shop/shopComponent.jsx';
 import './subscribe';
 import collision from './engines/collision.js';
+import actions from './actions/index.js';
 
 import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
 import {generateItem} from '/client/core/item.js';
@@ -54,7 +55,7 @@ Meteor.startup(() => {
   }, false);
 
   let areas = generateAreas();
-  cotwStore.dispatch({type: "INIT_AREAS", areas});
+  cotwStore.dispatch(actions.initAreas(areas));
 
   let buildings = generateBuildings(cotwStore.dispatch);
   cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
@@ -74,7 +75,7 @@ Meteor.startup(() => {
   _.forEach(initialGear, (item, equipmentType) => {
     console.log(`Initial gear: adding ${equipmentType} id: ${item.id}`);
     cotwStore.dispatch({type: "PLAYER_EQUIP", equipmentType, iid: item.id});
-    cotwStore.dispatch({type: "ITEM_ADD", item});
+    cotwStore.dispatch(actions.addItem(item));
     cotwStore.dispatch({type: "CONTAINER_ADD_ITEM", cid: equipmentType, iid: item.id});
   });
 

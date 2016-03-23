@@ -1,5 +1,6 @@
 import  {Items, ItemType, Tiles, ASCIITiles, BuildingTypes} from './cotwContent.js';
 import {generateItems} from '../core/item.js';
+import actions from '../actions/index.js';
 
 export const GameArea = {
   0        : 'Village',
@@ -252,7 +253,7 @@ export const generateBuildings = (dispatch) => {
       if (building.stockedItemTypes) {
         _.forEach(generateItems(building.stockedItemTypes), (item) => {
           dispatch({type: "CONTAINER_ADD_ITEM", cid: building.cid, iid: item.id});
-          dispatch({type: "ITEM_ADD", item: item});
+          dispatch(actions.addItem(item));
         });
       }
     });

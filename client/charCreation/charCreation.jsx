@@ -54,7 +54,7 @@ export const mapState = (state) => {
   }
 };
 
-export const mapDispatch = (dispatch) => {
+export const mapDispatch = (dispatch, Meteor) => {
   return {
     onCompleted      : (player) => {
       Meteor.call('newGame', player, function (data) {

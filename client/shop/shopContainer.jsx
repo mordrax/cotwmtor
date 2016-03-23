@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import {EquipmentSlots} from '/client/enums/cotwContent.js';
 import Item from './item.jsx';
+import actions from '../actions/index.js';
 
 const ContainerView = ({dropTargetType, id, type, name, pack, items, connectDropTarget, isOver}) => {
 
@@ -76,7 +77,7 @@ export default Container = connect(
             return;
           }
 
-          dispatch({type: 'UPDATE_ITEM', iid: dest.pack.id, weight: destNewWeight});
+          dispatch(actions.updateItem(dest.pack.id, destNewWeight));
         } else if (dest.type === 'Equipment' && dest.items[0]) {
           // if equipment slot already occupied, prevent drop
           console.warn(`Item already equipped! ${source.item.id} cannot be equipped because there's already something there.`);

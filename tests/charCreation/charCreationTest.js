@@ -41,7 +41,7 @@ describe("<CharCreation>", () => {
     });
 
     it('should dispatch a route action "/" on cancel', () => {
-      testDispatch.onCancelled();;
+      testDispatch.onCancelled();
       expect(props.dispatch).toHaveBeenCalledWith(routeActions.push('/'))
     });
 
@@ -50,8 +50,18 @@ describe("<CharCreation>", () => {
       expect(props.dispatch).toHaveBeenCalledWith(actions.setAttribute('Strength', 5))
     });
 
-    it('should save the game to server and route to /game on a new game', () => {
-      throw 'TODO: Server spy, async spy and route action';
+    describe('New game creation', () => {
+      let props = {
+        Meteor:() => {},
+
+      }
+      beforeEach(() => {
+
+      });
+      it('should save the game to server and route to /game on a new game', () => {
+        throw 'TODO: Server spy, async spy and route action';
+      })
     })
+
   })
 });

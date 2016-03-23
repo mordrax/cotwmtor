@@ -32,10 +32,24 @@ export default {
   },
 
   updateData: (data) => {
-    console.dir('calling update data:', data);
     return {
       type: "UPDATE_DATA",
       data
     }
+  },
+
+  initAreas: areas => {
+    return {type: "INIT_AREAS", areas};
+  },
+
+  addItem: item => {
+    return {type: "ITEM_ADD", item};
+  },
+
+  removeItem: id => {
+    return {type:"ITEM_REMOVE", id}
+  },
+  updateItem: (id, weight) => {
+    return {type: 'UPDATE_ITEM', id, weight}
   }
 }
