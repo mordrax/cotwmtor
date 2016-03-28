@@ -101,8 +101,8 @@ export default Container = connect(
           dispatch({type: 'PLAYER_EQUIP', iid: source.item.id, equipmentType: destCid});
 
         // add item to containers
-        dispatch({type: 'CONTAINER_ADD_ITEM', iid: source.item.id, cid: destCid});
-        dispatch({type: 'CONTAINER_REMOVE_ITEM', iid: source.item.id, cid: source.cid});
+        dispatch(actions.addToContainer(destCid, source.item.id));
+        dispatch(actions.removeFromContainer(source.cid, source.item.id));
       }
     }
   })(dropTarget);

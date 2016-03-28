@@ -76,7 +76,7 @@ Meteor.startup(() => {
     console.log(`Initial gear: adding ${equipmentType} id: ${item.id}`);
     cotwStore.dispatch({type: "PLAYER_EQUIP", equipmentType, iid: item.id});
     cotwStore.dispatch(actions.addItem(item));
-    cotwStore.dispatch({type: "CONTAINER_ADD_ITEM", cid: equipmentType, iid: item.id});
+    cotwStore.dispatch(actions.addToContainer(equipmentType, item.id));
   });
 
   let generalStore = _.filter(buildings, (x)=>x.name == 'General Store')[0];

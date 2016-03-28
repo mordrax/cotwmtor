@@ -6,8 +6,8 @@ describe("Reducer: Items", () => {
   let item = {id: 1, name:'TestItem'};
 
   it('should return base state on no action', () => {
-    let newState = reducer(state, {});
-    expect(newState).toEqual(state);
+    let newState = reducer(undefined, {});
+    expect(newState).toEqual({});
   });
 
   it('should add an item', () => {

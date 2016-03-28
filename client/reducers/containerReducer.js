@@ -18,12 +18,17 @@ let defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case "ADD_CONTAINER":
+    case "ADD_AS_CONTAINER":
       return {
         ...state,
         [action.cid]: {}
       };
-    case "CONTAINER_ADD_ITEM":
+    case "REMOVE_AS_CONTAINER":
+      throw 'Not implemented!';
+      return {
+
+      };
+    case "ADD_TO_CONTAINER":
       return {
         ...state,
         [action.cid]: {
@@ -32,7 +37,7 @@ export default (state = defaultState, action) => {
         }
       };
 
-    case "CONTAINER_REMOVE_ITEM":
+    case "REMOVE_FROM_CONTAINER":
       let container = Object.assign({}, state[action.cid]);
       delete container[action.iid];
 

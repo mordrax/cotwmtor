@@ -252,7 +252,7 @@ export const generateBuildings = (dispatch) => {
 
       if (building.stockedItemTypes) {
         _.forEach(generateItems(building.stockedItemTypes), (item) => {
-          dispatch({type: "CONTAINER_ADD_ITEM", cid: building.cid, iid: item.id});
+          dispatch(actions.addToContainer(building.cid, item.id));
           dispatch(actions.addItem(item));
         });
       }
