@@ -48,4 +48,20 @@ describe("Reducer: Player", () => {
     expect(newState.attributes.Dexterity).toEqual({value: 50, name: 'Dexterity'});
     expect(newState.attributes.Available).toEqual({value: 100, name: 'Available'});
   });
+
+  it('should allow players to equip items', () => {
+    throw 'TODO';
+  });
+
+  it('should allow players to unequip items', () => {
+    throw 'TODO';
+  });
+
+  it('should move players', () => {
+    throw 'TODO';
+  });
+
+  it('should teleport players to different parts of the map (on entering new areas)', () => {
+    throw 'TODO';
+  });
 });
