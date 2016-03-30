@@ -58,7 +58,7 @@ Meteor.startup(() => {
   cotwStore.dispatch(actions.initAreas(areas));
 
   let buildings = generateBuildings(cotwStore.dispatch);
-  cotwStore.dispatch({type: "INIT_BUILDINGS", buildings});
+  cotwStore.dispatch(actions.addBuildings(buildings));
 
   let initialGear = {
     armour   : generateItem(Items.Armour.ChainMail, {type: ItemType.Armour}),
@@ -80,7 +80,7 @@ Meteor.startup(() => {
   });
 
   let generalStore = _.filter(buildings, (x)=>x.name == 'General Store')[0];
-  cotwStore.dispatch({type: "SET_GAME_STATE", currentBuilding: generalStore.id});
+  cotwStore.dispatch(actions.setGameState({currentBuilding: generalStore.id}));
 
   ReactDOM.render(
     <Provider store={cotwStore}>

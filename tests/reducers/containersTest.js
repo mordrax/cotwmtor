@@ -49,17 +49,7 @@ describe("Reducer: Containers", () => {
 
     it('should remove an item from a container', () => {
       let newState2 = reducer(state, actions.removeFromContainer(container.id, item.id));
-      expect(newState2[container.id][item.id].toBeUndefined());
-    });
-  });
-
-  describe('Updating item stats', () => {
-    it('should update weight of the container when adding and removing items', () => {
-      throw 'TODO';
-    });
-
-    it('should allow a container to be added to another container', () => {
-      throw 'TODO';
+      expect(newState2[container.id][item.id]).toBeUndefined();
     });
   });
 });

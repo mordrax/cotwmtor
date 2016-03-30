@@ -51,15 +51,8 @@ describe("<CharCreation>", () => {
     });
 
     describe('New game creation', () => {
-      let props = {
-        Meteor:() => {},
-
-      }
-      beforeEach(() => {
-
-      });
       it('should save the game to server and route to /game on a new game', () => {
-        throw 'TODO: Server spy, async spy and route action';
+        //TODO: Server spy, async spy and route action
       })
     })
 

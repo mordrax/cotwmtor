@@ -24,10 +24,10 @@ export default (state = defaultState, action) => {
         [action.cid]: {}
       };
     case "REMOVE_AS_CONTAINER":
-      throw 'Not implemented!';
-      return {
+      let newState = Object.assign({}, state);
+      delete newState[action.cid];
+      return newState;
 
-      };
     case "ADD_TO_CONTAINER":
       return {
         ...state,

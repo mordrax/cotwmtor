@@ -1,6 +1,6 @@
-import {Items} from '/client/enums/cotwContent.js';
+import {Items} from '../../client/enums/cotwContent.js';
 import _ from 'lodash';
-import {generateItem} from '/client/core/item.js';
+import {generateItem} from '../../client/core/item.js';
 
 let defaultState = {
   gender    : 'male',

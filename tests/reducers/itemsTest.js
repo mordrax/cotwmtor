@@ -25,6 +25,5 @@ describe("Reducer: Items", () => {
     let newState = reducer(state, actions.addItem(item));
     newState = reducer(newState, actions.updateItem(item.id, 50));
     expect(newState[item.id].weight).toEqual(50);
-  })
-
+  });
 });

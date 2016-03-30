@@ -33,7 +33,7 @@ describe("<Attributes>", () => {
   });
 
   it('should set the length of the bar based on what the attribute value is', () => {
-    throw "TODO: Don't know how to check for html width."
+    //TODO: Don't know how to check for html width.
   });
 
   it('should display the correct description for the Strength stat at 0', () => {

@@ -39,6 +39,14 @@ export default {
     return {type: "INIT_AREAS", areas};
   },
 
+  setGameState: state => {
+    return {type: "SET_GAME_STATE", ...state}
+  },
+
+  addBuildings: buildings => {
+    return {type: "INIT_BUILDINGS", buildings}
+  },
+
   addItem: item => {
     return {type: "ITEM_ADD", item};
   },

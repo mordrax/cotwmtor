@@ -46,7 +46,6 @@ export const CharCreation = ({
     </div>
   </div>
 );
-CharCreation.displayName = 'CharCreation';
 
 export const mapState = (state) => {
   return {
