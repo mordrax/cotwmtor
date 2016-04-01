@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-
+var path = require('path');
 
 module.exports = function (config) {
   config.set({
@@ -55,6 +55,6 @@ module.exports = function (config) {
       options: {
         presets: ['airbnb']
       }
-    },
+    }
   });
 };
