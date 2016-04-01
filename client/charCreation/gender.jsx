@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from '../../node_modules/classnames/bind';
 import {connect} from 'react-redux';
-import actions from '../actions/index.js';
+import actions from '../../actions/index.js';
 
 const Gender = ({
   gender,

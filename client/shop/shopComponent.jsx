@@ -1,15 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import actions from '/client/actions/index.js';
-
-import {ItemType} from '/client/enums/cotwContent.js';
+import actions from '../../actions/index.js';
 
 //dragdrop
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Container from './shopContainer.jsx';
-import {EquipmentSlots} from '/client/enums/cotwContent.js';
+import {ItemType, EquipmentSlots} from '../../enums/cotwContent.js';
 
 const ShopView = ({building, equipment, containers, items, pack, packItems, buildingItems}) => (
   <div>

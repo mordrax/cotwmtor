@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
-import {EquipmentSlots} from '/client/enums/cotwContent.js';
+import {EquipmentSlots} from '../../enums/cotwContent.js';
 import Item from './item.jsx';
-import actions from '../actions/index.js';
+import actions from '../../actions/index.js';
 
 const ContainerView = ({dropTargetType, id, type, name, pack, items, connectDropTarget, isOver}) => {
 
@@ -62,7 +62,6 @@ export default Container = connect(
        *
        * @param source - {dragTargetType: "Bracers", cid: "bracers", item: Object}
        * @param dest - {dropTargetType: Array[16], id: "7", type: "Shop", items: Array[10]}
-       *
        */
       onDrop: (source, dest) => {
         let destItem = dest.containerItem;
@@ -73,7 +72,7 @@ export default Container = connect(
           let destWeight = _.reduce(dest.items, (sum, i) => sum + i.base.weight, 0);
           let destNewWeight = (destWeight + (source.item.weight || source.item.base.weight));
           if (dest.pack.base.weightCap < destNewWeight) {
-            console.warn(`Too Heavy! ${source.item.id} has weight of ${source.item.base.weight} which is too heavy for ${dest.pack.id}, current weight ${destWeight}/${dest.pack.base.weight}`)
+            console.warn(`Too Heavy! ${source.item.id} has weight of ${source.item.base.weight} which is too heavy for ${dest.pack.id}, current weight ${destWeight}/${dest.pack.base.weight}`);
             return;
           }
 
@@ -92,13 +91,9 @@ export default Container = connect(
 
         // add item to equipment
         if (_.contains(_.keys(EquipmentSlots), source.cid))
-          dispatch({
-            type         : 'PLAYER_UNEQUIP',
-            iid          : source.item.id,
-            equipmentType: source.cid
-          });
+          dispatch(actions.unequipItem(source.cid));
         if (_.contains(_.keys(EquipmentSlots), destCid))
-          dispatch({type: 'PLAYER_EQUIP', iid: source.item.id, equipmentType: destCid});
+          dispatch(actions.equipItem(destCid, source.item.id));
 
         // add item to containers
         dispatch(actions.addToContainer(destCid, source.item.id));

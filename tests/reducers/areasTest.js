@@ -1,4 +1,4 @@
-import actions from '../../client/actions/index.js';
+import actions from '../../actions/index.js';
 import reducer from '../../client/reducers/areaReducer.js';
 
 describe("Reducer: Area", () => {

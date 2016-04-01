@@ -1,6 +1,6 @@
-import {Items} from '../../client/enums/cotwContent.js';
+import {Items} from '../../enums/cotwContent.js';
 import _ from 'lodash';
-import {generateItem} from '../../client/core/item.js';
+import {generateItem} from '../../core/item.js';
 
 let defaultState = {
   gender    : 'male',
@@ -73,21 +73,24 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         coord: [
-          state.coord[0] + action.dir[0],
-          state.coord[1] + action.dir[1]
+          state.coord[0] + action.direction[0],
+          state.coord[1] + action.direction[1]
         ]
       };
     case 'PLAYER_MOVE_TELEPORT':
       return {
         ...state,
-        coord: action.coord
+        coord: action.coords
       };
     case 'PLAYER_EQUIP':
+      if (typeof(action.itemId) !== 'string')
+        return state;
+
       return {
         ...state,
         equipment: {
           ...state.equipment,
-          [action.equipmentType] : action.iid
+          [action.equipmentType] : action.itemId
         }
       };
     case 'PLAYER_UNEQUIP':

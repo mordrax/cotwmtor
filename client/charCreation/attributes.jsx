@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import actions from '../../client/actions/index';
+import actions from '../../actions/index';
 
 const Attributes = ({attributes, onChangeAttribute}) => (
   <div>

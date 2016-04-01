@@ -4,9 +4,9 @@ import GameDifficulty from './gameDifficulty.jsx';
 import Gender from './gender.jsx';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-import actions from '../../client/actions/index';
+import actions from '../../actions/index';
 import { routeActions } from 'redux-simple-router';
-import {generateAreas, generateBuildings} from '../../client/enums/maps.js';
+import {generateAreas, generateBuildings} from '../../enums/maps.js';
 
 export const CharCreation = ({
   player,

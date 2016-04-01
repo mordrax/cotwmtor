@@ -10,7 +10,7 @@ import { syncHistory, routeReducer } from 'redux-simple-router';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { connect, Provider } from 'react-redux';
-import cotwReducer from '/client/reducers/index';
+import cotwReducer from '../client/reducers/index';
 
 // game
 import Title from './title/title.jsx';
@@ -20,11 +20,11 @@ import Main from './main/main.jsx';
 import Shop from './shop/shopComponent.jsx';
 import './subscribe';
 import collision from './engines/collision.js';
-import actions from './actions/index.js';
+import actions from '../actions/index.js';
 
-import {GameArea, GameScreen, generateAreas, generateBuildings} from '/client/enums/maps';
-import {generateItem} from '/client/core/item.js';
-import {Items, ItemType} from '/client/enums/cotwContent.js';
+import {GameArea, GameScreen, generateAreas, generateBuildings} from '../enums/maps';
+import {generateItem} from '../core/item.js';
+import {Items, ItemType} from '../enums/cotwContent.js';
 
 function configureStore(rootReducer, initialState) {
   const toolsCreateStore = compose(
@@ -74,7 +74,7 @@ Meteor.startup(() => {
 
   _.forEach(initialGear, (item, equipmentType) => {
     console.log(`Initial gear: adding ${equipmentType} id: ${item.id}`);
-    cotwStore.dispatch({type: "PLAYER_EQUIP", equipmentType, iid: item.id});
+    cotwStore.dispatch(actions.equipItem(equipmentType, item.id));
     cotwStore.dispatch(actions.addItem(item));
     cotwStore.dispatch(actions.addToContainer(equipmentType, item.id));
   });

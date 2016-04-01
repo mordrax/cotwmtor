@@ -1,6 +1,7 @@
-import actions from '../../client/actions/index.js';
+import actions from '../../actions/index.js';
 import reducer from '../../client/reducers/playerReducer.js';
-
+import * as items from '../../core/item.js';
+import * as cotw from '../../enums/cotwContent.js';
 
 describe("Reducer: Player", () => {
   let state;
@@ -49,19 +50,41 @@ describe("Reducer: Player", () => {
     expect(newState.attributes.Available).toEqual({value: 100, name: 'Available'});
   });
 
-  it('should allow players to equip items', () => {
-    throw 'TODO';
+  describe('Inventory interactions', () => {
+    let fourSlotBelt = items.generateItem(cotw.Items.Belt.FourSlotBelt);
+    let equippedState = reducer(state, actions.equipItem('belt', fourSlotBelt.id));
+
+    it('should allow players to equip items', () => {
+      expect(equippedState.equipment.belt).toEqual(fourSlotBelt.id);
+    });
+
+    it('should allow players to unequip items', () => {
+      let unequipState = reducer(equippedState, actions.unequipItem('belt'));
+      expect(unequipState.equipment.belt).toBeNull();
+    });
+
+    it('should prevent players from equiping items into the wrong slot', () => {
+      let notEquipState = reducer(equippedState, actions.equipItem('boots', fourSlotBelt.id));
+      expect(notEquipState.equipment.boots).toBeNull();
+    })
   });
 
-  it('should allow players to unequip items', () => {
-    throw 'TODO';
-  });
+  describe('Movements', () => {
+    let currentCoords;
 
-  it('should move players', () => {
-    throw 'TODO';
-  });
+    beforeEach(() => {
+      state = reducer(undefined, {});
+      currentCoords = state.coord;
+    });
 
-  it('should teleport players to different parts of the map (on entering new areas)', () => {
-    throw 'TODO';
+    it('should move players', () => {
+      let movedPlayer = reducer(state, actions.movePlayer([0, 1]));
+      expect(movedPlayer.coord[1]).toEqual(currentCoords[1] + 1);
+    });
+
+    it('should teleport players to different parts of the map (on entering new areas)', () => {
+      let teleportedPlayer = reducer(state, actions.teleportPlayer([42, 6]));
+      expect(teleportedPlayer.coord).toEqual([42, 6]);
+    });
   });
 });

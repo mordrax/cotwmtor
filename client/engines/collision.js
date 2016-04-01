@@ -1,4 +1,4 @@
-import {GameScreen, GameArea} from '/client/enums/maps';
+import {GameScreen, GameArea} from '/enums/maps';
 import { routeActions } from 'redux-simple-router';
 
 let _store;

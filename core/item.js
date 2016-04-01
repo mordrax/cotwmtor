@@ -21,10 +21,10 @@ export const generateItems = (itemTypes, amt = 10) => {
 
 /**
  *
- * @param base
+ * @param base - cotwContent.Items
  * @param props {type: ItemType}
  */
-export const generateItem = (base, props) => {
+export const generateItem = (base, props = {}) => {
   let name = base.name.replace(/\s+/g, '');
   if (props.type && props.type == ItemType.Pack)
     props.cid = name + _.uniqueId();

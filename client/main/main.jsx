@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {GameScreen} from '/client/enums/maps.js';
+import {GameScreen} from '../../enums/maps.js';
 import _ from 'lodash';
 import createFragment from 'react-addons-create-fragment';
 import MapView from './mapComponent.jsx';

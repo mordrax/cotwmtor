@@ -1,4 +1,4 @@
-import {GameArea, GameScreen} from '../../client/enums/maps'
+import {GameArea, GameScreen} from '../../enums/maps'
 
 let defaultState = {
   name: 'TODO: Unnamed game',
