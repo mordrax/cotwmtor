@@ -15,7 +15,5 @@ describe("Reducer: Games", () => {
     state = reducer(undefined, {});
     let newState = reducer(state, actions.setGameState({currentScreen: 123}));
     expect(newState.currentScreen).toEqual(123);
-  })
-
-
+  });
 });

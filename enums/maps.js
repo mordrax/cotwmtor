@@ -276,11 +276,10 @@ const generateArea = (area) => {
     _.forEach(tileRow, function (asciiTile) {
       if (y === 0)
         map[x] = [];
-      let cell = {
+      map[x][y] = {
         tile : _.extend({}, ASCIITiles[asciiTile]),
         coord: [x, y]
       };
-      map[x][y] = cell;
 
       x++;
     });

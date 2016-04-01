@@ -24,9 +24,9 @@ export const CharCreation = ({
           <div className="ui labeled fluid input">
             <div className="ui label">Character name:</div>
             <input
-                   type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"
-                   onChange={(e) => onChangeName(e.target.value)}
-                   value={player.name}
+              type="text" name="name" placeholder="What word did your mother utter as you came kicking and screaming into this world?"
+              onChange={(e) => onChangeName(e.target.value)}
+              value={player.name}
             />
           </div>
         </div>
@@ -53,14 +53,14 @@ export const mapState = (state) => {
   }
 };
 
-export const mapDispatch = (dispatch, Meteor) => {
+export const mapDispatch = (dispatch) => {
   return {
     onCompleted      : (player) => {
       Meteor.call('newGame', player, function (data) {
         console.log('new game return: ' + data);
       });
       dispatch(routeActions.push('/game'));
-      dispatch({type: "INIT_GAME", map: generateAreas(), buildings: generateBuildings(dispatch)});
+      //dispatch({type: "INIT_GAME", map: generateAreas(), buildings: generateBuildings(dispatch)});
     },
     onCancelled      : () => dispatch(routeActions.push('/')),
     onChangeName     : input => dispatch(actions.changeName(input)),

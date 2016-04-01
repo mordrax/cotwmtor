@@ -1,4 +1,6 @@
-import {GameScreen, GameArea} from '/enums/maps';
+import {GameScreen, GameArea} from '../../enums/maps.js';
+import actions from '../../actions/index.js';
+
 import { routeActions } from 'redux-simple-router';
 
 let _store;
@@ -8,7 +10,7 @@ const onKeyPress = (e, store) => {
   _state = store.getState();
 
   if (e.keyCode === 27) {
-    store.dispatch({type: 'SCREEN_CHANGE', screen: GameScreen.Map});
+    store.dispatch(actions.setGameState({currentScreen: GameScreen.Map}));
     store.dispatch(routeActions.push('/game'));
   }
 
@@ -30,22 +32,16 @@ const followLink = (area, curcoord, dir) => {
 
   let building = _state.buildings[destCell.bid];
   if (building.cid) {
-    _store.dispatch({type: 'SCREEN_CHANGE', currentScreen: GameScreen.Shop, /*TODO*/buildingScreen: building.id});
+    _store.dispatch(actions.setGameState({currentScreen: GameScreen.Shop, currentBuilding: building.id}));
     _store.dispatch(routeActions.push('/shop'));
   } else if (building.link) {
-    _store.dispatch({
-      type: 'AREA_CHANGE',
-      area: building.link.area,
-      bid: building.link.bid
-    });
+    _store.dispatch(actions.setGameState({currentArea: building.link.area}));
     let linkBuilding = _state.buildings[building.link.bid];
-    let entry = linkBuilding.type.entryPoint || [0,0];
-    _store.dispatch({
-      type: 'PLAYER_MOVE_TELEPORT', coord: [
-        linkBuilding.coord[0] + entry[0],
-        linkBuilding.coord[1] + entry[1]
-      ]
-    })
+    let entry = linkBuilding.type.entryPoint || [0, 0];
+    _store.dispatch(actions.teleportPlayer([
+      linkBuilding.coord[0] + entry[0],
+      linkBuilding.coord[1] + entry[1]
+    ]));
   }
   return true;
 };
@@ -53,14 +49,14 @@ const followLink = (area, curcoord, dir) => {
 const movePlayer = (area, curcoord, dir) => {
   var cell = area[curcoord[0] + dir[0]][curcoord[1] + dir[1]];
   if (!(cell.tile.solid || cell.building)) {
-    _store.dispatch({type: 'PLAYER_MOVE', dir});
+    _store.dispatch(actions.movePlayer(dir));
     return true;
   }
   return false;
 };
 
 const calculateDirection = (e) => {
-  var dir = [0,0];
+  var dir = [0, 0];
 
   switch (e.keyCode) {
     case 83:
