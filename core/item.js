@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {Items, ItemType} from '../enums/cotwContent.js';
+import {Items, ItemType} from './cotwContent.js';
 
 export const generateItems = (itemTypes, amt = 10) => {
   let items = {};
@@ -21,7 +21,7 @@ export const generateItems = (itemTypes, amt = 10) => {
 
 /**
  *
- * @param base - cotwContent.Items
+ * @param base: cotwContent.Items
  * @param props {type: ItemType}
  */
 export const generateItem = (base, props = {}) => {

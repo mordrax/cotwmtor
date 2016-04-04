@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow, mount, render} from 'enzyme';
-import Attributes from '../../client/charCreation/attributes.jsx';
+import Attributes from '/client/charCreation/attributes.jsx';
 
 describe("<Attributes>", () => {
   let component;

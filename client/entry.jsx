@@ -22,9 +22,9 @@ import './subscribe';
 import collision from './engines/collision.js';
 import actions from '../actions/index.js';
 
-import {GameArea, GameScreen, generateAreas, generateBuildings} from '../enums/maps';
+import {GameArea, GameScreen, generateAreas, generateBuildings} from '../core/maps';
 import {generateItem} from '../core/item.js';
-import {Items, ItemType} from '../enums/cotwContent.js';
+import {Items, ItemType} from '../core/cotwContent.js';
 
 function configureStore(rootReducer, initialState) {
   const toolsCreateStore = compose(

@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import actions from '../../actions/index';
 import { routeActions } from 'redux-simple-router';
-import {generateAreas, generateBuildings} from '../../enums/maps.js';
+import {generateAreas, generateBuildings} from '../../core/maps.js';
 
 export const CharCreation = ({
   player,

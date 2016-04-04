@@ -1,4 +1,4 @@
-import {Items} from '../../enums/cotwContent.js';
+import {Items} from '../../core/cotwContent.js';
 import _ from 'lodash';
 import {generateItem} from '../../core/item.js';
 

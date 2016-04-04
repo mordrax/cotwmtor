@@ -1,4 +1,4 @@
-import {GameArea, GameScreen} from '../../enums/maps'
+import {GameArea, GameScreen} from '../../core/maps'
 import _ from 'lodash';
 
 let defaultState = {
@@ -11,7 +11,6 @@ let defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case 'SET_GAME_STATE':
-      console.log('init game');
       let currentBuilding = typeof(action.currentBuilding) === 'string' ? action.currentBuilding : state.currentBuilding;
       let currentArea = GameArea[action.currentArea] !== undefined ? action.currentArea : state.currentArea;
       let currentScreen = GameScreen[action.currentScreen] !== undefined ? action.currentScreen : state.currentScreen;

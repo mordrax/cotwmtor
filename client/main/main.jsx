@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {GameScreen} from '../../enums/maps.js';
+import {GameScreen} from '/core/maps.js';
 import _ from 'lodash';
 import createFragment from 'react-addons-create-fragment';
 import MapView from './mapComponent.jsx';
 
-const MainView = ({game, area, player}) => (
+export const MainView = ({game, area, player}) => (
   <div>
     <h1>Welcome to Castle of the Winds - ({game.name})</h1>
     {
-        <MapView map={area} player={player}/>
+      <MapView map={area} player={player}/>
     }
   </div>
 );
@@ -17,7 +17,7 @@ const MainView = ({game, area, player}) => (
 let MainContainer = connect(
   (state) => {
     return {
-      area   : state.areas[state.game.currentArea],
+      area  : state.areas[state.game.currentArea],
       player: state.player,
       game  : state.game
     }

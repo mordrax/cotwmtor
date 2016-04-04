@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow} from 'enzyme';
-import GameDifficulty, {DifficultyLevel} from '../../client/charCreation/gameDifficulty.jsx';
+import GameDifficulty, {DifficultyLevel} from '/client/charCreation/gameDifficulty.jsx';
 
 describe("<GameDifficulty>: ", () => {
   let component;

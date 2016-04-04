@@ -1,6 +1,6 @@
 import  {Items, ItemType, Tiles, ASCIITiles, BuildingTypes} from './cotwContent.js';
-import {generateItems} from '../core/item.js';
-import actions from '../actions/index.js';
+import {generateItems} from '/core/item.js';
+import actions from '/actions/index.js';
 
 export const GameArea = {
   0        : 'Village',
@@ -209,27 +209,26 @@ mapBuildings[GameArea.MinesLvl1] = {
 
 /**
  * Generate all game areas and return as a object with [GameArea.Village] as key
- * @returns {{}}
+ * @returns {2D array of {tile, coord, buildingType, buildingTopLeft, bid}}
  */
 export const generateAreas = () => {
-  console.log('generateAreas');
   let areas = {};
 
   //generate village
-  _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], function (area) {
-    areas[area] = generateArea(area);
+  _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], function (gameArea) {
+    areas[gameArea] = generateArea(mapTiles[gameArea]);
 
-    _.forEach(mapBuildings[area], (building, id) => {
+    _.forEach(mapBuildings[gameArea], (building, id) => {
       let topLeft = _.extend([], building.coord);
       let entryOffset = building.type.entryPoint || [0, 0];
       let entry = [topLeft[0] + entryOffset[0], topLeft[1] + entryOffset[1]];
 
-      _.extend(areas[area][topLeft[0]][topLeft[1]], {
+      _.extend(areas[gameArea][topLeft[0]][topLeft[1]], {
         buildingType   : building.type,
         buildingTopLeft: true
       });
 
-      _.extend(areas[area][entry[0]][entry[1]], {
+      _.extend(areas[gameArea][entry[0]][entry[1]], {
         buildingType: building.type,
         bid         : id
       });
@@ -240,7 +239,6 @@ export const generateAreas = () => {
 };
 
 export const generateBuildings = (dispatch) => {
-  console.log('generateBuildings');
 
   let buildings = {};
   _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], (area) => {
@@ -264,19 +262,18 @@ export const generateBuildings = (dispatch) => {
 
 /**
  * Given [GameArea.Village], will generate a 2D array of tiles
- * @param area
- * @returns {Array}
+ * @param mapTile
+ * @returns {2D array of {tile, coord}}
  */
-const generateArea = (area) => {
-  console.log(`GenerateArea: ${area}`);
-  let map = [], y = 0, x = 0;
+export const generateArea = (mapTile) => {
+  let area = [], y = 0, x = 0;
 
   // init with tile
-  _.forEach(mapTiles[area], function (tileRow) {
+  _.forEach(mapTile, function (tileRow) {
     _.forEach(tileRow, function (asciiTile) {
       if (y === 0)
-        map[x] = [];
-      map[x][y] = {
+        area[x] = [];
+      area[x][y] = {
         tile : _.extend({}, ASCIITiles[asciiTile]),
         coord: [x, y]
       };
@@ -287,5 +284,5 @@ const generateArea = (area) => {
     x = 0;
   });
 
-  return map;
+  return area;
 };

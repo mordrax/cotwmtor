@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
-import {EquipmentSlots} from '../../enums/cotwContent.js';
+import {EquipmentSlots} from '../../core/cotwContent.js';
 import Item from './item.jsx';
 import actions from '../../actions/index.js';
 
@@ -51,7 +51,7 @@ const dropTarget = DropTarget((props) => {
   return props.dropTargetType || 'abc';
 }, target, collect)(ContainerView);
 
-
+let Container;
 export default Container = connect(
   (state) => {
     return {}

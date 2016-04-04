@@ -818,5 +818,3 @@ export const ASCIITiles = {
   '/': BuildingTypes.DoorOpen,
   '!': BuildingTypes.Sign
 };
-
-export default ASCIITiles;

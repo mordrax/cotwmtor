@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import actions from '../../actions/index.js';
+import actions from '/actions/index.js';
 
 //dragdrop
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import Container from './shopContainer.jsx';
-import {ItemType, EquipmentSlots} from '../../enums/cotwContent.js';
+import Container from './container.jsx';
+import {ItemType, EquipmentSlots} from '/core/cotwContent.js';
 
-const ShopView = ({building, equipment, containers, items, pack, packItems, buildingItems}) => (
+export const ShopView = ({building, equipment, containers, items, pack, packItems, buildingItems}) => (
   <div>
     <h1>Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
@@ -41,22 +41,24 @@ const ShopView = ({building, equipment, containers, items, pack, packItems, buil
   </div>
 );
 
-const Shop = connect(
-  (state) => {
-    let pack = state.items[state.player.equipment['pack']];
-    let packItems = pack && state.containers[pack.cid] && _.map(state.containers[pack.cid], (isExists, iid) => state.items[iid]);
-    let building = state.buildings[state.game.currentBuilding];
+export const mapState = (state) => {
+  let pack = state.items[state.player.equipment['pack']];
+  let packItems = pack && state.containers[pack.cid] && _.map(state.containers[pack.cid], (isExists, iid) => state.items[iid]);
+  let building = state.buildings[state.game.currentBuilding];
 
-    return {
-      containers: state.containers,
-      building  : building,
-      buildingItems: state.containers[building.cid],
-      equipment : state.player.equipment,
-      pack,
-      packItems,
-      items     : state.items
-    }
-  },
+  return {
+    containers   : state.containers,
+    building     : building,
+    buildingItems: state.containers[building.cid],
+    equipment    : state.player.equipment,
+    pack,
+    packItems,
+    items        : state.items
+  }
+};
+
+const Shop = connect(
+  mapState,
   (dispatch) => {
     return {}
   })(ShopView);

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow} from 'enzyme';
-import Gender from '../../client/charCreation/gender.jsx';
+import Gender from '/client/charCreation/gender.jsx';
 
 describe("<Gender>", () => {
   let component;
