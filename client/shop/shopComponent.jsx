@@ -3,13 +3,17 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import actions from '/actions/index.js';
 
+import {ItemType, EquipmentSlots} from '/core/cotwContent.js';
+import Equipment from '/client/player/equipmentComponent.js';
+import Container from '/client/misc/containerComponent.js';
+import ShopWindow from '/client/shop/shopWindowComponent.js';
+import Pack from '/client/player/packComponent.js';
+
 //dragdrop
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import Container from './container.jsx';
-import {ItemType, EquipmentSlots} from '/core/cotwContent.js';
 
-export const ShopView = ({building, equipment, containers, items, pack, packItems, buildingItems}) => (
+export const ShopView = ({building}) => (
   <div>
     <h1>Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
@@ -17,43 +21,26 @@ export const ShopView = ({building, equipment, containers, items, pack, packItem
       <div className="six wide column">
         <div className="ui grid">
           {
-            containers && _.map(_.keys(EquipmentSlots), (slot) => {
-              let iid = _.keys(containers[slot])[0];
-              let item = iid ? items[iid] : null;
-
-              return (
-                <div className="three wide column" key={slot}>
-                  <Container dropTargetType={EquipmentSlots[slot]} id={slot} type='Equipment' items={[item]} name={slot}/>
-                </div>
-              )
-            })
+            <Equipment />
           }
         </div>
       </div>
       <div className="ten wide column">
-        <Container dropTargetType={_.values(ItemType)} id={building.cid} type='Shop' items={_.map(buildingItems, (isExists, iid) => items[iid])}/>
-        <br/><br/><br/><br/>
         {
-          pack ? <Container dropTargetType={_.values(ItemType)} id={pack.cid} pack={pack} type='Pack' items={packItems}/> : ''
+          <ShopWindow />
         }
+        <br/><br/><br/><br/>
+        <Pack />
       </div>
     </div>
   </div>
 );
 
 export const mapState = (state) => {
-  let pack = state.items[state.player.equipment['pack']];
-  let packItems = pack && state.containers[pack.cid] && _.map(state.containers[pack.cid], (isExists, iid) => state.items[iid]);
-  let building = state.buildings[state.game.currentBuilding];
+  const building = state.buildings[state.game.currentBuilding];
 
   return {
-    containers   : state.containers,
-    building     : building,
-    buildingItems: state.containers[building.cid],
-    equipment    : state.player.equipment,
-    pack,
-    packItems,
-    items        : state.items
+    building
   }
 };
 

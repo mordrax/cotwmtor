@@ -1,24 +1,26 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import {ShopView, mapState} from '/client/shop/shopComponent.jsx';
 import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
+import * as itemFactory from '/core/item.js';
 
-describe("<Shop>", () => {
+describe("<ShopView>", () => {
   let component;
-  let props = {};
+  let props = {
+    building: {},
+    containers: {},
+    items: {},
+    pack: {},
+    packItems: {},
+    buildingItems: {}
+  };
 
-  describe('Equipment panel', () => {
-    it('should display panel');
+  component = shallow(<ShopView {...props}/>);
 
-    it('should display worn equipment');
+  describe('Correct states are mapped', () => {
 
-    it('should allow equipping of items');
-  });
-
-  describe('Shop panel', () => {
-    it('should display stock');
   });
 
   describe('Pack panel', () => {

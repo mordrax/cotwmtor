@@ -21,6 +21,6 @@ ejson
 #meteortoys:allthings
 react-meteor-data
 ecmascript
-#gadicc:ecmascript-hot@0.0.7-beta.12
+#gadicc:ecmascript-hot
 standard-minifier-css
 standard-minifier-js

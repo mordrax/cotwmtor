@@ -24,20 +24,18 @@ export const ItemView = ({cid, item, type, isDragging}) => (
   </div>
 );
 
-const ItemViewDraggable = ({ cid, item, type, connectDragSource, isDragging }) => (
-  connectDragSource(
+const ItemViewDraggable = ({ cid, item, type, connectDragSource, isDragging }) => {
+  return connectDragSource(
     <div>
       <ItemView cid={cid} item={item} type={type} isDragging={isDragging}/>
     </div>
   )
-);
+};
 
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging       : monitor.isDragging()
-  }
-}
+const collect = (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging       : monitor.isDragging()
+});
 
 const source = {
   beginDrag(props) {
@@ -45,6 +43,10 @@ const source = {
   }
 };
 
-export default DragSource((props) => {
-  return props.dragTargetType;
-}, source, collect)(ItemViewDraggable);
+const dragTargets = props => props.dragTargetType;
+
+const dragSource = DragSource(dragTargets, source, collect)(ItemViewDraggable);
+
+//export default ItemView;
+
+export default dragSource;

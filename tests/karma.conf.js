@@ -53,7 +53,8 @@ module.exports = function (config) {
       'karma-jasmine',
       'karma-sourcemap-loader',
       'karma-chrome-launcher',
-      'karma-mocha-reporter'
+      'karma-mocha-reporter',
+      'karma-spec-reporter'
     ],
     babelPreprocessor: {
       options: {
