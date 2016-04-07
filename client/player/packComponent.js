@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes as Type} from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import actions from '/actions/index.js';
@@ -9,7 +9,7 @@ export const Pack = ({items, containerId, pack}) => (
   <div className="Pack-component">
     <div className="ui block header">
       <span>Pack: </span>
-      <span>
+      <span className="test-weight-bulk">
         {
           `[Weight:${_.reduce(items, (sum, i) => sum + i.base.weight, 0)}/${pack.base.weightCap} |
       Bulk: ${_.reduce(items, (sum, i) => sum + i.base.bulk, 0)}/${pack.base.bulkCap}]`
@@ -22,15 +22,19 @@ export const Pack = ({items, containerId, pack}) => (
   </div>
 );
 
-Pack.propTypes = {};
+Pack.propTypes = {
+  items      : Type.array.isRequired,
+  containerId: Type.string.isRequired,
+  pack       : Type.object.isRequired
+};
 
 export const mapState = state => {
   let pack = state.items[state.player.equipment['pack']];
-  let items = pack && state.containers[pack.cid] && _.map(state.containers[pack.cid], (isExists, iid) => state.items[iid]);
+  let items = pack && state.containers[pack.id] && _.map(state.containers[pack.id], (isExists, iid) => state.items[iid]);
 
   return {
-    containerId: pack.cid,
-    items,
+    containerId: pack.id,
+    items      : items || [],
     pack
   }
 };

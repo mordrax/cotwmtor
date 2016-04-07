@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import actions from '/actions/index.js';
 
-import {ItemType, EquipmentSlots} from '/core/cotwContent.js';
 import Equipment from '/client/player/equipmentComponent.js';
-import Container from '/client/misc/containerComponent.js';
 import ShopWindow from '/client/shop/shopWindowComponent.js';
 import Pack from '/client/player/packComponent.js';
 
@@ -15,7 +13,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 export const ShopView = ({building}) => (
   <div>
-    <h1>Screen view :- {building && building.name}</h1>
+    <h1 className="test-building-name">Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
     <div className="ui two column grid">
       <div className="six wide column">

@@ -6,6 +6,7 @@ import Container from '/client/misc/containerComponent.js';
 import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
+import _ from 'lodash';
 
 describe("<Equipment>", () => {
   let component;
@@ -32,10 +33,12 @@ describe("<Equipment>", () => {
     expect(item[0].base.name).toEqual(cotw.Items.Purse.Purse.name);
   });
 
-  it('should map player equipment to component state {equipment: object}', () => {
-    let freehand = Item.generateItem(cotw.Items.Weapon.BastardSword);
-    let shield = Item.generateItem(cotw.Items.Shield.LargeIronShield);
-    let state = mapState({
+  it('should map player equipment to component state {equipment: item}', () => {
+    const freehand = Item.generateItem(cotw.Items.Weapon.BastardSword);
+    const shield = Item.generateItem(cotw.Items.Shield.LargeIronShield);
+    const fakeShield = Item.generateItem(cotw.Items.Shield.BrokenShield);
+
+    const state = mapState({
       player: {
         equipment: {
           freehand: freehand.id,
@@ -51,8 +54,8 @@ describe("<Equipment>", () => {
     let actualEquipment = _.filter(state.equipment, x=>x != null);
 
     expect(actualEquipment.length).toEqual(2);
-    expect(_.contains(actualEquipment, freehand.id)).toBe(true);
-    expect(_.contains(actualEquipment, shield.id)).toBe(true);
-
+    expect(_.contains(actualEquipment, freehand)).toBe(true);
+    expect(_.contains(actualEquipment, shield)).toBe(true);
+    expect(_.contains(actualEquipment, fakeShield)).toBe(false);
   });
 });

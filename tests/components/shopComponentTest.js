@@ -1,41 +1,50 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {shallow, mount} from 'enzyme';
-import {ShopView, mapState} from '/client/shop/shopComponent.jsx';
+import {shallow} from 'enzyme';
+
 import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 import * as itemFactory from '/core/item.js';
 
+import {ShopView, mapState} from '/client/shop/shopComponent.jsx';
+import Equipment from '/client/player/equipmentComponent.js';
+import ShopWindow from '/client/shop/shopWindowComponent.js';
+import Container from '/client/misc/containerComponent.js';
+import Pack from '/client/player/packComponent.js';
+
 describe("<ShopView>", () => {
   let component;
-  let props = {
-    building: {},
-    containers: {},
-    items: {},
-    pack: {},
-    packItems: {},
-    buildingItems: {}
+  const props = {
+    building: {name:"Bob's Armorsmithy"}
   };
 
   component = shallow(<ShopView {...props}/>);
 
-  describe('Correct states are mapped', () => {
-
+  it('should render equipment and shop window and not something else', () => {
+    expect(component.find(Equipment).length).toEqual(1);
+    expect(component.find(ShopWindow).length).toEqual(1);
+    expect(component.find(Pack).length).toEqual(1);
+    expect(component.find(Container).length).toEqual(0);
   });
 
-  describe('Pack panel', () => {
-    it('should display pack content');
-    it('should respect weight limit of pack');
-    it('should respect bulk limit of pack');
+  it('should display the building name', () => {
+    expect(component.find('.test-building-name').text()).toContain(props.building.name);
   });
 
-  describe('Buy/sell behaviour', () => {
-    it('should allow purchase from shop');
-    it('should allow sale to shop');
-  });
+  describe('mapState', () => {
+    it('maps a {building} to the state', () => {
+      const state = {
+        buildings: {
+          'One': {name: 'OneBuilding'}
+        },
+        game: {
+          currentBuilding: 'One'
+        }
+      };
 
-  describe('Identification behaviour', () => {
-    it('should allow id on unidentified items');
+      const actualState = mapState(state);
+      expect(actualState.building.name).toEqual('OneBuilding');
+    })
   });
 
   it('should route to /game on esc key');

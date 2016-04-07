@@ -20,7 +20,7 @@ check
 ejson
 #meteortoys:allthings
 react-meteor-data
-ecmascript
-#gadicc:ecmascript-hot
+#ecmascript
+gadicc:ecmascript-hot
 standard-minifier-css
 standard-minifier-js

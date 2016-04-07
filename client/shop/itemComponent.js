@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
 import _ from 'lodash';
 
-export const ItemView = ({cid, item, type, isDragging}) => (
+export const ItemView = ({cid, item, isDragging}) => (
   <div className="ui item" style={{
     opacity: isDragging ? 0.5: 1,
     cursor:'move',
@@ -13,7 +13,7 @@ export const ItemView = ({cid, item, type, isDragging}) => (
       <i className={`cotwItem ${item.base.css}`} alt=""/>
     </div>
     <div className="content">
-      <a className="header">{type}</a>
+      <a className="header">{item.type}</a>
       <div className="meta">
         <span className="date"/>
       </div>
@@ -24,10 +24,10 @@ export const ItemView = ({cid, item, type, isDragging}) => (
   </div>
 );
 
-const ItemViewDraggable = ({ cid, item, type, connectDragSource, isDragging }) => {
+const ItemViewDraggable = ({ cid, item, connectDragSource, isDragging }) => {
   return connectDragSource(
     <div>
-      <ItemView cid={cid} item={item} type={type} isDragging={isDragging}/>
+      <ItemView cid={cid} item={item} isDragging={isDragging}/>
     </div>
   )
 };
@@ -43,7 +43,7 @@ const source = {
   }
 };
 
-const dragTargets = props => props.dragTargetType;
+export const dragTargets = props => props.item.type;
 
 const dragSource = DragSource(dragTargets, source, collect)(ItemViewDraggable);
 

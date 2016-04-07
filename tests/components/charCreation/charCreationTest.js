@@ -13,7 +13,8 @@ describe("<CharCreation>", () => {
     player: {
       name: 'bob',
       gender: 'Male'
-    }
+    },
+    onChangeGender: () => {}
   };
 
   beforeEach(() => {

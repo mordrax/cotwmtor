@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes as Type} from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import actions from '/actions/index.js';
@@ -10,24 +10,25 @@ export const ShopWindow = ({items, containerId}) => (
     <div className="ui block header">Shop</div>
     <Container dropTargetType={_.values(cotw.ItemType)}
                id={containerId}
-               items={_.map(items, (isExists, iid) => items[iid])}/>
+               items={items}/>
   </div>
 );
 
 ShopWindow.PropTypes = {
-  //React.PropTypes.string.isRequired,
-  //React.PropTypes.func.isRequired,
-  //React.PropTypes.object.isRequired,
-  //React.PropTypes.number.isRequired
+  items: Type.arrayOf(Type.shape({
+    id: Type.string,
+    name: Type.string
+  })).isRequired,
+  containerId: Type.number.isRequired
 };
 
 export const mapState = state => {
   let building = state.buildings[state.game.currentBuilding];
 
-  let items = {};
+  let items = [];
   _.forEach(state.containers[building.cid], (isExist, itemId) => {
     if (!!isExist)
-      items[itemId] = state.items[itemId];
+      items.push(state.items[itemId]);
   });
 
   return {

@@ -25,9 +25,9 @@ export const generateItems = (itemTypes, amt = 10) => {
  * @param props {type: ItemType}
  */
 export const generateItem = (base, props = {}) => {
-  let name = base.name.replace(/\s+/g, '');
+  const name = base.name.replace(/\s+/g, '');
   if (props.type && props.type == ItemType.Pack)
     props.cid = name + _.uniqueId();
-  let id = name + _.uniqueId();
+  const id = name + _.uniqueId();
   return _.extend({}, {id, base}, props);
 };
