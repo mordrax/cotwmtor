@@ -5,7 +5,7 @@ import {CharCreation, mapDispatch, mapState } from '/client/charCreation/charCre
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import {routeActions} from 'redux-simple-router';
-import actions from '/actions/index';
+import * as actions from '/actions/index';
 
 describe("<CharCreation>", () => {
   let component;

@@ -6,17 +6,18 @@ import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
 
-import actions from '/actions/index.js';
-import store from './testStore.js';
+import * as actions from '/actions/index.js';
+import storeFactory from './testStore.js';
 
 import {Pack, mapState} from '/client/player/packComponent.js';
-import Container from '/client/misc/containerComponent.js';
+import Container from '/client/misc/containerComponent.jsx';
 
 describe("<Pack>", () => {
   let component;
   const sword = Item.generateItem(cotw.Items.Weapon.BastardSword);
   const shield = Item.generateItem(cotw.Items.Shield.LargeIronShield);
   const bag = Item.generateItem(cotw.Items.Pack.LargeBag);
+  const store = storeFactory();
 
   store.dispatch(actions.addItem(sword));
   store.dispatch(actions.addItem(shield));

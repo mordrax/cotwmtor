@@ -1,5 +1,5 @@
 import React from 'react';
-import actions from '../../actions/index';
+import * as actions from '../../actions/index';
 import {connect} from 'react-redux';
 import classNames from '../../node_modules/classnames/bind';
 import Game from '../../collections/games';

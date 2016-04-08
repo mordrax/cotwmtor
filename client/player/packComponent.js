@@ -1,9 +1,9 @@
 import React, {PropTypes as Type} from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import actions from '/actions/index.js';
+import * as actions from '/actions/index.js';
 import * as cotw from '/core/cotwContent.js';
-import Container from '/client/misc/containerComponent.js';
+import Container from '/client/misc/containerComponent.jsx';
 
 export const Pack = ({items, containerId, pack}) => (
   <div className="Pack-component">

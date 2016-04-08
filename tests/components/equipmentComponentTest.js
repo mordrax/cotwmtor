@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow} from 'enzyme';
 import {Equipment, mapState} from '/client/player/equipmentComponent.js';
-import Container from '/client/misc/containerComponent.js';
+import Container from '/client/misc/containerComponent.jsx';
 import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
@@ -54,8 +54,8 @@ describe("<Equipment>", () => {
     let actualEquipment = _.filter(state.equipment, x=>x != null);
 
     expect(actualEquipment.length).toEqual(2);
-    expect(_.contains(actualEquipment, freehand)).toBe(true);
-    expect(_.contains(actualEquipment, shield)).toBe(true);
-    expect(_.contains(actualEquipment, fakeShield)).toBe(false);
+    expect(_.includes(actualEquipment, freehand)).toBe(true);
+    expect(_.includes(actualEquipment, shield)).toBe(true);
+    expect(_.includes(actualEquipment, fakeShield)).toBe(false);
   });
 });

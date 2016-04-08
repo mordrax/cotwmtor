@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import actions from '/actions/index.js';
+import * as actions from '/actions/index.js';
 
 import Equipment from '/client/player/equipmentComponent.js';
 import ShopWindow from '/client/shop/shopWindowComponent.js';

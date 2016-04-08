@@ -1,10 +1,13 @@
-import actions from '/actions/index.js';
+import * as actions from '/actions/index.js';
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { connect, Provider } from 'react-redux';
-import reducer from '/client/reducers/index.js';
+import reducer from '/reducers/index.js';
 
-const store = createStore(reducer, {});
+const storeFactory = () => createStore(
+  reducer,
+  applyMiddleware(thunk)
+);
 
-export default store;
+export default storeFactory;

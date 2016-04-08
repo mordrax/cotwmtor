@@ -1,4 +1,4 @@
-import {GameArea, GameScreen} from '../../core/maps'
+import {GameArea, GameScreen} from '/core/maps'
 import _ from 'lodash';
 
 let defaultState = {

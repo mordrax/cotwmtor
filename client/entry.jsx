@@ -8,9 +8,9 @@ import { syncHistory, routeReducer } from 'redux-simple-router';
 
 // redux
 import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 import { connect, Provider } from 'react-redux';
-import cotwReducer from '../client/reducers/index';
+import cotwReducer from '../reducers/index';
 
 // game
 import Title from './title/title.jsx';
@@ -20,22 +20,23 @@ import Main from './main/main.jsx';
 import Shop from './shop/shopComponent.jsx';
 import './subscribe';
 import collision from './engines/collision.js';
-import actions from '../actions/index.js';
+import * as actions from '../actions/index.js';
 
 import {GameArea, GameScreen, generateAreas, generateBuildings} from '../core/maps';
 import {generateItem} from '../core/item.js';
 import {Items, ItemType} from '../core/cotwContent.js';
 
 function configureStore(rootReducer, initialState) {
-  const toolsCreateStore = compose(
+  const toolsStore = compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 
+  const thunkStore = applyMiddleware(thunkMiddleware)(toolsStore);
   // Sync dispatched route actions to the history
   const reduxRouterMiddleware = syncHistory(browserHistory);
-  const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(toolsCreateStore);
+  const routerStore = applyMiddleware(reduxRouterMiddleware)(thunkStore);
 
-  const store = createStoreWithMiddleware(rootReducer, applyMiddleware(thunk));
+  const store = routerStore(rootReducer);
 
 // Required for replaying actions from devtools to work
   reduxRouterMiddleware.listenForReplays(store);

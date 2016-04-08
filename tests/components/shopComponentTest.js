@@ -9,7 +9,7 @@ import * as itemFactory from '/core/item.js';
 import {ShopView, mapState} from '/client/shop/shopComponent.jsx';
 import Equipment from '/client/player/equipmentComponent.js';
 import ShopWindow from '/client/shop/shopWindowComponent.js';
-import Container from '/client/misc/containerComponent.js';
+import Container from '/client/misc/containerComponent.jsx';
 import Pack from '/client/player/packComponent.js';
 
 describe("<ShopView>", () => {

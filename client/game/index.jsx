@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import actions from '../../actions/index.js';
+import * as actions from '../../actions/index.js';
 import Games from '../../collections/games';
 
 var GameView = React.createClass({

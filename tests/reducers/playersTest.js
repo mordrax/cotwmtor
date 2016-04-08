@@ -1,5 +1,5 @@
-import actions from '/actions/index.js';
-import reducer from '/client/reducers/playerReducer.js';
+import * as actions from '/actions/index.js';
+import reducer from '/reducers/playerReducer.js';
 import * as items from '/core/item.js';
 import * as cotw from '/core/cotwContent.js';
 

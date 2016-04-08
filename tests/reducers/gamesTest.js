@@ -1,5 +1,5 @@
-import actions from '../../actions/index.js';
-import reducer from '../../client/reducers/gameReducer.js';
+import * as actions from '../../actions/index.js';
+import reducer from '../../reducers/gameReducer.js';
 
 describe("Reducer: Games", () => {
   let state;

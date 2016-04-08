@@ -1,5 +1,5 @@
-import actions from '../../actions/index.js';
-import reducer from '../../client/reducers/buildingReducer.js';
+import * as actions from '../../actions/index.js';
+import reducer from '../../reducers/buildingReducer.js';
 
 describe("Reducer: Buildings", () => {
   let state = {};

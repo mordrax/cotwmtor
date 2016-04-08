@@ -1,5 +1,5 @@
 import {GameScreen, GameArea} from '../../core/maps.js';
-import actions from '../../actions/index.js';
+import * as actions from '../../actions/index.js';
 
 import { routeActions } from 'redux-simple-router';
 
