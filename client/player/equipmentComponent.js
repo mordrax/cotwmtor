@@ -5,7 +5,7 @@ import * as actions from '/actions/index.js';
 
 //dragdrop
 import Container from '/client/misc/containerComponent.jsx';
-import {ItemType, EquipmentSlots} from '/core/cotwContent.js';
+import {ItemType, EquipmentSlotToItemType} from '/core/cotwContent.js';
 
 export const Equipment = ({equipment}) => (
   <div className="ui grid">
@@ -14,7 +14,7 @@ export const Equipment = ({equipment}) => (
         return (
           <div className={`three wide column equipmentSlot ${slot}`} key={slot}>
             {
-              <Container dropTargetType={slot} id={slot} type='Equipment' items={[item]} name={slot}/>
+              <Container dropTargetType={EquipmentSlotToItemType[slot]} id={slot} type='Equipment' items={[item]} name={slot}/>
             }
           </div>
         )

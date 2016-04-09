@@ -2,7 +2,7 @@ import React, {PropTypes as Type} from 'react';
 import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 
-import {EquipmentSlots} from '../../core/cotwContent.js';
+import {EquipmentSlotToItemType} from '../../core/cotwContent.js';
 import Item from './../shop/itemComponent.js';
 import * as actions from '../../actions/index.js';
 

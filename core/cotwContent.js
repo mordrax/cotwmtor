@@ -157,7 +157,7 @@ let allItemTypes = [
 /**
  * slot name to accepted item types
  */
-export const EquipmentSlots = {
+export const EquipmentSlotToItemType = {
   'armour'       : ItemType.Armour
   , 'neckwear'   : ItemType.Neckwear
   , 'overgarment': ItemType.Overgarment
