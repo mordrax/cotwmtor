@@ -1,4 +1,5 @@
 import * as repo from '/reducers/reducerRepository.js';
+import * as cotw from '/core/cotwContent.js';
 
 // player
 export const setGender = gender => {
@@ -53,14 +54,38 @@ export const addBuildings = buildings => {
 };
 
 // items
-export const addItem = item => {
+export const _addItem = item => {
   return {type: "ITEM_ADD", item};
 };
-export const removeItem = id => {
+export const _removeItem = id => {
   return {type: "ITEM_REMOVE", id}
 };
 export const updateItem = (id, weight) => {
   return {type: 'UPDATE_ITEM', id, weight}
+};
+
+export const removeItem = itemId => {
+  expect(itemId, 'string');
+
+  return (dispatch, getState) => {
+    let item = getState().items[itemId];
+    if (_.includes([cotw.ItemType.Bag, cotw.ItemType.Pack], item.base.type)) {
+      dispatch(removeAsContainer(item.id));
+    }
+    dispatch(_removeItem(itemId));
+  }
+};
+
+export const addItem = item => {
+  expect(item, 'object');
+  expect(item.base, 'object');
+
+  return (dispatch, getState) => {
+    dispatch(_addItem(item));
+    if (_.includes([cotw.ItemType.Bag, cotw.ItemType.Pack], item.base.type)) {
+      dispatch(addAsContainer(item.id));
+    }
+  }
 };
 
 export const moveItem = (itemId, fromContainerId, toContainerId) =>
@@ -95,7 +120,6 @@ export const moveItem = (itemId, fromContainerId, toContainerId) =>
 
     dispatch(removeFromContainer(fromContainerId, itemId));
     dispatch(addToContainer(toContainerId, itemId));
-
   };
 
 // containers
@@ -118,6 +142,10 @@ export const removeFromContainer = (cid, iid) => {
 
 const expect = (arg, types) => {
   let isVaidType = false;
+
+  if (typeof(types) !== 'object')
+    types = [types];
+
   _.forEach(types, t => {
     if (typeof arg === t)
       isVaidType = true;
@@ -125,3 +153,7 @@ const expect = (arg, types) => {
   if (!isVaidType)
     throw `Expected a type of [${types}] for the argument: (${arg})`;
 };
+
+export const getItems = state =>
+  _(state.items).filter(x=>!!x).value()
+;

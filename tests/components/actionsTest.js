@@ -3,7 +3,7 @@ import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
 
 import * as actions from '/actions/index.js';
-import storeFactory from './testStore.js';
+import storeFactory from './../core/testStore.js';
 import * as repo from '/reducers/reducerRepository.js';
 
 describe('Actions', () => {

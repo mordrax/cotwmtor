@@ -8,16 +8,20 @@ import Container from '/client/misc/containerComponent.jsx';
 export const Pack = ({items, containerId, pack}) => (
   <div className="Pack-component">
     <div className="ui block header">
-      <span>Pack: </span>
+      <span>Pack: {!pack ? '(No pack equipped!)' : ''}</span>
       <span className="test-weight-bulk">
         {
-          `[Weight:${_.reduce(items, (sum, i) => sum + i.base.weight, 0)}/${pack.base.weightCap} |
-      Bulk: ${_.reduce(items, (sum, i) => sum + i.base.bulk, 0)}/${pack.base.bulkCap}]`
+          pack ?
+            `[Weight:${_.reduce(items, (sum, i) => sum + i.base.weight, 0)}/${pack.base.weightCap} |
+      Bulk: ${_.reduce(items, (sum, i) => sum + i.base.bulk, 0)}/${pack.base.bulkCap}]` :
+            ''
         }
       </span>
     </div>
     {
-      <Container dropTargetType={_.values(cotw.ItemType)} id={containerId} pack={pack} items={items}/>
+      pack ?
+        <Container dropTargetType={_.values(cotw.ItemType)} id={containerId} pack={pack} items={items}/> :
+        ''
     }
   </div>
 );
@@ -33,9 +37,9 @@ export const mapState = state => {
   let items = pack && state.containers[pack.id] && _.map(state.containers[pack.id], (isExists, iid) => state.items[iid]);
 
   return {
-    containerId: pack.id,
+    containerId: pack && pack.id || null,
     items      : items || [],
-    pack
+    pack       : pack || null
   }
 };
 

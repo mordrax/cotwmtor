@@ -1,5 +1,4 @@
 let defaultState = {
-
 };
 
 export default (state=defaultState, action) => {

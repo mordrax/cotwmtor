@@ -8,7 +8,7 @@ import * as Item from '/core/item.js';
 import _ from 'lodash';
 
 import * as actions from '/actions/index.js';
-import storeFactory from './testStore.js';
+import storeFactory from './../core/testStore.js';
 import {Equipment, mapState} from '/client/player/equipmentComponent.js';
 import {ContainerView} from '/client/misc/containerComponent.jsx';
 
@@ -45,8 +45,8 @@ describe("<Equipment>", () => {
     dispatch(actions.equipItem('freehand', sword.id));
     component = shallow(<Equipment {...mapState(store.getState())} />);
 
-    expect(component.find('[id="freehand"]').node.props.items[0].id).toEqual(sword.id);
-    expect(component.find('[id="shield"]').node.props.items[0]).toEqual(null);
+    expect(component.find('[id="freehand"]').props().items[0].id).toEqual(sword.id);
+    expect(component.find('[id="shield"]').props().items[0]).toEqual(null);
   });
 
   it('should pass the correct dropTargetType to the container', () => {

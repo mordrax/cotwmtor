@@ -10,7 +10,7 @@ import {ContainerView} from '/client/misc/containerComponent.jsx';
 import ItemView from '/client/shop/itemComponent.js';
 
 import * as actions from '/actions/index.js';
-import storeFactory from './testStore.js';
+import storeFactory from './../core/testStore.js';
 
 describe("<Container>", () => {
   let component;
