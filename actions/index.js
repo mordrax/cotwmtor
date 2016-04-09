@@ -97,6 +97,11 @@ export const moveItem = (itemId, fromContainerId, toContainerId) =>
     const fromItem = state.items[fromContainerId] || null;
     const toItem = state.items[toContainerId] || null;
 
+    if (toContainerId === itemId) {
+      console.warn(`Stop! You can not put a bag in itself!`);
+      return;
+    }
+
     if (toItem && toItem.base.type === 'Pack') {
       const curWeight = _.reduce(repo.getItemsFromContainer(getState(), toItem.id), (sum, i) => sum + i.base.weight, 0);
       const newWeight = (curWeight + (item.weight || item.base.weight));

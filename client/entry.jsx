@@ -74,7 +74,6 @@ Meteor.startup(() => {
   };
 
   _.forEach(initialGear, (item, equipmentType) => {
-    console.log(`Initial gear: adding ${equipmentType} id: ${item.id}`);
     cotwStore.dispatch(actions.equipItem(equipmentType, item.id));
     cotwStore.dispatch(actions.addItem(item));
     cotwStore.dispatch(actions.addToContainer(equipmentType, item.id));

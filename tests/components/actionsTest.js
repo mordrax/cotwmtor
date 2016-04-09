@@ -27,11 +27,9 @@ describe('Actions', () => {
     _.forEach(items, x=>dispatch(actions.addItem(x)));
 
     dispatch(actions.addItem(chest));
-    dispatch(actions.addAsContainer(chest.id));
     _.forEach(items, x=>dispatch(actions.addToContainer(chest.id, x.id)));
 
     dispatch(actions.addItem(bag));
-    dispatch(actions.addAsContainer(bag.id));
   });
 
   it('moves the item from the source container to the destination container', () => {
@@ -81,5 +79,10 @@ describe('Actions', () => {
 
     dispatch(actions.moveItem(shield.id, 'shield', chest.id));
     expect(getState().player.equipment.shield).toBeFalsy();
-  })
+  });
+
+  it('does not allow containers to be put in itself', () => {
+    dispatch(actions.moveItem(bag.id, bag.id, bag.id));
+    expect(getState().containers[bag.id][bag.id]).toBeFalsy();
+  });
 });

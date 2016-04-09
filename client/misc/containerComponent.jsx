@@ -33,8 +33,6 @@ const target = {
   drop(props, monitor) {
     let source = monitor.getItem();
     props.onDrop(source, props);
-    //props.dispatchAction(props.onDrop(source.item.iid || 'hi'));
-    console.log(`Drop - Source(${source.item.id}) into ${props.id} belonging to (${props.item && props.item.id})`);
   }
 };
 
