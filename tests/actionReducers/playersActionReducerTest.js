@@ -94,42 +94,4 @@ describe("Reducer: Player", () => {
       expect(getState().player.coord).toEqual([42, 6]);
     });
   });
-
-  describe('Purse', () => {
-    beforeEach(() => {
-      setupStore();
-      let purse = items.generateItem(cotw.Items.Purse.Purse);
-      dispatch(actions.addItem(purse));
-      dispatch(actions.equipItem('purse', purse.id));
-    });
-
-    it('should be able to equip a purse', () => {
-      let itemId = getState().player.equipment.purse;
-      expect(itemId).toBeTruthy();
-
-      let purse = getState().items[itemId];
-      expect(purse).toBeTruthy();
-    });
-
-    it('should be able to add coins to a purse', () => {
-      let purseId = getState().player.equipment.purse;
-      let purse = getState().items[purseId];
-
-      expect(purse.copper).toEqual(0);
-
-      dispatch(actions.updatePurse({copper: 100, gold: 1}));
-
-      expect(getState().items[purseId].copper).toEqual(100);
-      expect(getState().items[purseId].gold).toEqual(1);
-      expect(getState().items[purseId].platinum).toEqual(0);
-    });
-
-    it('should be able to remove coins from a purse', () => {
-      throw 'TODO';
-    });
-
-    it('should not take out more than what the purse has', () => {
-      throw 'TODO';
-    })
-  })
 });

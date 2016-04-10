@@ -6,7 +6,7 @@ import * as actions from '/actions/index.js';
 import storeFactory from './../core/testStore.js';
 import * as repo from '/reducers/reducerRepository.js';
 
-describe('Actions', () => {
+describe('actions/index.js', () => {
   const armour = Item.generateItem(cotw.Items.Armour.ElvenChainMail);
   const shield = Item.generateItem(cotw.Items.Shield.MediumIronShield);
   const gauntlet = Item.generateItem(cotw.Items.Gauntlet.GauntletOfDexterity);

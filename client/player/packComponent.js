@@ -28,8 +28,8 @@ export const Pack = ({items, containerId, pack}) => (
 
 Pack.propTypes = {
   items      : Type.array.isRequired,
-  containerId: Type.string.isRequired,
-  pack       : Type.object.isRequired
+  containerId: Type.string,
+  pack       : Type.object
 };
 
 export const mapState = state => {

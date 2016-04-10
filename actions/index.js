@@ -47,8 +47,7 @@ export const updatePurse = contents => {
       return;
 
     const purseCombined = (purse, newPurse, coinType) => {
-      if (!purse) return 0;
-      return purse[coinType] || 0;
+      return (parseInt(purse[coinType]) + parseInt(newPurse[coinType])) || 0;
     };
 
     let purseCombined_coinType = _.curry(purseCombined)(purse, contents);
@@ -57,12 +56,12 @@ export const updatePurse = contents => {
       .map(purseCombined_coinType)
       .filter(x=>x<0)
       .value()
-      .length;
+      .length > 0;
 
     if (anyValuesLessThanZero)
-      throw `You cannot have negative coins.`;
-
-    dispatch(_updatePurse(purse.id, contents));
+      console.warn(`You cannot have negative coins.`);
+    else
+      dispatch(_updatePurse(purse.id, contents));
   };
 };
 const _updatePurse = (purseId, contents) => {
