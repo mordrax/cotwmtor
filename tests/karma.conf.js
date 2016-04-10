@@ -13,6 +13,9 @@ module.exports = function (config) {
       'tests.webpack.js': ['webpack', 'sourcemap'] //preprocess with webpack and our sourcemap loader
     },
     reporters        : ['mocha'],
+    mochaReporter: {
+      output: 'autowatch'
+    },
     //reporters    : ['dots'], //report results in this format
     webpack          : { //kind of a copy of your webpack config
       //devtool  : 'inline-source-map', //just do inline source maps instead of the default

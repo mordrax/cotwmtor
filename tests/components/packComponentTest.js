@@ -105,12 +105,8 @@ describe("<Pack>", () => {
       component = shallow(<Pack {...mapState(getState())}/>);
     });
 
-    it('should hide the pack if player does not have one', () => {
+    it('should hide the pack window', () => {
       expect(component.find(Container).length).toEqual(0);
-    });
-
-    it('should not err when there is no pack', () => {
-
     });
   });
 
