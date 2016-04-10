@@ -125,7 +125,11 @@ describe("Reducer: Player", () => {
     });
 
     it('should be able to remove coins from a purse', () => {
-
+      throw 'TODO';
     });
+
+    it('should not take out more than what the purse has', () => {
+      throw 'TODO';
+    })
   })
 });
