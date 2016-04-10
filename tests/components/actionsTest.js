@@ -85,4 +85,6 @@ describe('Actions', () => {
     dispatch(actions.moveItem(bag.id, bag.id, bag.id));
     expect(getState().containers[bag.id][bag.id]).toBeFalsy();
   });
+
+  it('combines the contents of two purses by dropping a purse on equipment');
 });

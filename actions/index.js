@@ -35,6 +35,39 @@ export const movePlayer = direction => {
 export const teleportPlayer = coords => {
   return {type: 'PLAYER_MOVE_TELEPORT', coords}
 };
+export const updatePurse = contents => {
+  return (dispatch, getState) => {
+    const purseId = getState().player.equipment.purse;
+    if (!purseId)
+      throw 'Trying to update purse, but player has no purse!';
+    const purse = getState().items[purseId];
+    if (!purse)
+      throw `The item ${purseId} does not exist in state.items`;
+    if (!contents)
+      return;
+
+    const purseCombined = (purse, newPurse, coinType) => {
+      if (!purse) return 0;
+      return purse[coinType] || 0;
+    };
+
+    let purseCombined_coinType = _.curry(purseCombined)(purse, contents);
+
+    let anyValuesLessThanZero = _(['copper', 'silver', 'gold', 'platinum'])
+      .map(purseCombined_coinType)
+      .filter(x=>x<0)
+      .value()
+      .length;
+
+    if (anyValuesLessThanZero)
+      throw `You cannot have negative coins.`;
+
+    dispatch(_updatePurse(purse.id, contents));
+  };
+};
+const _updatePurse = (purseId, contents) => {
+  return {type: 'UPDATE_PURSE', id:purseId, ...contents};
+};
 
 // game
 export const updateData = data => {

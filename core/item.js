@@ -26,8 +26,12 @@ export const generateItems = (itemTypes, amt = 10) => {
  */
 export const generateItem = (base, props = {}) => {
   const name = base.name.replace(/\s+/g, '');
-  if (props.type && props.type == ItemType.Pack)
+  if (base.type == ItemType.Pack)
     props.cid = name + _.uniqueId();
+
+  if (base.type == ItemType.Purse)
+    props = _.extend({}, {copper:0, silver:0, gold:0, platinum:0}, props);
+
   const id = name + _.uniqueId();
   return _.extend({}, {id, base}, props);
 };

@@ -74,9 +74,8 @@ Meteor.startup(() => {
   };
 
   _.forEach(initialGear, (item, equipmentType) => {
-    cotwStore.dispatch(actions.equipItem(equipmentType, item.id));
     cotwStore.dispatch(actions.addItem(item));
-    cotwStore.dispatch(actions.addToContainer(equipmentType, item.id));
+    cotwStore.dispatch(actions.equipItem(equipmentType, item.id));
   });
 
   let generalStore = _.filter(buildings, (x)=>x.name == 'General Store')[0];

@@ -23,6 +23,18 @@ export default (state=defaultState, action) => {
         }
       };
 
+    case "UPDATE_PURSE":
+      let purse = state[action.id];
+      return {
+        ...state,
+        [action.id]: {
+          ...purse,
+          copper: purse.copper + (action.copper || 0),
+          silver: purse.silver + (action.silver || 0),
+          gold: purse.gold + (action.gold || 0),
+          platinum: purse.platinum + (action.platinum || 0)
+        }
+      };
     default:
       return state;
   }
