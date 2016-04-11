@@ -29,6 +29,10 @@ export const ShopView = ({building}) => (
         }
         <br/><br/><br/><br/>
         <Pack />
+        <br/><br/><br/><br/>
+        {
+
+        }
       </div>
     </div>
   </div>

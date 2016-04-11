@@ -7,14 +7,22 @@ import * as actions from '/actions/index.js';
 import Container from '/client/misc/containerComponent.jsx';
 import {ItemType, EquipmentSlotToItemType} from '/core/cotwContent.js';
 
-export const Equipment = ({equipment}) => (
+export const Equipment = ({equipment, onShowPurse}) => (
   <div className="ui grid">
     {
       _.map(equipment, (item, slot) => {
         return (
-          <div className={`three wide column equipmentSlot ${slot}`} key={slot}>
+          <div className={`three wide column equipmentSlot ${slot}`}
+               key={slot}
+               onClick={() => onShowPurse()}
+          >
             {
-              <Container dropTargetType={EquipmentSlotToItemType[slot]} id={slot} type='Equipment' items={[item]} name={slot}/>
+              <Container dropTargetType={EquipmentSlotToItemType[slot]}
+                         id={slot}
+                         type='Equipment'
+                         items={[item]}
+                         name={slot}
+              />
             }
           </div>
         )
@@ -40,10 +48,16 @@ export const mapState = (state) => {
   }
 };
 
+export const mapDispatch = dispatch => {
+  return {
+    onShowPurse: () => {
+      dispatch(actions.showPurse());
+    }
+  }
+};
+
 const EquipmentContainer = connect(
   mapState,
-  (dispatch) => {
-    return {}
-  })(Equipment);
+  mapDispatch)(Equipment);
 
 export default EquipmentContainer;

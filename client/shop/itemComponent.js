@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
 import _ from 'lodash';
+import * as cotw from '/core/cotwContent.js';
 
 export const ItemView = ({cid, item, isDragging}) => (
   <div className="ui item" style={{
@@ -13,7 +14,7 @@ export const ItemView = ({cid, item, isDragging}) => (
       <i className={`cotwItem ${item.base.css}`} alt=""/>
     </div>
     <div className="content">
-      <a className="header">{item.type}</a>
+      <a className="header">{item.base.type}</a>
       <div className="meta">
         <span className="date"/>
       </div>
@@ -32,6 +33,13 @@ const ItemViewDraggable = ({ cid, item, connectDragSource, isDragging }) => {
   )
 };
 
+ItemViewDraggable.propTypes = {
+  cid              : PropTypes.string.isRequired,
+  item             : PropTypes.object.isRequired,
+  isDragging       : PropTypes.bool.isRequired,
+  connectDragSource: PropTypes.func.isRequired
+};
+
 const collect = (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging       : monitor.isDragging()
@@ -43,7 +51,12 @@ const source = {
   }
 };
 
-export const dragTargets = props => props.item.type;
+export const dragTargets = props => {
+  if (_.includes(cotw.ItemType, props.item.base.type))
+    return props.item.base.type;
+  else
+    throw `Drag target does not have a valid type! Props(${props})`
+};
 
 const dragSource = DragSource(dragTargets, source, collect)(ItemViewDraggable);
 

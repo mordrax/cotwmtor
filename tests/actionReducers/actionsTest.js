@@ -1,10 +1,16 @@
 import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
-
 import * as actions from '/actions/index.js';
 import storeFactory from './../core/testStore.js';
 import * as repo from '/reducers/reducerRepository.js';
+
+let store, dispatch, getState;
+const storeSetup = () => {
+  store = storeFactory();
+  dispatch = store.dispatch;
+  getState = store.getState;
+};
 
 describe('actions/index.js', () => {
   const armour = Item.generateItem(cotw.Items.Armour.ElvenChainMail);
@@ -18,12 +24,9 @@ describe('actions/index.js', () => {
 
   const items = [armour, shield, gauntlet, belt, helmet];
 
-  let store, getState, dispatch;
   beforeEach(() => {
-    store = storeFactory();
-    dispatch = store.dispatch;
+    storeSetup();
 
-    getState = store.getState;
     _.forEach(items, x=>dispatch(actions.addItem(x)));
 
     dispatch(actions.addItem(chest));
@@ -32,22 +35,55 @@ describe('actions/index.js', () => {
     dispatch(actions.addItem(bag));
   });
 
-  it('moves the item from the source container to the destination container', () => {
-    dispatch(actions.moveItem(shield.id, chest.id, bag.id));
+  describe('moveItem', () => {
+    it('moves the item from the source container to the destination container', () => {
+      dispatch(actions.moveItem(shield.id, chest.id, bag.id));
 
-    const chestItems = repo.getItemsFromContainer(getState(), chest.id);
-    const bagItems = repo.getItemsFromContainer(getState(), bag.id);
+      const chestItems = repo.getItemsFromContainer(getState(), chest.id);
+      const bagItems = repo.getItemsFromContainer(getState(), bag.id);
 
-    expect(chestItems.length).toEqual(4);
-    expect(bagItems.length).toEqual(1);
-  });
+      expect(chestItems.length).toEqual(4);
+      expect(bagItems.length).toEqual(1);
+    });
 
-  it('does not move item if it exceeds weight limit', () => {
-    expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
+    it('does not move item if it exceeds weight limit', () => {
+      expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
 
-    dispatch(actions.moveItem(chest.id, 'pack', bag.id));
+      dispatch(actions.moveItem(chest.id, 'pack', bag.id));
 
-    expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
+      expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
+    });
+
+    it('allows equipping of items', () => {
+      dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
+      expect(getState().player.equipment.shield).toEqual(shield.id);
+    });
+
+    it('doesnt allow doubling up of equipment slot items', () => {
+      const shield2 = Item.generateItem(cotw.Items.Shield.LargeIronShield);
+
+      dispatch(actions.addItem(shield2));
+      dispatch(actions.equipItem('shield', shield2.id));
+      expect(getState().player.equipment.shield).toEqual(shield2.id);
+      expect(getState().player.equipment.shield).not.toEqual(shield.id);
+
+      dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
+      expect(getState().player.equipment.shield).toEqual(shield2.id);
+      expect(getState().player.equipment.shield).not.toEqual(shield.id);
+    });
+
+    it('allows you to unequip items', () => {
+      dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
+      expect(getState().player.equipment.shield).toEqual(shield.id);
+
+      dispatch(actions.moveItem(shield.id, 'shield', chest.id));
+      expect(getState().player.equipment.shield).toBeFalsy();
+    });
+
+    it('does not allow containers to be put in itself', () => {
+      dispatch(actions.moveItem(bag.id, bag.id, bag.id));
+      expect(getState().containers[bag.id][bag.id]).toBeFalsy();
+    });
   });
 
   it('allows nesting of containers', () => {
@@ -55,36 +91,16 @@ describe('actions/index.js', () => {
     expect(repo.getItemsFromContainer(getState(), chest.id).length).toEqual(6);
   });
 
-  it('allows equipping of items', () => {
-    dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
-    expect(getState().player.equipment.shield).toEqual(shield.id);
-  });
-
-  it('doesnt allow doubling up of equipment slot items', () => {
-    const shield2 = Item.generateItem(cotw.Items.Shield.LargeIronShield);
-
-    dispatch(actions.addItem(shield2));
-    dispatch(actions.equipItem('shield', shield2.id));
-    expect(getState().player.equipment.shield).toEqual(shield2.id);
-    expect(getState().player.equipment.shield).not.toEqual(shield.id);
-
-    dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
-    expect(getState().player.equipment.shield).toEqual(shield2.id);
-    expect(getState().player.equipment.shield).not.toEqual(shield.id);
-  });
-
-  it('allows you to unequip items', () => {
-    dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
-    expect(getState().player.equipment.shield).toEqual(shield.id);
-
-    dispatch(actions.moveItem(shield.id, 'shield', chest.id));
-    expect(getState().player.equipment.shield).toBeFalsy();
-  });
-
-  it('does not allow containers to be put in itself', () => {
-    dispatch(actions.moveItem(bag.id, bag.id, bag.id));
-    expect(getState().containers[bag.id][bag.id]).toBeFalsy();
-  });
-
   it('combines the contents of two purses by dropping a purse on equipment');
+
+  it('sets game.showPurse on action.showPurse', () => {
+    dispatch(actions.showPurse());
+    expect(getState().game.showPurse).toEqual(true);
+  });
+
+  //describe('addBuilding', () => {
+  //  it('should add a building', () => {
+  //    dispatch(actions.addBuilding(map.generateBuilding(map.mapBuildings[map.GameArea.Village].VillageGate)));
+  //  })
+  //});
 });

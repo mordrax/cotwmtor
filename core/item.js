@@ -26,6 +26,9 @@ export const generateItems = (itemTypes, amt = 10) => {
  */
 export const generateItem = (base, props = {}) => {
   const name = base.name.replace(/\s+/g, '');
+  if (!base.type)
+    throw `Invalid item spec, no item.type found!`;
+
   if (base.type == ItemType.Pack)
     props.cid = name + _.uniqueId();
 

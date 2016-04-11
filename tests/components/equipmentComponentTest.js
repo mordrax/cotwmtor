@@ -9,22 +9,31 @@ import _ from 'lodash';
 
 import * as actions from '/actions/index.js';
 import storeFactory from './../core/testStore.js';
-import {Equipment, mapState} from '/client/player/equipmentComponent.js';
+import {Equipment, mapState, mapDispatch} from '/client/player/equipmentComponent.js';
 import {ContainerView} from '/client/misc/containerComponent.jsx';
 
-describe("<Equipment>", () => {
-  const store = storeFactory();
-  const dispatch = store.dispatch;
+let store, dispatch, getState;
 
+const setupStore = () => {
+  store = storeFactory();
+  dispatch = store.dispatch;
+  getState = store.getState;
+};
+
+describe("<Equipment>", () => {
   let component;
   const purse = Item.generateItem(cotw.Items.Purse.Purse);
-  dispatch(actions.addItem(purse));
-  dispatch(actions.equipItem('purse', purse.id));
-  component = shallow(<Equipment {...mapState(store.getState())} />);
+
+  beforeEach(() => {
+    setupStore();
+    dispatch(actions.addItem(purse));
+    dispatch(actions.equipItem('purse', purse.id));
+    let props = _.extend({}, mapState(store.getState()), mapDispatch(store.dispatch));
+    component = shallow(<Equipment {...props} />);
+  });
 
   it('should make each equipment slot a container', () => {
     expect(component.find('[dropTargetType]').length).toEqual(15); // 15 equipment slots
-
   });
 
   it('should have a css class named after the slot', () => {
@@ -43,7 +52,8 @@ describe("<Equipment>", () => {
 
     dispatch(actions.addItem(sword));
     dispatch(actions.equipItem('freehand', sword.id));
-    component = shallow(<Equipment {...mapState(store.getState())} />);
+    let props = _.extend({}, mapState(store.getState()), mapDispatch(store.dispatch));
+    component = shallow(<Equipment {...props} />);
 
     expect(component.find('[id="freehand"]').props().items[0].id).toEqual(sword.id);
     expect(component.find('[id="shield"]').props().items[0]).toEqual(null);
@@ -62,5 +72,11 @@ describe("<Equipment>", () => {
     expect(component.find('[dropTargetType="Overgarment"]').length).toEqual(1);
     expect(component.find('[dropTargetType="Ring"]').length).toEqual(2);
     expect(component.find('[dropTargetType="Boots"]').length).toEqual(1);
+  });
+
+  it('should show the purse on double clicking the equipment slot', () => {
+    expect(getState().game.showPurse).toEqual(false);
+    component.find('[id="purse"]').parent().simulate('click');
+    expect(getState().game.showPurse).toEqual(true);
   });
 });

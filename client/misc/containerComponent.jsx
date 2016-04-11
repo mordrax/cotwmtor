@@ -15,7 +15,13 @@ export const ContainerView = ({id, items, isOver}) => {
       <div className="ui grid" style={{border: isOver?'2px blue solid':'2px black dashed', minHeight: '50px', minWidth:'50px'}}>
         {
           _.map(items, (item) => {
-            return item && <Item dragTargetType={item.base.type} cid={id} item={item} key={item.id}/>;
+            if (!item)
+              return;
+
+            return <Item dragTargetType={item.base.type}
+                         cid={id}
+                         item={item}
+                         key={item.id}/>;
           })
         }
       </div>
@@ -24,8 +30,8 @@ export const ContainerView = ({id, items, isOver}) => {
 };
 
 ContainerView.propTypes = {
-  id: Type.string.isRequired,
-  items: Type.array.isRequired,
+  id    : Type.string.isRequired,
+  items : Type.array.isRequired,
   isOver: Type.bool.isRequired
 };
 
@@ -55,7 +61,14 @@ const ContainerViewDroppable = ({id, items, connectDropTarget, isOver}) => {
 };
 
 const dropTarget = DropTarget(
-  ({dropTargetType}) => dropTargetType,
+  ({dropTargetType}) => {
+    if (!dropTargetType) {
+      console.error('Invalid drop target type');
+      throw `Invalid drop target type`;
+    }
+
+    return dropTargetType;
+  },
   target,
   collect
 )(ContainerViewDroppable);

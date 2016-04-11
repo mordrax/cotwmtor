@@ -68,24 +68,27 @@ const _updatePurse = (purseId, contents) => {
   return {type: 'UPDATE_PURSE', id:purseId, ...contents};
 };
 
-// game
+// gameReducer
 export const updateData = data => {
   return {type: "UPDATE_DATA", data}
 };
-
 export const initAreas = areas => {
   return {type: "INIT_AREAS", areas};
 };
-
 export const setGameState = state => {
   return {type: "SET_GAME_STATE", ...state}
 };
-
 export const addBuildings = buildings => {
   return {type: "INIT_BUILDINGS", buildings}
 };
+export const initGame = () => {
+  return {type: 'INIT_GAME'}
+};
+export const showPurse = () => {
+  return {type: 'SHOW_PURSE'}
+};
 
-// items
+// itemsReducer
 export const _addItem = item => {
   return {type: "ITEM_ADD", item};
 };

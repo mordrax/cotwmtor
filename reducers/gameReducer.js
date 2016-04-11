@@ -2,10 +2,12 @@ import {GameArea, GameScreen} from '/core/maps'
 import _ from 'lodash';
 
 let defaultState = {
-  name: 'TODO: Unnamed game',
+  name           : 'TODO: Unnamed game',
   currentBuilding: '',
-  currentArea: GameArea.Village,
-  currentScreen: GameScreen.Map
+  currentArea    : GameArea.Village,
+  currentScreen  : GameScreen.Map,
+  gameInitialised: false,
+  showPurse: false
 };
 
 export default (state = defaultState, action) => {
@@ -21,6 +23,20 @@ export default (state = defaultState, action) => {
         currentArea,
         currentScreen
       };
+    case 'INIT_GAME':
+    {
+      return {
+        ...state,
+        gameInitialised: true
+      }
+    }
+    case 'SHOW_PURSE':
+    {
+      return {
+        ...state,
+        showPurse: true
+      }
+    }
     default:
       return state;
   }

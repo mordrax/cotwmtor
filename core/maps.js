@@ -23,9 +23,9 @@ export const GameScreen = {
   Shop     : 3
 };
 
-let mapTiles = {};
-let mapBuildings = {};
-let mapLinks = {};
+export const mapTiles = {};
+export const mapBuildings = {};
+export const mapLinks = {};
 mapTiles[GameArea.Village] = [
 // 0 2 4 6 8 0 2 4 6 8 0 2 4
   '========,,###,,,========', // 0
@@ -238,22 +238,27 @@ export const generateAreas = () => {
   return areas;
 };
 
-export const generateBuildings = (dispatch) => {
+export const generateBuilding = (mapBuilding, id, dispatch) => {
+  let building = _.extend({}, mapBuilding);
+  building.id = id;
+  building.cid = building.id + _.uniqueId();
 
+  if (building.stockedItemTypes) {
+    dispatch(actions.addAsContainer(building.cid));
+    _.forEach(generateItems(building.stockedItemTypes), (item) => {
+      dispatch(actions.addToContainer(building.cid, item.id));
+      dispatch(actions.addItem(item));
+    });
+  }
+
+  return building;
+};
+
+export const generateBuildings = (dispatch) => {
   let buildings = {};
   _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], (area) => {
-    _.forEach(mapBuildings[area], (blueprint, id) => {
-      let building = _.extend({}, blueprint);
-      building.id = id;
-      building.cid = _.uniqueId();
-      buildings[id] = building;
-
-      if (building.stockedItemTypes) {
-        _.forEach(generateItems(building.stockedItemTypes), (item) => {
-          dispatch(actions.addToContainer(building.cid, item.id));
-          dispatch(actions.addItem(item));
-        });
-      }
+    _.forEach(mapBuildings[area], (mapBuilding, id) => {
+      buildings[id] = generateBuilding(mapBuilding, id, dispatch);
     });
   });
 
