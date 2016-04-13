@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = function (config) {
   config.set({
     autoWatch        : true,
-    browsers         : ['Chrome'], //run in Chrome
+    browsers         : ['jsdom'], //run in Chrome
     files            : ['tests.webpack.js'],
     frameworks       : ['jasmine'], //use the mocha test framework
     logLevel         : config.LOG_INFO,
@@ -58,7 +58,8 @@ module.exports = function (config) {
       'karma-sourcemap-loader',
       'karma-chrome-launcher',
       'karma-mocha-reporter',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
+      'karma-jsdom-launcher'
     ],
     babelPreprocessor: {
       options: {

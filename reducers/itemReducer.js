@@ -1,16 +1,17 @@
+import _ from 'lodash';
+
 let defaultState = {
 };
-
+let newState;
 export default (state=defaultState, action) => {
   switch (action.type) {
     case "ITEM_ADD":
-      return {
-        ...state,
-        [action.item.id] : action.item
-      };
+      newState = _.extend({}, state);
+      _.forEach(action.items, x=>newState[x.id]=x);
 
+      return newState;
     case "ITEM_REMOVE":
-      let newState = Object.assign({}, state);
+      newState = _.extend({}, state);
       delete newState[action.id];
       return newState;
 

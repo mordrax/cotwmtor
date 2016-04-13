@@ -238,15 +238,14 @@ export const generateAreas = () => {
   return areas;
 };
 
-export const generateBuilding = (mapBuilding, id, dispatch) => {
+export const generateBuilding = (mapBuilding, key, dispatch) => {
   let building = _.extend({}, mapBuilding);
-  building.id = id;
-  building.cid = building.id + _.uniqueId();
+  building.id = key + _.uniqueId();
 
   if (building.stockedItemTypes) {
-    dispatch(actions.addAsContainer(building.cid));
+    dispatch(actions.addAsContainer(building.id));
     _.forEach(generateItems(building.stockedItemTypes), (item) => {
-      dispatch(actions.addToContainer(building.cid, item.id));
+      dispatch(actions.addToContainer(building.id, item.id));
       dispatch(actions.addItem(item));
     });
   }
@@ -255,10 +254,11 @@ export const generateBuilding = (mapBuilding, id, dispatch) => {
 };
 
 export const generateBuildings = (dispatch) => {
-  let buildings = {};
+  let buildings = {}, building;
   _.forEach([GameArea.Village, GameArea.Farm, GameArea.MinesLvl1], (area) => {
-    _.forEach(mapBuildings[area], (mapBuilding, id) => {
-      buildings[id] = generateBuilding(mapBuilding, id, dispatch);
+    _.forEach(mapBuildings[area], (mapBuilding, key) => {
+      building = generateBuilding(mapBuilding, key, dispatch);
+      buildings[building.id] = building;
     });
   });
 

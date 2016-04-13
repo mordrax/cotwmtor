@@ -8,27 +8,19 @@ import * as Item from '/core/item.js';
 import _ from 'lodash';
 
 import * as actions from '/actions/index.js';
-import storeFactory from './../core/testStore.js';
+import {storeSetup, dispatch, getState} from './../core/testStore.js';
 import {Equipment, mapState, mapDispatch} from '/client/player/equipmentComponent.js';
 import {ContainerView} from '/client/misc/containerComponent.jsx';
-
-let store, dispatch, getState;
-
-const setupStore = () => {
-  store = storeFactory();
-  dispatch = store.dispatch;
-  getState = store.getState;
-};
 
 describe("<Equipment>", () => {
   let component;
   const purse = Item.generateItem(cotw.Items.Purse.Purse);
 
   beforeEach(() => {
-    setupStore();
+    storeSetup();
     dispatch(actions.addItem(purse));
     dispatch(actions.equipItem('purse', purse.id));
-    let props = _.extend({}, mapState(store.getState()), mapDispatch(store.dispatch));
+    let props = _.extend({}, mapState(getState()), mapDispatch(dispatch));
     component = shallow(<Equipment {...props} />);
   });
 
@@ -52,7 +44,7 @@ describe("<Equipment>", () => {
 
     dispatch(actions.addItem(sword));
     dispatch(actions.equipItem('freehand', sword.id));
-    let props = _.extend({}, mapState(store.getState()), mapDispatch(store.dispatch));
+    let props = _.extend({}, mapState(getState()), mapDispatch(dispatch));
     component = shallow(<Equipment {...props} />);
 
     expect(component.find('[id="freehand"]').props().items[0].id).toEqual(sword.id);
@@ -74,7 +66,7 @@ describe("<Equipment>", () => {
     expect(component.find('[dropTargetType="Boots"]').length).toEqual(1);
   });
 
-  it('should show the purse on double clicking the equipment slot', () => {
+  it('should update the show the purse on double clicking the equipment slot', () => {
     expect(getState().game.showPurse).toEqual(false);
     component.find('[id="purse"]').parent().simulate('click');
     expect(getState().game.showPurse).toEqual(true);

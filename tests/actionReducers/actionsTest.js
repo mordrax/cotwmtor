@@ -2,42 +2,37 @@ import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
 import * as actions from '/actions/index.js';
-import storeFactory from './../core/testStore.js';
+import {storeSetup, dispatch, getState} from './../core/testStore.js';
 import * as repo from '/reducers/reducerRepository.js';
 
-let store, dispatch, getState;
-const storeSetup = () => {
-  store = storeFactory();
-  dispatch = store.dispatch;
-  getState = store.getState;
-};
-
 describe('actions/index.js', () => {
-  const armour = Item.generateItem(cotw.Items.Armour.ElvenChainMail);
-  const shield = Item.generateItem(cotw.Items.Shield.MediumIronShield);
-  const gauntlet = Item.generateItem(cotw.Items.Gauntlet.GauntletOfDexterity);
-  const belt = Item.generateItem(cotw.Items.Belt.TwoSlotBelt);
-  const helmet = Item.generateItem(cotw.Items.Helmet.EnchantedHelmOfStorms);
+  describe('dndShopItem', () => {
+    const armour = Item.generateItem(cotw.Items.Armour.ElvenChainMail);
+    const shield = Item.generateItem(cotw.Items.Shield.MediumIronShield);
+    const gauntlet = Item.generateItem(cotw.Items.Gauntlet.GauntletOfDexterity);
+    const belt = Item.generateItem(cotw.Items.Belt.TwoSlotBelt);
+    const helmet = Item.generateItem(cotw.Items.Helmet.EnchantedHelmOfStorms);
 
-  const chest = Item.generateItem(cotw.Items.Pack.LargeChest);
-  const bag = Item.generateItem(cotw.Items.Pack.MediumBag);
+    const chest = Item.generateItem(cotw.Items.Pack.LargeChest);
+    const bag = Item.generateItem(cotw.Items.Pack.MediumBag);
 
-  const items = [armour, shield, gauntlet, belt, helmet];
+    const items = [armour, shield, gauntlet, belt, helmet];
 
-  beforeEach(() => {
-    storeSetup();
+    let generalStore;
 
-    _.forEach(items, x=>dispatch(actions.addItem(x)));
+    beforeEach(() => {
+      storeSetup();
 
-    dispatch(actions.addItem(chest));
-    _.forEach(items, x=>dispatch(actions.addToContainer(chest.id, x.id)));
+      _.forEach(items, x=>dispatch(actions.addItem(x)));
 
-    dispatch(actions.addItem(bag));
-  });
+      dispatch(actions.addItem(chest));
+      _.forEach(items, x=>dispatch(actions.addToContainer(chest.id, x.id)));
 
-  describe('moveItem', () => {
+      dispatch(actions.addItem(bag));
+    });
+
     it('moves the item from the source container to the destination container', () => {
-      dispatch(actions.moveItem(shield.id, chest.id, bag.id));
+      dispatch(actions.dndShopItem(shield.id, chest.id, bag.id));
 
       const chestItems = repo.getItemsFromContainer(getState(), chest.id);
       const bagItems = repo.getItemsFromContainer(getState(), bag.id);
@@ -46,52 +41,155 @@ describe('actions/index.js', () => {
       expect(bagItems.length).toEqual(1);
     });
 
-    it('does not move item if it exceeds weight limit', () => {
-      expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
+    describe('Buy/Sell related drag', () => {
+      let twoHandedSword, club;
+      beforeEach(() => {
+        storeSetup();
 
-      dispatch(actions.moveItem(chest.id, 'pack', bag.id));
+        let buildings = map.generateBuildings(dispatch);
+        dispatch(actions.addBuildings(buildings));
+        generalStore = _.find(buildings, x=>x.name === 'General Store');
 
-      expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
+        const purse = Item.generateItem(cotw.Items.Purse.Purse, {
+          silver: 5 //500
+        });
+        twoHandedSword = Item.generateItem(cotw.Items.Weapon.TwoHandedSword); //buy 6360
+        club = Item.generateItem(cotw.Items.Weapon.Club); //buy 105
+        dispatch(actions.addItem(purse, club));
+        dispatch(actions.addItem(twoHandedSword));
+        dispatch(actions.addToContainer(generalStore.id, twoHandedSword.id));
+        dispatch(actions.equipItem('purse', purse.id));
+      });
+
+      it('checks player has enough money to buy from shop', () => {
+        dispatch(actions.dndShopItem(twoHandedSword.id, generalStore.id, 'freehand'));
+        expect(getState().player.equipment.freehand).toBeFalsy();
+
+        dispatch(actions.dndShopItem(club.id, generalStore.id, 'freehand'));
+        expect(getState().player.equipment.freehand).toEqual(club.id);
+      });
+      it('allows undo of a buy/sell event (through registering undo functions)');
+      it('fires off a notification for buy/sell');
+      it('triggers a buy correctly from a shop to equipment or pack');
     });
 
-    it('allows equipping of items', () => {
-      dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
-      expect(getState().player.equipment.shield).toEqual(shield.id);
+    describe('Equipment related drag', () => {
+      it('allows equipping of items', () => {
+        dispatch(actions.dndShopItem(shield.id, chest.id, 'shield'));
+        expect(getState().player.equipment.shield).toEqual(shield.id);
+      });
+      it('doesnt allow doubling up of equipment slot items', () => {
+        const shield2 = Item.generateItem(cotw.Items.Shield.LargeIronShield);
+
+        dispatch(actions.addItem(shield2));
+        dispatch(actions.equipItem('shield', shield2.id));
+        expect(getState().player.equipment.shield).toEqual(shield2.id);
+        expect(getState().player.equipment.shield).not.toEqual(shield.id);
+
+        dispatch(actions.dndShopItem(shield.id, chest.id, 'shield'));
+        expect(getState().player.equipment.shield).toEqual(shield2.id);
+        expect(getState().player.equipment.shield).not.toEqual(shield.id);
+      });
+      it('allows you to unequip items', () => {
+        dispatch(actions.dndShopItem(shield.id, chest.id, 'shield'));
+        expect(getState().player.equipment.shield).toEqual(shield.id);
+
+        dispatch(actions.dndShopItem(shield.id, 'shield', chest.id));
+        expect(getState().player.equipment.shield).toBeFalsy();
+      });
     });
 
-    it('doesnt allow doubling up of equipment slot items', () => {
-      const shield2 = Item.generateItem(cotw.Items.Shield.LargeIronShield);
+    describe('Pack related drag', () => {
+      it('does not move item if it exceeds weight limit', () => {
+        expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
 
-      dispatch(actions.addItem(shield2));
-      dispatch(actions.equipItem('shield', shield2.id));
-      expect(getState().player.equipment.shield).toEqual(shield2.id);
-      expect(getState().player.equipment.shield).not.toEqual(shield.id);
+        dispatch(actions.dndShopItem(chest.id, 'pack', bag.id));
 
-      dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
-      expect(getState().player.equipment.shield).toEqual(shield2.id);
-      expect(getState().player.equipment.shield).not.toEqual(shield.id);
+        expect(repo.getItemsFromContainer(getState(), bag.id).length).toEqual(0);
+      });
+      it('does not allow containers to be put in itself', () => {
+        dispatch(actions.dndShopItem(bag.id, bag.id, bag.id));
+        expect(getState().containers[bag.id][bag.id]).toBeFalsy();
+      });
     });
 
-    it('allows you to unequip items', () => {
-      dispatch(actions.moveItem(shield.id, chest.id, 'shield'));
-      expect(getState().player.equipment.shield).toEqual(shield.id);
+    describe('Dropping into the equipped purse', ()=> {
+      let purse1 = Item.generateItem(cotw.Items.Purse.Purse, {
+        copper: 100,
+        gold  : 1
+      });
+      let purse2 = Item.generateItem(cotw.Items.Purse.Purse, {
+        copper: 50,
+        silver: 5
+      });
 
-      dispatch(actions.moveItem(shield.id, 'shield', chest.id));
-      expect(getState().player.equipment.shield).toBeFalsy();
-    });
+      beforeEach(() => {
+        storeSetup();
 
-    it('does not allow containers to be put in itself', () => {
-      dispatch(actions.moveItem(bag.id, bag.id, bag.id));
-      expect(getState().containers[bag.id][bag.id]).toBeFalsy();
+        dispatch(actions.addItem(purse1));
+        dispatch(actions.addItem(purse2));
+        dispatch(actions.equipItem('purse', purse1.id));
+        dispatch(actions.addToContainer(bag.id, purse2.id));
+
+        dispatch(actions.dndShopItem(purse2.id, bag.id, purse1.id));
+      });
+
+
+      it('combines the contents of two purses by dropping a purse on equipment', () => {
+        expect(getState().items[purse1.id].copper).toEqual(150);
+        expect(getState().items[purse1.id].silver).toEqual(5);
+        expect(getState().items[purse1.id].gold).toEqual(1);
+        expect(getState().items[purse1.id].platinum).toEqual(0);
+      });
+
+      it('removes the purse being dropped', () => {
+        expect(getState().containers[purse2.id]).toBeFalsy();
+        expect(getState().items[purse2.id]).toBeFalsy();
+      });
     });
   });
 
-  it('allows nesting of containers', () => {
-    dispatch(actions.addToContainer(chest.id, bag.id));
-    expect(repo.getItemsFromContainer(getState(), chest.id).length).toEqual(6);
+  describe('updatePurse', () => {
+    beforeEach(() => {
+      storeSetup();
+      let purse = Item.generateItem(cotw.Items.Purse.Purse, {
+        copper: 1000,
+        silver: 50});
+      dispatch(actions.addItem(purse));
+      dispatch(actions.equipItem('purse', purse.id));
+    });
+
+    it('should subtract coins from purse', () => {
+      dispatch(actions.updatePurse({copper: -500, platinum: 5}));
+      let state = getState();
+      let purse = state.items[state.player.equipment.purse];
+      expect(purse.copper).toEqual(500);
+      expect(purse.platinum).toEqual(5);
+    });
+
+    it('should give you change if you dont have the right denominations', () => {
+      dispatch(actions.updatePurse({copper: -1100}));
+      let state = getState();
+      let purse = state.items[state.player.equipment.purse];
+      expect(purse.copper).toEqual(0);
+      expect(purse.silver).toEqual(49);
+    });
   });
 
-  it('combines the contents of two purses by dropping a purse on equipment');
+  describe('addToContainer', () => {
+    const chest = Item.generateItem(cotw.Items.Pack.LargeChest);
+    const bag = Item.generateItem(cotw.Items.Pack.MediumBag);
+
+    beforeEach(() => {
+      storeSetup();
+      dispatch(actions.addItem(chest));
+      dispatch(actions.addItem(bag));
+    });
+    it('allows nesting of containers', () => {
+      dispatch(actions.addToContainer(chest.id, bag.id));
+      expect(repo.getItemsFromContainer(getState(), chest.id).length).toEqual(1);
+    });
+  });
 
   it('sets game.showPurse on action.showPurse', () => {
     dispatch(actions.showPurse());

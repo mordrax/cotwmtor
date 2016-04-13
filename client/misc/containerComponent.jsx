@@ -9,7 +9,7 @@ import * as actions from '../../actions/index.js';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-export const ContainerView = ({id, items, isOver}) => {
+export const ContainerView = ({id, items, isOver, children}) => {
   return (
     <div style={{  }}>
       <div className="ui grid" style={{border: isOver?'2px blue solid':'2px black dashed', minHeight: '50px', minWidth:'50px'}}>
@@ -24,6 +24,7 @@ export const ContainerView = ({id, items, isOver}) => {
                          key={item.id}/>;
           })
         }
+        {children}
       </div>
     </div>
   )
@@ -49,13 +50,14 @@ function collect(connect, monitor) {
   };
 }
 
-const ContainerViewDroppable = ({id, items, connectDropTarget, isOver}) => {
+const ContainerViewDroppable = ({id, items, connectDropTarget, isOver, children}) => {
   return connectDropTarget(
     <div>
       <ContainerView
         id={id}
         items={items}
-        isOver={isOver}/>
+        isOver={isOver}
+        children={children}/>
     </div>
   )
 };
@@ -81,7 +83,7 @@ export const mapDispatch = (dispatch) => {
      * @param dest - {dropTargetType: Array[16], id: "7", type: "Shop", items: Array[10]}
      */
     onDrop: (source, dest) => {
-      dispatch(actions.moveItem(source.item.id, source.cid, dest.id));
+      dispatch(actions.dndShopItem(source.item.id, source.cid, dest.id));
     }
   }
 };

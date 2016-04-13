@@ -25,7 +25,7 @@ describe("<ShopWindow>", () => {
   describe('mapState', () => {
     const state = {
       buildings : {
-        'One': {name: 'OneBuilding', cid: '7'}
+        'One': {name: 'OneBuilding', id: '7'}
       },
       containers: {
         '7': {'Item1': true, 'Item2': true}

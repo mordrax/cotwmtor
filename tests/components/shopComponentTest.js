@@ -14,6 +14,7 @@ import Equipment from '/client/player/equipmentComponent.js';
 import ShopWindow from '/client/shop/shopWindowComponent.js';
 import Container from '/client/misc/containerComponent.jsx';
 import Pack from '/client/player/packComponent.js';
+import Purse from '/client/player/purseComponent.js';
 
 let store, dispatch, getState, component;
 const storeSetup = () => {
@@ -43,17 +44,18 @@ describe("<ShopView>", () => {
   it('should display the building name', () => {
     let buildings = map.generateBuildings(store.dispatch);
     store.dispatch(actions.addBuildings(buildings));
-    dispatch(actions.setGameState({currentBuilding: 'GeneralStore'}));
+    let building = _.find(buildings, x=>x.name === 'General Store');
+    dispatch(actions.setGameState({currentBuilding: building.id}));
 
-    let component = newComponent();
-    expect(component.find('.test-building-name').text()).toContain('General Store');
+    component = newComponent();
+    expect(component.find('.test-building-name').text()).toContain(building.name);
   });
 
   describe('mapState', () => {
     it('maps a {building} to the state', () => {
       const state = {
         buildings: {
-          'One': {name: 'OneBuilding'}
+          'One': {name: 'OneBuilding', id:'One'}
         },
         game: {
           currentBuilding: 'One'
@@ -66,7 +68,12 @@ describe("<ShopView>", () => {
   });
 
   it('should show the purse view on state.game.showPurse', () => {
+    expect(component.find(Purse).length).toEqual(0);
 
+    dispatch(actions.showPurse());
+    component = newComponent();
+
+    expect(component.find(Purse).length).toEqual(1);
   });
 
   it('should route to /game on esc key');

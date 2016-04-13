@@ -6,12 +6,12 @@ import * as actions from '/actions/index.js';
 import Equipment from '/client/player/equipmentComponent.js';
 import ShopWindow from '/client/shop/shopWindowComponent.js';
 import Pack from '/client/player/packComponent.js';
-
+import Purse from '/client/player/purseComponent.js';
 //dragdrop
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-export const ShopView = ({building}) => (
+export const ShopView = ({building, isShowPurse}) => (
   <div>
     <h1 className="test-building-name">Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
@@ -25,13 +25,15 @@ export const ShopView = ({building}) => (
       </div>
       <div className="ten wide column">
         {
-          <ShopWindow />
+          <ShopWindow>
+            <h1>BLah!</h1>
+          </ShopWindow>
         }
         <br/><br/><br/><br/>
         <Pack />
         <br/><br/><br/><br/>
         {
-
+          isShowPurse && <Purse />
         }
       </div>
     </div>
@@ -42,7 +44,8 @@ export const mapState = (state) => {
   const building = state.buildings[state.game.currentBuilding];
 
   return {
-    building
+    building,
+    isShowPurse: state.game.showPurse
   }
 };
 

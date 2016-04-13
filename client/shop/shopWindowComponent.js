@@ -26,14 +26,14 @@ export const mapState = state => {
   let building = state.buildings[state.game.currentBuilding];
 
   let items = [];
-  _.forEach(state.containers[building.cid], (isExist, itemId) => {
+  _.forEach(state.containers[building.id], (isExist, itemId) => {
     if (!!isExist)
       items.push(state.items[itemId]);
   });
 
   return {
     items,
-    containerId: building.cid
+    containerId: building.id
   }
 };
 
