@@ -1,5 +1,6 @@
 import * as repo from '/reducers/reducerRepository.js';
 import * as cotw from '/core/cotwContent.js';
+import * as Purse from '/core/purse.js';
 
 // player
 export const setGender = gender => {
@@ -35,6 +36,7 @@ export const movePlayer = direction => {
 export const teleportPlayer = coords => {
   return {type: 'PLAYER_MOVE_TELEPORT', coords}
 };
+
 export const updatePurse = contents => {
   return (dispatch, getState) => {
     const purseId = getState().player.equipment.purse;
@@ -127,14 +129,38 @@ export const addItem = (...items) => {
   }
 };
 
+/**
+ * Returns if the item's cost is lower than the purse amount
+ * @param {object} item
+ * @param {object} purse
+ * @returns {boolean}
+ */
 const isItemAffordable = (item, purse) => {
-  let playerMoney = purse.copper +
-    100 * purse.silver +
-    10000 * purse.gold +
-    1000000 * purse.platinum;
+  if (!item.base || !item.base.buy) {
+    console.error(`Item: ${item.id} has no price and cannot be bought!`);
+    return false;
+  }
+
+  if (!purse) {
+    console.warn(`Player has no purse and cannot afford anything!`);
+    return false;
+  }
+
+
+  const playerMoney = (purse.copper || 0) +
+    100 * (purse.silver || 0) +
+    10000 * (purse.gold || 0) +
+    1000000 * (purse.platinum || 0);
+
   return item.base.buy <= playerMoney;
 };
 
+/**
+ *
+ * @param {string} itemId
+ * @param {string} fromContainerId
+ * @param {string} toContainerId
+ */
 export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
   (dispatch, getState) => {
     const state = getState();
