@@ -37,7 +37,23 @@ export const teleportPlayer = coords => {
   return {type: 'PLAYER_MOVE_TELEPORT', coords}
 };
 
-export const updatePurse = contents => {
+export const removeFromPurse = amt => {
+  return (dispatch, getState) => {
+    const purseId = getState().player.equipment.purse;
+    if (!purseId)
+      throw 'Trying to update purse, but player has no purse!';
+    const purse = getState().items[purseId];
+    if (!purse)
+      throw `The item ${purseId} does not exist in state.items`;
+
+    let change = Purse.subtract(purse, amt);
+    if (change != null)
+      dispatch(_setPurseContents(purse.id, change));
+    else
+      console.error(`Trying to remove more than is in the purse!`);
+  }
+};
+export const addToPurse = contents => {
   return (dispatch, getState) => {
     const purseId = getState().player.equipment.purse;
     if (!purseId)
@@ -48,25 +64,16 @@ export const updatePurse = contents => {
     if (!contents)
       return;
 
-    const purseCombined = (purse, newPurse, coinType) => {
-      return (parseInt(purse[coinType]) + parseInt(newPurse[coinType])) || 0;
-    };
 
-    let purseCombined_coinType = _.curry(purseCombined)(purse, contents);
+    const newContents = _(Purse.denominations).transform((res, x)=> {
+      res[x] = (purse[x] || 0) + (contents[x] || 0);
+      return res;
+    }, {}).value();
 
-    let anyValuesLessThanZero = _(['copper', 'silver', 'gold', 'platinum'])
-        .map(purseCombined_coinType)
-        .filter(x=>x < 0)
-        .value()
-        .length > 0;
-
-    if (anyValuesLessThanZero)
-      console.warn(`You cannot have negative coins.`);
-    else
-      dispatch(_updatePurse(purse.id, contents));
+    dispatch(_setPurseContents(purse.id, newContents));
   };
 };
-const _updatePurse = (purseId, contents) => {
+const _setPurseContents = (purseId, contents) => {
   return {type: 'UPDATE_PURSE', id: purseId, ...contents};
 };
 
@@ -214,7 +221,7 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
       if (!item || item.base.type !== cotw.ItemType.Purse)
         return;
 
-      dispatch(updatePurse(_.pick(item, ['copper', 'silver', 'gold', 'platinum'])));
+      dispatch(addToPurse(_.pick(item, ['copper', 'silver', 'gold', 'platinum'])));
       dispatch(removeItem(item.id));
     }
 

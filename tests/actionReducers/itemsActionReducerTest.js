@@ -79,7 +79,7 @@ describe("Reducer: Items", () => {
 
       expect(purse.copper).toEqual(0);
 
-      dispatch(actions.updatePurse({copper: 100, gold: 1}));
+      dispatch(actions.addToPurse({copper: 100, gold: 1}));
 
       expect(getState().items[purseId].copper).toEqual(100);
       expect(getState().items[purseId].gold).toEqual(1);
@@ -92,8 +92,8 @@ describe("Reducer: Items", () => {
 
       expect(purse.copper).toEqual(0);
 
-      dispatch(actions.updatePurse({copper: 100, gold: 3}));
-      dispatch(actions.updatePurse({copper: -50, gold: -1}));
+      dispatch(actions.addToPurse({copper: 100, gold: 3}));
+      dispatch(actions.removeFromPurse({copper: 50, gold: 1}));
 
       expect(getState().items[purseId].copper).toEqual(50);
       expect(getState().items[purseId].gold).toEqual(2);
@@ -106,7 +106,7 @@ describe("Reducer: Items", () => {
 
       expect(purse.copper).toEqual(0);
 
-      dispatch(actions.updatePurse({copper: -50, gold: -1}));
+      dispatch(actions.removeFromPurse({copper: 50, gold: 1}));
 
       expect(getState().items[purseId].copper).toEqual(0);
       expect(getState().items[purseId].gold).toEqual(0);

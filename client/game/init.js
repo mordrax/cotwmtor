@@ -26,7 +26,7 @@ const initGear = store => {
     store.dispatch(actions.equipItem(equipmentType, item.id));
   });
 
-  store.dispatch(actions.updatePurse({copper:1000, silver:10, gold:1}));
+  store.dispatch(actions.addToPurse({copper:1000, silver:10, gold:1}));
 };
 
 const initAreas = store => {

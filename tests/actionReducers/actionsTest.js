@@ -149,7 +149,7 @@ describe('actions/index.js', () => {
     });
   });
 
-  describe('updatePurse', () => {
+  describe('addToPurse', () => {
     beforeEach(() => {
       storeSetup();
       let purse = Item.generateItem(cotw.Items.Purse.Purse, {
@@ -160,7 +160,7 @@ describe('actions/index.js', () => {
     });
 
     it('should subtract coins from purse', () => {
-      dispatch(actions.updatePurse({copper: -500, platinum: 5}));
+      dispatch(actions.addToPurse({copper: -500, platinum: 5}));
       let state = getState();
       let purse = state.items[state.player.equipment.purse];
       expect(purse.copper).toEqual(500);
@@ -168,7 +168,7 @@ describe('actions/index.js', () => {
     });
 
     it('should give you change if you dont have the right denominations', () => {
-      dispatch(actions.updatePurse({copper: -1100}));
+      dispatch(actions.addToPurse({copper: -1100}));
       let state = getState();
       let purse = state.items[state.player.equipment.purse];
       expect(purse.copper).toEqual(0);

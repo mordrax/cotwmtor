@@ -30,10 +30,10 @@ export default (state=defaultState, action) => {
         ...state,
         [action.id]: {
           ...purse,
-          copper: purse.copper + (action.copper || 0),
-          silver: purse.silver + (action.silver || 0),
-          gold: purse.gold + (action.gold || 0),
-          platinum: purse.platinum + (action.platinum || 0)
+          copper: action.copper || 0,
+          silver: action.silver || 0,
+          gold: action.gold || 0,
+          platinum: action.platinum || 0
         }
       };
     default:
