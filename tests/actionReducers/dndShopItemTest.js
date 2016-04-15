@@ -47,22 +47,30 @@ describe('ActionReducers - dndShopItem - dragging items around shop, equipment, 
       });
       twoHandedSword = Item.generateItem(cotw.Items.Weapon.TwoHandedSword); //buy 6360
       club = Item.generateItem(cotw.Items.Weapon.Club); //buy 105
-      dispatch(actions.addItem(purse, club));
-      dispatch(actions.addItem(twoHandedSword));
+      dispatch(actions.addItem(purse, club, twoHandedSword, chest));
       dispatch(actions.addToContainer(generalStore.id, twoHandedSword.id));
       dispatch(actions.equipItem('purse', purse.id));
     });
 
-    it('checks player has enough money to buy from shop', () => {
+    it('drag from shop to equipment checks player can afford the item before equipping it', () => {
       dispatch(actions.dndShopItem(twoHandedSword.id, generalStore.id, 'freehand'));
       expect(getState().player.equipment.freehand).toBeFalsy();
 
       dispatch(actions.dndShopItem(club.id, generalStore.id, 'freehand'));
       expect(getState().player.equipment.freehand).toEqual(club.id);
+
+      
     });
     it('allows undo of a buy/sell event (through registering undo functions)');
     it('fires off a notification for buy/sell');
-    it('triggers a buy correctly from a shop to equipment or pack');
+    it('checks player can afford item when dragging from shop to container', () => {
+      dispatch(actions.dndShopItem(twoHandedSword.id, generalStore.id, chest.id));
+      expect(getState().containers[chest.id]).toBeTruthy();
+      expect(getState().containers[chest.id][twoHandedSword.id]).toBeFalsy();
+    });
+    it('subtracts the price from a item when purchased', () => {
+
+    })
   });
 
   describe('Equipment - dragging to/from equipment slot', () => {
