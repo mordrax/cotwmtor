@@ -45,7 +45,9 @@ export const removeFromPurse = amt => {
     const purse = getState().items[purseId];
     if (!purse)
       throw `The item ${purseId} does not exist in state.items`;
-
+    if (typeof amt === 'object')
+      amt = Purse.purseInCopper(amt);
+    
     let change = Purse.subtract(purse, amt);
     if (change != null)
       dispatch(_setPurseContents(purse.id, change));
@@ -63,7 +65,6 @@ export const addToPurse = contents => {
       throw `The item ${purseId} does not exist in state.items`;
     if (!contents)
       return;
-
 
     const newContents = _(Purse.denominations).transform((res, x)=> {
       res[x] = (purse[x] || 0) + (contents[x] || 0);
@@ -194,7 +195,7 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
 
     // if toContainer is a pack, check weight/bulk capacity
     if (toItem && toItem.base.type === 'Pack') {
-      const curWeight = _.reduce(repo.getItemsFromContainer(getState(), toItem.id), (sum, i) => sum + i.base.weight, 0);
+      const curWeight = _.reduce(repo.getItemsFromContainer(getState, toItem.id), (sum, i) => sum + i.base.weight, 0);
       const newWeight = (curWeight + (item.weight || item.base.weight));
       if (toItem.base.weightCap < newWeight) {
         console.warn(`Too Heavy! ${item.id} has weight of ${item.base.weight} which is too heavy for ${toItem.id}, current weight ${curWeight}/${toItem.base.weight}`);

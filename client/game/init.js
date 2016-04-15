@@ -35,8 +35,6 @@ const initAreas = store => {
 };
 
 const initBuildings = store => {
-
-
   let buildings = generateBuildings(store.dispatch);
   store.dispatch(actions.addBuildings(buildings));
 
@@ -50,7 +48,6 @@ const initBuildings = store => {
   });
   store.dispatch(actions.addItem(purse));
   store.dispatch(actions.addToContainer(generalStore.id, purse.id));
-
 };
 
 export default {
