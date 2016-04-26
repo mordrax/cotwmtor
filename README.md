@@ -20,3 +20,7 @@ Please install these following packages for your OS:
 1. `git clone http://github.com/mordrax/cotwmtor` in a new directory
 2. `npm i && meteor`, grab a coffee as npm and meteor pulls all the required packages
 3. Goto `http://localhost:3000`
+
+#### Tests ####
+I use Karma as my test runner. It powers Jasmine, Enzyme and jsdom for a mix of unit / integration testing.
+Simply run `npm run tests` from the root directory to start the karma watcher.

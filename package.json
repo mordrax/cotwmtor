@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "tests": "cd tests && karma start"
+  },
   "dependencies": {
     "classnames": "^2.2.1",
     "history": "^1.17.0",
