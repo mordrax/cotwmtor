@@ -1,18 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import * as actions from '/actions/index.js';
 
 import Equipment from '/client/player/equipmentComponent.js';
 import ShopWindow from '/client/shop/shopWindowComponent.js';
 import Pack from '/client/player/packComponent.js';
 import Purse from '/client/player/purseComponent.js';
+
+//notification
+import { Notification } from 'react-notification';
+
 //dragdrop
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 export const ShopView = ({building, isShowPurse}) => (
   <div>
+    <Notification
+      isActive={true}
+      message={`You have just purchased: BADASS Two Handed SWORD!`}
+      action={'UNDO'}
+      onClick={()=>console.log('You have just purchased: BADASS Two Handed SWORD!')}
+    />
     <h1 className="test-building-name">Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
     <div className="ui two column grid">

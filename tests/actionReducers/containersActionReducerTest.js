@@ -1,55 +1,30 @@
-import * as actions from '../../actions/index.js';
-import reducer from '../../reducers/containerReducer.js';
+import * as actions from '/actions/index.js';
+import * as cotw from '/core/cotwContent.js';
+import * as Item from '/core/item.js';
 
-describe("Reducer: Containers", () => {
-  let state = {};
-  let item = {id: 34, name: 'TestItem'};
-  let container = {id:25, name:'Small bag'};
+import {storeSetup, dispatch, getState} from '/tests/core/testStore.js';
 
-  it('should return base state on no action', () => {
-    let newState = reducer(undefined, {});
-    expect(newState).toEqual({
-      'armour': {}
-      , 'neckwear': {}
-      , 'overgarment': {}
-      , 'helmet': {}
-      , 'shield': {}
-      , 'bracers': {}
-      , 'gauntlets': {}
-      , 'weapon': {}
-      , 'freehand': {}
-      , 'rightring': {}
-      , 'leftring': {}
-      , 'belt': {}
-      , 'boots': {}
-      , 'pack': {}
-      , 'purse': {}
-    });
-  });
+const pack = Item.generateItem(cotw.Items.Pack.EnchantedMediumPackOfHolding);
+const sword = Item.generateItem(cotw.Items.Weapon.BastardSword);
 
-  describe('Basic container actions', () => {
-    let newState = reducer(state, actions.addAsContainer(item.id));
-
-    it('should be able to add a empty container', () => {
-      expect(newState[item.id]).toEqual({});
+describe("ActionReducers: Containers", () => {
+  describe('Basic container interactions', () => {
+    beforeEach(storeSetup);
+    
+    it('should add a container if item is a bag or pack', () => {
+      dispatch(actions.addItem(pack));
+      expect(getState().containers[pack.id]).toEqual({});
     });
 
-    it('should be able to remove a container', () => {
-      let newState2 = reducer(newState, actions.removeAsContainer(item.id));
-      expect(newState2[item.id]).toBeUndefined();
-    })
-  });
-
-  describe('Add/Remove items', () => {
-    let newState = reducer(state, actions.addToContainer(container.id, item.id));
-
-    it('should add an item to a container', () => {
-      expect(newState[container.id][item.id]).toEqual(true);
+    it('should not add a container if item is not a bag or pack', () => {
+      dispatch(actions.addItem(sword));
+      expect(getState().containers[sword.id]).toEqual(undefined);
     });
 
-    it('should remove an item from a container', () => {
-      let newState2 = reducer(state, actions.removeFromContainer(container.id, item.id));
-      expect(newState2[container.id][item.id]).toBeUndefined();
+    it('should remove a pack from containers', () => {
+      dispatch(actions.addItem(pack));
+      dispatch(actions.removeItem(pack.id));
+      expect(getState().containers[pack.id]).toEqual(undefined);
     });
   });
 });

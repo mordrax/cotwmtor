@@ -9,7 +9,7 @@ export const denominationsMultiplier = {
   'gold'    : 10000,
   'platinum': 1000000
 };
-const purseInCopper = purse => {
+export const purseInCopper = purse => {
   if (!purse)
     return 0;
 
@@ -56,27 +56,27 @@ const giveChange = (amount, denominationsCap) => {
  *
  * Algorithm is simply to subtract the sum in copper and convert back to denominations, largest first.
  * @param {{copper, silver, gold, platinum}} purse
- * @param {{copper, silver, gold, platinum}} cost
+ * @param {number} cost
  * @returns {{copper, silver, gold, platinum} || null}
  */
 export const subtract = (purse, cost) => {
   const sumPurse = purseInCopper(purse);
-  let sumCost = purseInCopper(cost);
 
-  if (sumPurse <= sumCost)
+  if (typeof cost !== 'number')
+    return purse;
+  if (sumPurse <= cost)
     return null;
 
   let newPurse = _.extend({}, purse);
-  let remainingCost = sumCost;
 
   // for each denomination, try to pay the cost with only that denomination
   // - if you can't, set the denomination to zero and try with the next higher denomination
   // - once you can, then the denomination is big enough and you get change
   //   Change gives you the highest denomination first, up to the current denomination you paid with
   _.some(denominations, x => {
-    let change = denominationsMultiplier[x] * newPurse[x] - remainingCost;
+    let change = denominationsMultiplier[x] * newPurse[x] - cost;
     if (change < 0) {
-      remainingCost = -change;
+      cost = -change;
       newPurse[x] = 0;
     } else {
       let changePurse = giveChange(change, x);

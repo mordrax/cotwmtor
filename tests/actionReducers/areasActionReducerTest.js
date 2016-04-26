@@ -1,5 +1,5 @@
-import * as actions from '../../actions/index.js';
-import reducer from '../../reducers/areaReducer.js';
+import * as actions from '/actions/index.js';
+import reducer from '/reducers/areaReducer.js';
 
 describe("Reducer: Area", () => {
   let state = {

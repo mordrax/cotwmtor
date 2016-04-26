@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var path = require('path');
+var path    = require('path');
 
 module.exports = function (config) {
   config.set({
@@ -13,7 +13,7 @@ module.exports = function (config) {
       'tests.webpack.js': ['webpack', 'sourcemap'] //preprocess with webpack and our sourcemap loader
     },
     reporters        : ['mocha'],
-    specReporter: {
+    specReporter     : {
       suppressPassed: true
     },
     //reporters    : ['dots'], //report results in this format
@@ -45,6 +45,7 @@ module.exports = function (config) {
       },
       externals: {
         'cheerio'                       : 'window',
+        'react/addons'                  : true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext'        : true
       }

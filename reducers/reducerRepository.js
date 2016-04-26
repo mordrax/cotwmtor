@@ -2,15 +2,17 @@ import _ from 'lodash';
 
 /**
  * Return all items from a container
- * @param {Object} state
- * @param {Number} cid - container id
+ * @param {function} getState
+ * @param {string} cid - container id
  * @returns {Array}
  */
-export const getItemsFromContainer = (state, cid) => {
-  let items = [];
-  _.forEach(state.containers[cid], (isExist, itemId) => {
-    if (!!isExist)
-      items.push(state.items[itemId]);
-  });
-  return items;
+export const getItemsFromContainer = (getState, cid) => {
+  const {containers, items} = getState();
+
+  return _(containers[cid])
+    .reduce((res, isExists, itemId) => {
+      if (isExists)
+        (res || (res = [])).push(items[itemId]);
+      return res;
+    }, []);
 };
