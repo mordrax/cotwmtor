@@ -10,7 +10,7 @@ import * as actions from '/actions/index.js';
 import storeFactory from './../core/testStore.js';
 
 import {Pack, mapState} from '/client/player/packComponent.js';
-import Container from '/client/misc/containerComponent.jsx';
+import Container from '/client/misc/containerComponent.js';
 
 let store, dispatch, getState;
 let sword, shield, bag;

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import * as actions from '/actions/index.js';
 
 //dragdrop
-import Container from '/client/misc/containerComponent.jsx';
+import Container from '/client/misc/containerComponent.js';
 import {ItemType, EquipmentSlotToItemType} from '/core/cotwContent.js';
 
 export const Equipment = ({equipment, onShowPurse}) => (

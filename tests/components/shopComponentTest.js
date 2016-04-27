@@ -9,10 +9,10 @@ import * as actions from '/actions/index.js';
 
 import storeFactory from '/tests/core/testStore.js';
 
-import {ShopView, mapState, mapDispatch} from '/client/shop/shopComponent.jsx';
+import {ShopView, mapState, mapDispatch} from '/client/shop/shopComponent.js';
 import Equipment from '/client/player/equipmentComponent.js';
 import ShopWindow from '/client/shop/shopWindowComponent.js';
-import Container from '/client/misc/containerComponent.jsx';
+import Container from '/client/misc/containerComponent.js';
 import Pack from '/client/player/packComponent.js';
 import Purse from '/client/player/purseComponent.js';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow, mount, render} from 'enzyme';
-import {CharCreation, mapDispatch, mapState } from '/client/charCreation/charCreation.jsx';
+import {CharCreation, mapDispatch, mapState } from '/client/charCreation/charCreation.js';
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import {routeActions} from 'redux-simple-router';

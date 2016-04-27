@@ -7,7 +7,7 @@ import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
 
 import {ShopWindow, mapState} from '/client/shop/shopWindowComponent.js';
-import Container from '/client/misc/containerComponent.jsx';
+import Container from '/client/misc/containerComponent.js';
 
 describe("<ShopWindow>", () => {
   let component;

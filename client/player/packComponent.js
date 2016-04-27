@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as actions from '/actions/index.js';
 import * as cotw from '/core/cotwContent.js';
-import Container from '/client/misc/containerComponent.jsx';
+import Container from '/client/misc/containerComponent.js';
 
 export const Pack = ({items, containerId, pack}) => (
   <div className="Pack-component">

@@ -10,7 +10,7 @@ import _ from 'lodash';
 import * as actions from '/actions/index.js';
 import {storeSetup, dispatch, getState} from './../core/testStore.js';
 import {Purse, mapState, mapDispatch} from '/client/player/purseComponent.js';
-import {ContainerView} from '/client/misc/containerComponent.jsx';
+import {ContainerView} from '/client/misc/containerComponent.js';
 
 let component;
 const purse = _.extend(Item.generateItem(cotw.Items.Purse.Purse), {

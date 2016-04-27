@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {GameScreen} from '/core/maps.js';
 import _ from 'lodash';
 import createFragment from 'react-addons-create-fragment';
-import MapView from './mapComponent.jsx';
+import MapView from './mapComponent.js';
 
 export const MainView = ({game, area, player}) => (
   <div>

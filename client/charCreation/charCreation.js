@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import Attributes from './attributes.jsx';
-import GameDifficulty from './gameDifficulty.jsx';
-import Gender from './gender.jsx';
+import Attributes from './attributes.js';
+import GameDifficulty from './gameDifficulty.js';
+import Gender from './gender.js';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';

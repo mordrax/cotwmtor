@@ -6,7 +6,7 @@ import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 import * as Item from '/core/item.js';
 
-import {ContainerView} from '/client/misc/containerComponent.jsx';
+import {ContainerView} from '/client/misc/containerComponent.js';
 import ItemView from '/client/shop/itemComponent.js';
 
 import * as actions from '/actions/index.js';

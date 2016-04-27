@@ -4,7 +4,7 @@ import _ from 'lodash';
 import * as actions from '/actions/index.js';
 
 //dragdrop
-import Container from '/client/misc/containerComponent.jsx';
+import Container from '/client/misc/containerComponent.js';
 import * as cotw from '/core/cotwContent.js';
 
 export const Purse = ({purse}) => (

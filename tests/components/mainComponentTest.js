@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow, mount} from 'enzyme';
-import Main, {MainView} from '/client/main/main.jsx';
+import Main, {MainView} from '/client/main/main.js';
 import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 

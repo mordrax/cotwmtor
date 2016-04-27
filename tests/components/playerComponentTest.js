@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow} from 'enzyme';
-import Player, {playerPositionStyle} from '/client/main/playerComponent.jsx';
+import Player, {playerPositionStyle} from '/client/main/playerComponent.js';
 
 describe("<Player>", () => {
   let component;

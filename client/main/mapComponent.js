@@ -1,6 +1,6 @@
 import ASCIITiles from '/core/cotwContent';
 import React from 'react';
-import PlayerView from './playerComponent.jsx';
+import PlayerView from './playerComponent.js';
 
 /**
  * Rotates a half/half tile to be facing the right way re neighbours

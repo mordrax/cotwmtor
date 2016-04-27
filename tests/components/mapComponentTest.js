@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {shallow} from 'enzyme';
-import Map, {CalculatePathRotation} from '/client/main/mapComponent.jsx';
+import Map, {CalculatePathRotation} from '/client/main/mapComponent.js';
 import * as cotw from '/core/cotwContent.js';
 import * as map from '/core/maps.js';
 
