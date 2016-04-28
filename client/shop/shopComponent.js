@@ -13,14 +13,18 @@ import { Notification } from 'react-notification';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-export const ShopView = ({building, isShowPurse}) => (
+export const ShopView = ({building, isShowPurse, notifications}) => (
   <div>
-    <Notification
-      isActive={true}
-      message={`You have just purchased: BADASS Two Handed SWORD!`}
-      action={'UNDO'}
-      onClick={()=>console.log('You have just purchased: BADASS Two Handed SWORD!')}
-    />
+    {
+      _.map(notifications, notification => {
+        return <Notification
+          isActive={true}
+          message={notification.msg}
+          action={notification.action}
+          onClick={notification.cb}
+        />
+      })
+    }
     <h1 className="test-building-name">Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
     <div className="ui two column grid">
@@ -50,8 +54,10 @@ export const ShopView = ({building, isShowPurse}) => (
 
 export const mapState = (state) => {
   const building = state.buildings[state.game.currentBuilding];
+  const notifications = state.notifications;
 
   return {
+    notifications,
     building,
     isShowPurse: state.game.showPurse
   }
