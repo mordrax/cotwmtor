@@ -5,6 +5,7 @@ import areas from '/reducers/areaReducer.js';
 import buildings from '/reducers/buildingReducer.js';
 import containers from '/reducers/containerReducer.js';
 import items from '/reducers/itemReducer.js';
+import notifications from '/reducers/notificationReducer.js';
 
 import {routeReducer} from 'redux-simple-router';
 
@@ -15,6 +16,7 @@ const cotwApp = combineReducers({
   buildings,
   containers,
   items,
+  notifications,
   routing: routeReducer
 });
 

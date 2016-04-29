@@ -105,6 +105,23 @@ export const _addItem = items => {
 export const _removeItem = id => {
   return {type: "ITEM_REMOVE", id}
 };
+
+export const addNotification = notification =>
+{
+  return {
+    type: "ADD_NOTIFICATION",
+    id  : notification.id,
+    notification
+  }
+};
+
+export const removeNotification = id => {
+  return {
+    type: "REMOVE_NOTIFICATION",
+    id
+  }
+};
+
 export const updateItem = (id, weight) => {
   return {type: 'UPDATE_ITEM', id, weight}
 };
@@ -188,8 +205,20 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
     if (fromBuilding && fromBuilding.stockedItemTypes) {
       if (!isItemAffordable(item, state.items[state.player.equipment.purse])) {
         console.warn(`You cannot afford to buy: ${item.id}`);
-        //TODO notification
+        dispatch(addNotification({
+          id: _.uniqueId(),
+          message: 'Cannot afford item!',
+          action: null,
+          cb: () => {}
+        }));
         return;
+      } else {
+        dispatch(addNotification({
+          id: _.uniqueId(),
+          message: `Bought a ${item.base.name}!`,
+          action: 'UNDO',
+          cb: () => { console.error('TODO: Implement undo purchase.')}
+        }))
       }
     }
 

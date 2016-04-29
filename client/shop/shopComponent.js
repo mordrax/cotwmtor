@@ -18,8 +18,9 @@ export const ShopView = ({building, isShowPurse, notifications}) => (
     {
       _.map(notifications, notification => {
         return <Notification
+          key={notification.id}
           isActive={true}
-          message={notification.msg}
+          message={notification.message}
           action={notification.action}
           onClick={notification.cb}
         />
