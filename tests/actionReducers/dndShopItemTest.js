@@ -51,15 +51,12 @@ describe('ActionReducers - dndShopItem - dragging items around shop, equipment, 
       dispatch(actions.addToContainer(generalStore.id, twoHandedSword.id));
       dispatch(actions.equipItem('purse', purse.id));
     });
-
     it('drag from shop to equipment checks player can afford the item before equipping it', () => {
       dispatch(actions.dndShopItem(twoHandedSword.id, generalStore.id, 'freehand'));
       expect(getState().player.equipment.freehand).toBeFalsy();
 
       dispatch(actions.dndShopItem(club.id, generalStore.id, 'freehand'));
       expect(getState().player.equipment.freehand).toEqual(club.id);
-
-      
     });
     it('allows undo of a buy/sell event (through registering undo functions)');
     it('fires off a notification for buy/sell');
