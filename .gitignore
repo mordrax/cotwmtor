@@ -1,1 +1,4 @@
 .idea
+.babelrc
+tests/coverage
+node_modules
