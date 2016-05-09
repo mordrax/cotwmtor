@@ -190,10 +190,23 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
   (dispatch, getState) => {
     const state = getState();
     const item = state.items[itemId];
+
     const fromContainer = state.containers[fromContainerId];
     const fromBuilding = state.buildings[fromContainerId];
+    const fromItem = state.items[fromContainerId] || null;
+
     const toContainer = state.containers[toContainerId];
+    const toBuilding = state.buildings[toContainerId];
     const toItem = state.items[toContainerId] || null;
+
+    const isFromPack = fromItem && fromItem.base.type === 'Pack';
+    const isFromEquipment = _.includes(_.keys(state.player.equipment), fromContainerId);
+    const isFromShop = fromBuilding && fromBuilding.stockedItemTypes;
+
+    const isToPack = toItem && toItem.base.type === 'Pack';
+    const isToEquipment = _.includes(_.keys(state.player.equipment), toContainerId);
+    const isToShop = toBuilding && toBuilding.stockedItemTypes;
+    const isToPurse = toItem && toItem.base.type === cotw.ItemType.Purse;
 
     // prevent putting containers in itself
     if (toContainerId === itemId) {
@@ -202,7 +215,7 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
     }
 
     // if fromBuilding is a shop, check the player can afford it
-    if (fromBuilding && fromBuilding.stockedItemTypes) {
+    if (isFromShop) {
       if (!isItemAffordable(item, state.items[state.player.equipment.purse])) {
         console.warn(`You cannot afford to buy: ${item.id}`);
         dispatch(addNotification({
@@ -222,8 +235,23 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
       }
     }
 
+    // make sure to unequip
+    if (isFromEquipment) {
+      dispatch(unequipItem(fromContainerId, itemId));
+    }
+
+
+    if (isToShop) {
+      dispatch(addNotification({
+        id: _.uniqueId(),
+        message: `Sold item ${item.base.name}`,
+        action: 'UNDO',
+        cb: () => {console.error('TODO: Implement undo selling.')}
+      }))
+    }
+
     // if toContainer is a pack, check weight/bulk capacity
-    if (toItem && toItem.base.type === 'Pack') {
+    if (isToPack) {
       const curWeight = _.reduce(repo.getItemsFromContainer(getState, toItem.id), (sum, i) => sum + i.base.weight, 0);
       const newWeight = (curWeight + (item.weight || item.base.weight));
       if (toItem.base.weightCap < newWeight) {
@@ -233,7 +261,7 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
     }
 
     // if toContainer is a equipment slot, make sure nothing is currently equipped
-    if (_.includes(_.keys(state.player.equipment), toContainerId)) {
+    if (isToEquipment) {
       // check if an item is already equipped
       if (!!getState().player.equipment[toContainerId])
         return;
@@ -241,13 +269,8 @@ export const dndShopItem = (itemId, fromContainerId, toContainerId) =>
       dispatch(equipItem(toContainerId, itemId));
     }
 
-    // make sure to unequip
-    if (_.includes(_.keys(state.player.equipment), fromContainerId)) {
-      dispatch(unequipItem(fromContainerId, itemId));
-    }
-
     // if toContainer is a purse, only accept purse items and destroy the incoming purse
-    if (toItem && toItem.base.type === cotw.ItemType.Purse) {
+    if (isToPurse) {
       if (!item || item.base.type !== cotw.ItemType.Purse)
         return;
 

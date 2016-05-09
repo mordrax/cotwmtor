@@ -6,26 +6,24 @@ import ShopWindow from '/client/shop/shopWindowComponent.js';
 import Pack from '/client/player/packComponent.js';
 import Purse from '/client/player/purseComponent.js';
 
+import * as actions from '/actions/index.js';
+
 //notification
-import { Notification } from 'react-notification';
+import { NotificationStack } from 'react-notification';
 
 //dragdrop
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-export const ShopView = ({building, isShowPurse, notifications}) => (
+export const ShopView = ({building, isShowPurse, notifications, dismissNotification}) => (
   <div>
-    {
-      _.map(notifications, notification => {
-        return <Notification
-          key={notification.id}
-          isActive={true}
-          message={notification.message}
-          action={notification.action}
-          onClick={notification.cb}
-        />
-      })
-    }
+    <NotificationStack
+      notifications={notifications}
+      onDismiss={ (notification) => {
+          dismissNotification(notification.key)
+        }
+      }
+    />
     <h1 className="test-building-name">Screen view :- {building && building.name}</h1>
     <span className='ui text container segment'>This is a inventory screen</span>
     <div className="ui two column grid">
@@ -55,7 +53,16 @@ export const ShopView = ({building, isShowPurse, notifications}) => (
 
 export const mapState = (state) => {
   const building = state.buildings[state.game.currentBuilding];
-  const notifications = state.notifications;
+  const notifications = _.map(state.notifications, notification => {
+    return {
+      key     : notification.id,
+      isActive: true,
+      message : notification.message,
+      action  : notification.action,
+      onClick : notification.cb,
+      dismissAfter: 3000
+    }
+  });
 
   return {
     notifications,
@@ -67,7 +74,10 @@ export const mapState = (state) => {
 const Shop = connect(
   mapState,
   (dispatch) => {
-    return {}
+    return {
+      dismissNotification: id =>
+        dispatch(actions.removeNotification(id))
+    }
   })(ShopView);
 
 export default DragDropContext(HTML5Backend)(Shop);
