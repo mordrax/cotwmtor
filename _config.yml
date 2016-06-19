@@ -2,9 +2,9 @@
 title: Castle of the Winds
 #email: please.use@github.issues
 description: > # this means to ignore newlines until "baseurl:"
-  Castle of the Winds remake in Meteor using React.
+  Castle of the Winds remake in Elm.
   Devlog of an aspiring indie game developer.
-baseurl: "/castleofthewinds" # the subpath of your site, e.g. /blog/
+baseurl: "/cotwmtor" # the subpath of your site, e.g. /blog/
 url: "http://game.castleofthewinds.com" # the base hostname & protocol for your site
 github_username:  mordrax
 github_project: cotwmtor
