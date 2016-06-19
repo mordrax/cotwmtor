@@ -9,4 +9,4 @@ url: "http://cotwmtor.meteorapp.com" # the base hostname & protocol for your sit
 github_username:  mordra
 github_project: cotwmtor
 # Build settings
-#markdown: kramdown
+markdown: kramdown
