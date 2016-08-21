@@ -1,2 +1,5 @@
 _site
 .sass-cache
+.idea/dictionaries/jni.xml
+.idea/workspace.xml
+images/notifications.png
