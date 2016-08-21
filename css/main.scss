@@ -50,3 +50,10 @@ $on-laptop:        800px;
         "layout",
         "syntax-highlighting"
 ;
+
+
+img + em {
+    display: block;
+    text-align: center;
+    background-color: #f4f4f4
+}
