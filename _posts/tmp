@@ -1,0 +1,62 @@
+tmp
+
+*Later that evening...*
+
+Just re-reading my last post
+
+> Stay tuned for when you’ll actually be able to kill a monster!
+
+Man, that was a while back. Since then let's see, what has happened:
+
+- Monsters have appeared in the village
+- So has a messages window displaying the last few game messages
+- Monsters can be killed, they also hit back!
+- Wow, and they move *around* buildings. Hold on, this calls for a sub-title
+
+## A* Pathfinding
+
+So up to now the monsters did a vector subtraction from itself to the hero, actually that's not right, the monsters just compared it's coordinates to the hero and just moved either it's x or y position to be closer. This means that they won't be able to move around most obstacles that causes their distance to the hero to increase and they get *stuck* on buildings. This was a very simple algorithm that served it's initial purpose but at some point needed to be rewritten.
+
+Introducing: http://www.redblobgames.com/pathfinding/a-star/introduction.html
+
+I could probably just stop here. Amit from RedBlobGames is pretty amazing. It took me about 12 mins (reading time for the article) to gain a detailed and comprehensive understanding of how A* works. In a sentence, it is breath first search where the next node is prioritised by the distance from the starting point and the remaining distance to the goal (estimated using a heuristic).
+
+So I went about implementing it until I found someone had already done one! And their API was perfect. So after a few exchanges, he turned his AStar.elm module into a package: https://github.com/krisajenkins/elm-astar and in a matter of one afternoon, I had monsters moving *around* obstacles coming for youuuuu!!!! Awesome. Oh and I didn't have any bugs doing this.
+
+## Dungeon Generation
+
+Pathfinding seemed like such a big task at first. Through Amit's blog and the subsequent library that I found, the task became very simple. This optimism carried through to what I'd now consider to be the most complex part of the game. Dungeon generation. When I started this a month ago, I had told myself, I'll get it done over the weekend. Put in some solid 8 hours and it should be fine. Fast forward 4 weeks and ~20 hours? 40 hours? later, I think I'm about 1/3 of the way.
+
+But that does not worry me, because writing Elm makes me happy ^_^ and so I've really enjoyed this experience especially since I've picked up a few new tricks along the way. But first, let's have a look at what I've done over this time.
+
+#### In the beginning
+
+![github stars](/cotwmtor/images/room_take1.png)
+![github stars](/cotwmtor/images/room_take2.png)
+![github stars](/cotwmtor/images/room_take3.png)
+![github stars](/cotwmtor/images/room_take4.png)
+![github stars](/cotwmtor/images/room_take5.png)
+![github stars](/cotwmtor/images/room_take6.png)
+![github stars](/cotwmtor/images/room_take7.png)
+![github stars](/cotwmtor/images/room_take8.png)
+![github stars](/cotwmtor/images/room_take9.png)
+![github stars](/cotwmtor/images/room_take10.png)
+![github stars](/cotwmtor/images/room_take11.png)
+![github stars](/cotwmtor/images/room_take12.png)
+![github stars](/cotwmtor/images/room_take13.png)
+![github stars](/cotwmtor/images/room_take14.png)
+![github stars](/cotwmtor/images/room_take15.png)
+![github stars](/cotwmtor/images/room_take16.png)
+![github stars](/cotwmtor/images/room_take17.png)
+
+## Generators
+
+Here we get a bit technical. One of the major differences between FP (functional programming) and OOP (Object orientated programming) is in state mutation. State mutation means that a variable which held one value at one point in time, is allowed to hold another value at another point in time. FP people don't like this, OOP people *don't* like this either! Because it creates alot of confusion which leads to bugs.
+
+However, it also makes somethings very easy to do in OOP languages and harder for a entry level functional programmer (like me) to do.
+
+Introducing random numbers. Random numbers in computing is not random. This is likely to be something everyone *in* the field take for granted but everyone outside of the field would be astonished at. Or at least outside the field of mathematics.
+
+What we take for granted when we call some library to give us a random number is in fact, under the hood, getting a seed like the current time since the epoch, feeding it into a random number generator and spitting out a result then massaging it into the range we specified. If we take that same seed and fed it into the same generator, we'd get the exact same result each time! What a coincidence... no not really, because nothing in computing (disclaimer: 2016 pre-quantum computer era) is random! That's one of the reasons why I love the field so much but that's another topic for another day.
+
+So, if a random number is not random then how do we get random numbers? It turns out that you can 'step' through the seed as in each time you generate a result, you can arrive at another seed. And these seeds form a sort of linked list where you can get from one to another and eventually it will loop back to form a circular link. This is as much as I know and care to understand about the topic.
