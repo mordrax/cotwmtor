@@ -107,3 +107,9 @@ period that one can get into if the module's API and data structure are not well
 I'm not finished with the dungeon yet. With renewed energy, I'd like to remove collisions, make it possible to have more than one door from a room, and can't forget, join
 new corridors to existing corridors/rooms to create a bit of a loop otherwise the dungeon would be a very boring A -> B affair. I think it would also be suitable to have
 a fitness function to judge whether a dungeon is good by working out how many different paths one can take to get from stairs to stairs, a fun exercise for next time.
+
+Oh and I found these, I was too poor to afford to buy it at the time, only played the shareware part of the game until much later. Enjoy!
+
+![old 144 inch disks](/cotwmtor/images/disk144.jpg)
+![old floppy disks](/cotwmtor/images/disks.jpg)
+
