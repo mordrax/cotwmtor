@@ -34,28 +34,47 @@ Ok, now let's see... ahh, this deserves it's own section [refactoring the dungeo
 
 ## Dungeon generator rewrite
 
-A more apt name for this blog would be 'Mordrax's various rewrites'. As I look back on my activities, much of it has been, 'Oh look, this can be done a bit better, let's rewrite this... again ... and again...'. Productivity of these rewrites are questionable, I hear you think, but let me try to justify to the avid reader, a shareholder in the completion of this game, why _this_ particular rewrite was necessary.
+So, a more apt name for this blog would be 'Mordrax's various rewrites'. As I look back on my activities, much of it has been, 'Oh look, this can be done a bit better, let's rewrite this... again ... and again...'. Productivity of these rewrites are questionable, I hear you think, but let me try to justify to the avid reader, a shareholder in the completion of this game, why _this_ particular rewrite was necessary.
 
-#### First attempt
+#### Dungeon Generator: First attempt
 
-So this story began [eleven moons past](/cotwmtor/2016/08/20/DungeonPart1.html). I was a younger, more naive lad optimistic about my dungeon generating skillz. Actually, it had begun twelve moons past as I was already a moon into the generator at the time. At it's completion, I posted a [final update](/cotwmtor/2016/11/06/DungeonPart3.html) to signal that I was finished and moving on. The whole thing actually took me THREE AND A HALF MONTHS! Damn!... Why oh why am I doing this again... ok, breathe, focus, calm down... so, at that point, the dungeon generator was done, but there was two problems with it.
+So this story began [eleven moons past](/cotwmtor/2016/08/20/DungeonPart1.html). I was a younger, more naive lad optimistic about my dungeon generating skillz. At it's completion, I posted a [final update](/cotwmtor/2016/11/06/DungeonPart3.html) to signal that I was finished and moving on. The whole thing actually took me THREE AND A HALF MONTHS! Damn!... Why oh why am I doing this again... ok, breathe, focus, calm down... so, at that point, the dungeon generator was done, but there was two problems with it.
 
 #### Problems
 
-1. It performed badly. This was easily benchmarked. Each time a dungeon was generated, it would take anywhere between 3 to 10 seconds in-game for a dungeon to appear. This was unacceptable. There was two reasons for why it took so long, data structures and the algorithm.
+1. It performed badly. Each generated dungeon took anywhere between 3 to 10 seconds (in-game). This was unacceptable.
 
-2. The code was bad. It was buggy, complex and brittle. Which is really the same thing. This meant that every time I had to touch it, there was a good chance of introducing bugs and in fact, the last two times I did touch it, first for overriding tile visibility in the dungeon editor ( we want all tiles to be visible when testing out the generator via the editor as opposed to in-game where they are made visible by exploration ) and the second time was when I was fixing up the data structure to give it a 500% performance boost!
+2. The code was particularly bad. It was buggy, complex and brittle. These three characteristics overlaps alot and so changes to it had a higher rate of creating logic bugs. Eg when overriding tile visibility in the dungeon editor it also overrode tile visibility in-game and improving the data structure caused weird hit box issues causing lighting of rooms to be out of sync with character position!
 
-#### First solution
+#### First problem
 
 As I alluded to, even though I knew that the generator was suboptimal, I avoided a rewrite, preferring to do some quick and dirty fixes.
-Using Chrome's developer tools (profiler), I quickly found that one of the reasons why it took so long was because I was using a list to represent the map and everytime a room or a corridor was generated and asked 'does this fit in the map?', I would have to iterate through each tile of the room/corridor and compare it to _each tile of the map_ because it was a list. Changing this into a dictionary gave me the 500% performance boost. Simple, [one hour fix](https://github.com/mordrax/cotwelm/commit/6958876d75ea64eec768ec3f98584064e93c3ac7).
+Chrome's developer devTool profiler quickly located the bad data structure issue ( using a list where a hashmap was required ). Changing this into a dictionary reduced dungeon generation time to 1-2 secs. Simple, [one hour fix](https://github.com/mordrax/cotwelm/commit/6958876d75ea64eec768ec3f98584064e93c3ac7).
 
 That was great! Dungeon generation was now bearable again, 1 to 2 seconds and we're off to the races! Not quite...
 
-#### Second problem clause to first solution
+#### Second problem
 
-So, the second problem said 'everytime I had to touch it', referring to the dungeon generator code
+The code wasn't particularly robust. The dungeon generator was the first time I had written 'generators', a technical term in functional programming not to be confused with the actual 'dungeon generator'. It was also the first time I had attempted to make a dungeon generator. And there were more problems than I'd like to admit. So even by simply changing the data structure used to solve the first problem, I ended up introducing more bugs :(
+
+### Algorithms ###
+
+So let's talk about how we generate dungeons briefly. The first attempt went something like this:
+
+1. Create a room, add it to a list of 'active points'
+2. Pick a random active point,
+    1. If it's a room, add random doors to the room. Add these doors to the 'active points' and remove the room from 'active points'
+    2. If it's a door, try to add a random corridor to it.
+    3. If it's a corridor, either finish it in a room or extend the corridor in a valid direction.
+
+This algorithm is seemingly simple at first glance however, there was a fundamental problem with it along with other implementation and conceptual issues.
+
+The fundamental problem was that there was no guarantee you could get a dungeon with a given amount of rooms in a confined space. You start with one room and then dig, it might have been ok if I'd drawn the dungeon _around_ the finished product but because I have a preset dungeon size ( this is also arbitrary ), it meant that a dungeon which did not meet the minimum number of rooms was thrown away. Wasted computation. Hence the large gap in time taken 3 - 10 secs, sometimes it was 15 secs to get a room.
+
+
+### Rooms ###
+
+
 
 ## Next...
 
